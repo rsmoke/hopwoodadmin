@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContest.php');
+require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestAdmin.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -40,13 +40,13 @@ if ($resAdmin->num_rows > 0) {
   <meta name="author" content="LSA-MIS_rsmoke">
   <link rel="icon" href="img/favicon.ico">
 
-  <script type='text/javascript' src='../js/webforms2.js'></script>
+  <script type='text/javascript' src='js/webforms2.js'></script>
 
-  <link rel="stylesheet" href="../css/bootstrap.min.css"><!-- 3.3.1 -->
-  <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
-  <link rel="stylesheet" href="../css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
-  <link rel="stylesheet" href="../css/normalize.css" media="all">
-  <link rel="stylesheet" href="../css/default.css" media="all">
+  <link rel="stylesheet" href="css/bootstrap.min.css"><!-- 3.3.1 -->
+  <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
+  <link rel="stylesheet" href="css/normalize.css" media="all">
+  <link rel="stylesheet" href="css/default.css" media="all">
 
   <style type="text/css">
     input[type=number]::-webkit-outer-spin-button,
@@ -111,7 +111,7 @@ if ($resAdmin->num_rows > 0) {
 <div id="initialView">
   <div class="row clearfix">
     <div class="col-md-12">
-    <div><img src="ADMIN/admIMG/IMG_0970.jpg" class="img img-responsive center-block" width="571" height="304" alt="Hopwood Image"></div>
+    <div><img src="img/IMG_0970.jpg" class="img img-responsive center-block" width="571" height="304" alt="Hopwood Image"></div>
     </div>
   </div>
 </div>
@@ -374,9 +374,9 @@ SQL;
 
     <?php
 }
-    include("../footer.php");?>
+    include("footer.php");?>
     <!-- //additional script specific to this page -->
-      <script src="ADMIN/admJS/admMyScript.js"></script>
+      <script src="js/admMyScript.js"></script>
 </div><!-- End Container of all things -->
 </body>
 </html>

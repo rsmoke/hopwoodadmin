@@ -63,7 +63,7 @@ $( document ).ready(function(){
       } else { // enty meets requirements for a valid uniqname string
       $.ajax({
         type: 'post',
-        url: 'ADMIN/myAdminFormSubmit.php',
+        url: 'myAdminFormSubmit.php',
         data: $("#myAdminForm :input"),
         success: done()
       });
@@ -78,7 +78,7 @@ $( document ).ready(function(){
   // });
   $('.btnDelADM').click( function ( event ){
     var stuff = $(this).data('delid');
-    $.post('ADMIN/deleteAdm.php', {'delid' : stuff}).done(function( data ){
+    $.post('deleteAdm.php', {'delid' : stuff}).done(function( data ){
         console.log( "result: " + data );
     }).success(done());
   });
@@ -114,7 +114,7 @@ $( document ).ready(function(){
 
   //Set the selected region to empty then populate it with the formatted result of the JSON string that is returned
   function updates(){
-    $.getJSON("ADMIN/myAdminFormView.php", function(data){
+    $.getJSON("myAdminFormView.php", function(data){
         $("span#currAdmins").empty();
         $.each(data.result, function(){
           $("span#currAdmins").append("<div><button class='btn btn-xs btn-danger btnDelADM' data-delID='" + this.adminID + "'><span class='glyphicon glyphicon-remove'></span></button>&nbsp;<strong>" + this.admin + "</strong> -- " + this.adminFname + " " + this.adminLname + "</div>");
@@ -126,7 +126,7 @@ $( document ).ready(function(){
   $('#contests').on('click', '.editBtn', function ( event ){
     var useContests = $(this).data('contestsid');
     var contestName = "";
-    $.getJSON("ADMIN/contestsInstance.php", {id: useContests} ,function(data){
+    $.getJSON("contestsInstance.php", {id: useContests} ,function(data){
       $("span#outputData").empty();
       $.each(data.result, function () {
         contestName = this.name;
@@ -142,7 +142,7 @@ $( document ).ready(function(){
 
   $('#addContest').click( function(){
     var optionSet = "";
-    $.getJSON("ADMIN/contestsList.php", function( data ){
+    $.getJSON("contestsList.php", function( data ){
       $.each(data.result, function(){
         optionSet += "<option value='" + this.contestsID + "'>" + this.name + "</option>";
       });
