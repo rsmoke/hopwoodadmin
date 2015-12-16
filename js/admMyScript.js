@@ -15,15 +15,6 @@ $( document ).ready(function(){
     $('#output').hide();
   });
 
-  // $('#admApplicantBtn').click( function(){
-  //  $('#applicant').toggle();
-  //  $('#manuscript_type').hide();
-  //  $('#contests').hide();
-  //  $('#admin_access').hide();
-  //  $('#initialView').hide();
-  //  $('#output').hide();
-  // });
-
   $('#admContestsBtn').click( function(){
     $('#contests').toggle();
     $('#applicant').hide();
@@ -33,15 +24,6 @@ $( document ).ready(function(){
     $('#output').toggle();
     $("span#outputData").empty();
   });
-
-  // $('#admManuscriptTypeBtn').click( function(){
-  //  $('#manuscript_type').toggle();
-  //  $('#applicant').hide();
-  //  $('#contest').hide();
-  //  $('#admin_access').hide();
-  //  $('#initialView').hide();
-
-  // });
 
   $('#admAdminManageBtn').click( function(){
     $('#admin_access').toggle();
@@ -82,21 +64,6 @@ $( document ).ready(function(){
         console.log( "result: " + data );
     }).success(done());
   });
-    //  // $.ajax({ //take record value of to be deleted record and set the URL to reflect this. When page reloads
-    //  //     // the record is removed
-    //  //  type: 'post',
-    //  //  url: 'deleteAdm.php',
-    //  //  data: item2Del.attr('delID'),
-    //  //  beforeSend: function() { // display animation for UI enhancement
-    //  //    parent.animate({'backgroundColor':'#fb6c6c'},200);
-    //  //  },
-    //  //  success: function() {
-    //  //    parent.slideUp(300,function() {
-    //  //      parent.remove();
-    //  //    });
-    //  //  }
-    //  // });
-    // });
 
   //simply sets the input(s) of the named form to an empty value
   function clearInput(){
