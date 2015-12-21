@@ -93,7 +93,7 @@ $_SESSION['isAdmin'] = true;
             <button id="reportFinAidBtn" type="button" class="btn btn-success">Financial Aid</button>
           </div>
           <div class="btn-group" role="group" aria-label="contest_applicants">
-            <button id="reportRefLetterBtn" type="button" class="btn btn-success">Reference Letter Required</button>
+            <button id="reportRecLetterBtn" type="button" class="btn btn-success">Reference Letter Required</button>
           </div>
           <div class="btn-group" role="group" aria-label="contest_applicants">
             <button id="reportEvaluationsBtn" type="button" class="btn btn-success">Evaluations</button>
@@ -107,11 +107,7 @@ $_SESSION['isAdmin'] = true;
     <div class="row clearfix">
       <div class="col-md-12">
         <div id="outputReports">
-          <div class="row clearfix">
-            <div class="col-md-12">
-              <span id="outputReportData"></span>
-            </div>
-          </div>
+            <span id="outputReportData"></span>
         </div>
       </div>
     </div>
