@@ -218,14 +218,18 @@ SQL;
   <div id="applicant">
     <div class="row clearfix">
       <div class="col-md-12">
-        <h5 class="text-muted">Please select an applicant</h5>
-        <p>By clicking on the applicants uniqname you can see their complete profile</p>
+        <h5 class="text-muted">All applicants by last name</h5>
+        <!-- <p>By clicking on the applicants uniqname you can see their complete profile</p> -->
         <span id="allApplicants">
           <?php
           $resApp = $db->query("SELECT * FROM tbl_applicant ORDER BY userLname");
+          echo '<table class="table table-hover">
+                <thead><th>Last Name</th><th>First Name</th><th>Pen name</th><th>UniqName</th><th>UMID</th></thead>
+                <tbody>';
           while ($row = $resApp->fetch_assoc()) {
-          echo '<div class="record" id="record-' . $row['id'] . '"><strong>' . $row['uniqname'] .'</strong>  -- ' . $row['userLname'] .  ", " . $row['userFname'] .  "&nbsp;" . $row['umid'] . '</div>';
+          echo '<tr class="record" id="record-' . $row['id'] . '"><td>' . $row['userLname'] . '</td><td>' . $row['userFname'] .  '</td><td>' . $row['penName'] .  '</td><td><strong>' . $row['uniqname'] .'</strong></td><td>' . $row['umid'] . '</td></tr>';
           }
+          echo '</tbody></table>';
           ?>
         </span>
       </div>
