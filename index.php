@@ -37,6 +37,7 @@ $_SESSION['isAdmin'] = true;
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="css/normalize.css" media="all">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/default.css" media="all">
     <style type="text/css">
     input[type=number]::-webkit-outer-spin-button,
@@ -83,7 +84,7 @@ $_SESSION['isAdmin'] = true;
             <button id="admContestBtn" type="button" class="btn btn-primary">Contest</button>
           </div>
           <div class="btn-group" role="group" aria-label="contest_report">
-            <button id="admReportBtn" type="button" class="btn btn-warning">Reports</button>
+            <a id="admReportBtn" type="button" class="btn btn-warning" href="reports.php">Reports</a>
           </div>
           <div class="btn-group" role="group" aria-label="contest_applicants">
             <button id="admApplicantBtn" type="button" class="btn btn-success">Applicants</button>
@@ -196,22 +197,6 @@ SQL;
           }
           ?>
         </div>
-      </div>
-    </div>
-  </div>
-  <div id="reports">
-    <div class="row clearfix">
-      <div class="col-md-12">
-        <h5 class="text-muted">Please select an applicant</h5>
-        <p>By clicking on the applicants uniqname you can see their complete profile</p>
-        <span id="allReports">
-          <?php
-          $resApp = $db->query("SELECT * FROM tbl_applicant ORDER BY userLname");
-          while ($row = $resApp->fetch_assoc()) {
-          echo '<div class="record" id="record-' . $row['id'] . '"><strong>' . $row['uniqname'] .'</strong>  -- ' . $row['userLname'] .  ", " . $row['userFname'] .  "&nbsp;" . $row['umid'] . '</div>';
-          }
-          ?>
-        </span>
       </div>
     </div>
   </div>
