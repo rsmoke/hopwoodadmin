@@ -88,12 +88,20 @@ $_SESSION['isAdmin'] = true;
           <div class="btn-group" role="group" aria-label="contest_applicants">
             <button id="admApplicantBtn" type="button" class="btn btn-success">Applicants</button>
           </div>
-          <div class="btn-group" role="group" aria-label="contests_contests">
+<?php
+if($login_name == 'rsmoke'){
+   echo  '<div class="btn-group" role="group" aria-label="contests_contests">
             <button id="admContestsBtn" type="button" class="btn btn-info">Contests Administration</button>
-          </div>
-          <div class="btn-group" role="group" aria-label="admin_access">
+          </div>';
+        }
+?>
+<?php
+if($login_name == 'rsmoke'){
+   echo  '<div class="btn-group" role="group" aria-label="admin_access">
             <button id="admAdminManageBtn" type="button" class="btn btn-default">Admin-Access</button>
-          </div>
+          </div>';
+        }
+?>
         </div>
       </div>
     </div>
