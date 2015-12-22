@@ -6,12 +6,12 @@ $( document ).ready(function(){
       $("#outputReportData").empty();
         $("#outputReportData").append(
           '<table class="table table-hover dataout">'+
-          '<thead><th></th><th>Last-Name</th><th>First-Name</th><th>Uniqname</th><th>Description</th></thead>'+
+          '<thead><th></th><th>UMID</th><th>Last-Name</th><th>First-Name</th><th>Uniqname</th><th>Description</th></thead>'+
           '<tbody>');
     $.getJSON("finAidReport.php", function(data){
         $.each(data.result, function(){
           $(".dataout").append("<tr><td><button class='btn btn-xs btn-info' data-ID='" + this.uniqname +
-           "'><i class='fa fa-info'></i></button></td><td>" + this.lname + "</td><td>" + this.fname +
+           "'><i class='fa fa-info'></i></button></td><td>" + this.umid + "</td><td>" + this.lname + "</td><td>" + this.fname +
             "</td><td>" + this.uniqname + "</td><td>" + this.desc + "</td></tr>");
             });
     });
