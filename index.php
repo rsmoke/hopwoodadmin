@@ -136,6 +136,7 @@ if($login_name == 'rsmoke'){
             `lk_contests`.`graduateEligible`
             FROM tbl_contest
             JOIN `lk_contests` ON ((`tbl_contest`.`contestsID` = `lk_contests`.`id`))
+            ORDER BY date_closed DESC, name
 SQL;
             $results = $db->query($sqlContestSelect);
             if (!$results) {
