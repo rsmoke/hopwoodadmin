@@ -3,10 +3,6 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContest.php')
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 
   $queryFinAid = <<<SQL
-    -- SELECT vw.EntryId, rank.entryid, title, firstname, lastname, penName, contestName, rank, rankedby
-    -- FROM `vw_entrydetail` AS vw
-    -- JOIN tbl_ranking AS rank ON(vw.EntryID = rank.entryid)
-    -- ORDER BY rank.rank DESC
     SELECT vw.EntryId, rank.entryid, title, firstname, lastname, penName, contestName, rank, rankedby
     FROM `vw_entrydetail` AS vw
     JOIN tbl_ranking AS rank ON(vw.EntryID = rank.entryid)
