@@ -11,7 +11,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
     FROM `vw_entrydetail` AS vw
     JOIN tbl_ranking AS rank ON(vw.EntryID = rank.entryid)
     WHERE rank.rank > 0
-    ORDER BY rank.rank
+    ORDER BY contestName, rank.rankedby, rank.rank
 SQL;
 
   $resSelect = $db->query($queryFinAid);
