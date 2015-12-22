@@ -96,10 +96,10 @@ $_SESSION['isAdmin'] = true;
             <button id="reportRecLetterBtn" type="button" class="btn btn-success">Reference Letter Required</button>
           </div>
           <div class="btn-group" role="group" aria-label="contest_applicants">
-            <button id="reportEvaluationsBtn" type="button" class="btn btn-success">Evaluations</button>
+            <button id="reportRatingBtn" type="button" class="btn btn-success">Evaluations</button>
           </div>
           <div class="btn-group" role="group" aria-label="contest_applicants">
-            <button id="admApplicantBtn" type="button" class="btn btn-info"><i class="fa fa-download"></i> Total Applicant Information</button>
+            <a id="ktchensinkBtn" type="button" class="btn btn-info" href="kitchensink.csv"><i class="fa fa-download"></i></a>
           </div>
         </div>
       </div>
