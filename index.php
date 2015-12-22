@@ -176,6 +176,7 @@ SQL;
                       SELECT *
                       FROM vw_entrydetail
                       WHERE ContestInstance = {$instance['ContestId']}
+                      ORDER BY uniqname
 SQL;
                       $resultsInd = $db->query($sqlIndEntry);
                       if (!$resultsInd) {
