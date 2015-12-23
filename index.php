@@ -183,9 +183,12 @@ SQL;
                       if (!$resultsInd) {
                       echo "There are no applicants available";
                       } else {
+                      $entryCount = 0;
                       while ($entry = $resultsInd->fetch_assoc()) {
-                      echo '<tr><td>' . $entry['EntryId'] . '</td><td>' . $entry['firstname'] . " " . $entry['lastname'] . '</td><td>' . $entry['uniqname'] . '</td><td>' . $entry['title'] . '</td><td>' . $entry['penName'] . '</td><td>' . $entry['datesubmitted'] . '</td></tr>';
+                        $entryCount++;
+                        echo '<tr><td>' . $entry['EntryId'] . '</td><td>' . $entry['firstname'] . " " . $entry['lastname'] . '</td><td>' . $entry['uniqname'] . '</td><td>' . $entry['title'] . '</td><td>' . $entry['penName'] . '</td><td>' . $entry['datesubmitted'] . '</td></tr>';
                       }
+                      echo '<small>' . $entryCount . '</small>';
                       }
                       ?>
                     </tbody>
