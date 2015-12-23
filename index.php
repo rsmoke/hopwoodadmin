@@ -176,7 +176,7 @@ SQL;
                       $sqlIndEntry = <<<SQL
                       SELECT *
                       FROM vw_entrydetail
-                      WHERE ContestInstance = {$instance['ContestId']}
+                      WHERE ContestInstance = {$instance['ContestId']}  AND vw_entrydetail.status = 0
                       ORDER BY uniqname
 SQL;
                       $resultsInd = $db->query($sqlIndEntry);
