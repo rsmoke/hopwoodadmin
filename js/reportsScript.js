@@ -54,7 +54,7 @@ $( document ).ready(function(){
         $("#outputReportData").append(
           '<h4>' + contestArray[i] + '</h4>'+
           '<table class="table table-hover dataout-' + i + '">'+
-          '<thead><th></th><th>Title</th><th>First-Name</th><th>Last Name</th><th>Pen Name</th><th>Rank</th><th>Ranked By</th></thead>'+
+          '<thead><th></th><th>Title</th><th>Pen Name</th><th>First-Name</th><th>Last Name</th><th>Rank</th><th>Ranked By</th></thead>'+
           '<tbody>');
       
           $.each(data.result, function(){
