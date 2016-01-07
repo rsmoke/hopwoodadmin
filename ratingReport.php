@@ -3,7 +3,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContest.php')
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 
   $queryFinAid = <<<SQL
-    SELECT vw.EntryId, rank.entryid, title, firstname, lastname, penName, contestName, rank, rankedby
+    SELECT vw.EntryId, rank.entryid, title, firstname, lastname, penName, contestName, rank, rankedby, vw.document
     FROM `vw_entrydetail` AS vw
     JOIN tbl_ranking AS rank ON(vw.EntryID = rank.entryid)
     WHERE rank.rank > 0
@@ -26,6 +26,7 @@ SQL;
           'contestName' => $item["contestName"],
           'rank' => $item["rank"],
           'rankedby' => $item["rankedby"],
+          'document' => $item["document"],
           )
 
         );
