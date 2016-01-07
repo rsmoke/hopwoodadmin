@@ -61,7 +61,7 @@ $( document ).ready(function(){
             if (this.contestName == contestArray[i]){
               $(".dataout-" + i).append("<tr><td><small>" + this.entryid +
                 "</small></td><td><a class='btn btn-xs btn-info' href='contestfiles/" + this.document +
-               "' target='_blank'><i class='fa fa-book'></i></button></td><td>" + this.title + "</td><td>" + this.penName +
+               "' target='_blank'><i class='fa fa-book'></i></a></td><td>" + this.title + "</td><td>" + this.penName +
                 "</td><td>" + this.firstname + "</td><td>" + this.lastname + "</td><td>" + this.rank +
                  "</td><td>" + this.rankedby + "</td></tr>");
             }
