@@ -168,7 +168,7 @@ SQL;
                   <div class="table-responsive">
                     <table class="table table-hover table-condensed">
                       <tr>
-                        <th>AppID</th><th>Applicant Name</th><th>uniqname</th><th>Title</th><th>Pen Name</th><th>Date Entered</th>
+                        <th>AppID</th><th>File</th><th>Applicant Name</th><th>uniqname</th><th>Title</th><th>Pen Name</th><th>Date Entered</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -186,7 +186,8 @@ SQL;
                       $entryCount = 0;
                       while ($entry = $resultsInd->fetch_assoc()) {
                         $entryCount++;
-                        echo '<tr><td>' . $entry['EntryId'] . '</td><td>' . $entry['firstname'] . " " . $entry['lastname'] . '</td><td>' . $entry['uniqname'] . '</td><td>' . $entry['title'] . '</td><td>' . $entry['penName'] . '</td><td>' . $entry['datesubmitted'] . '</td></tr>';
+                        echo '<tr><td>' . $entry['EntryId'] . '</td><td><a class="btn btn-xs btn-info" href="contestfiles/' . $entry['document'] .
+               '" target="_blank"><i class="fa fa-book"></i></a></td><td>' . $entry['firstname'] . " " . $entry['lastname'] . '</td><td>' . $entry['uniqname'] . '</td><td>' . $entry['title'] . '</td><td>' . $entry['penName'] . '</td><td>' . $entry['datesubmitted'] . '</td></tr>';
                       }
                       echo '<small>' . $entryCount . '</small>';
                       }
