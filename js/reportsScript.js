@@ -54,14 +54,14 @@ $( document ).ready(function(){
         $("#outputReportData").append(
           '<h4>' + contestArray[i] + '</h4>'+
           '<table class="table table-hover dataout-' + i + '">'+
-          '<thead><th><small>Entry ID</small></th><th>File</th><th>Title</th><th>Pen Name</th><th>First-Name</th><th>Last Name</th><th>Rank</th><th>Ranked By</th><th>comment</th></thead>'+
+          '<thead><th><small>Entry ID</small></th><th>File</th><th>Title</th><th>Type</th><th>Pen Name</th><th>First-Name</th><th>Last Name</th><th>Rank</th><th>Ranked By</th><th>comment</th></thead>'+
           '<tbody>');
-      
+
           $.each(data.result, function(){
             if (this.contestName == contestArray[i]){
               $(".dataout-" + i).append("<tr><td><small>" + this.entryid +
                 "</small></td><td><a class='btn btn-xs btn-info' href='contestfiles/" + this.document +
-               "' target='_blank'><i class='fa fa-book'></i></a></td><td>" + this.title + "</td><td>" + this.penName +
+               "' target='_blank'><i class='fa fa-book'></i></a></td><td>" + this.title + "</td><td>" + this.manuscriptType + "</td><td>" + this.penName +
                 "</td><td>" + this.firstname + "</td><td>" + this.lastname + "</td><td>" + this.rank +
                  "</td><td>" + this.rankedby + "</td><td>" + this.comment + "</td></tr>");
             }
