@@ -42,7 +42,7 @@ $( document ).ready(function(){
       $("#outputReportData").empty();
 
     $.getJSON("ratingReport.php", function(data){
-       //iterate through and get the names of all the contests that have been rated and push into an array here
+       //iterate through and get the names of all the contests that have been rated and push into an array
         var contestArray = [];
         $.each(data.result, function(){
           if (contestArray.indexOf(this.contestName) == -1){
