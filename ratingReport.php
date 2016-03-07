@@ -3,11 +3,11 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContest.php')
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 
   $queryFinAid = <<<SQL
-    SELECT vw.EntryId, rank.entryid, title, firstname, lastname, penName, contestName, rank, rankedby, vw.document, rank.comment,vw.manuscriptType
-    FROM `vw_entrydetail` AS vw
+    SELECT vw.EntryId, rank.entryid, title, firstname, lastname, penName, contestName, rank, rankedby, vw.document, rank.comment,vw.manuscriptType,CASE WHEN vw.classLevel > 12 THEN 'G' ELSE 'U' END AS classLevel
+    FROM `vw_entrydetail_with_classlevel` AS vw
     JOIN tbl_ranking AS rank ON(vw.EntryID = rank.entryid)
     WHERE rank.rank > 0
-    ORDER BY contestName, manuscriptType,rank.rankedby, rank.rank
+    ORDER BY contestName, vw.manuscriptType, rank.rankedby, rank.rank, classLevel
 SQL;
 
   $resSelect = $db->query($queryFinAid);
@@ -28,7 +28,8 @@ SQL;
           'rankedby' => $item["rankedby"],
           'document' => $item["document"],
           'comment' => $item["comment"],
-          'manuscriptType' => $item["manuscriptType"]
+          'manuscriptType' => $item["manuscriptType"],
+          'classLevel' => $item["classLevel"]
           )
 
         );
