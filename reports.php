@@ -99,6 +99,9 @@ $_SESSION['isAdmin'] = true;
             <button id="reportRatingBtn" type="button" class="btn btn-success">Evaluations</button>
           </div>
           <div class="btn-group" role="group" aria-label="contest_applicants">
+            <button id="reportNationalEvalBtn" type="button" class="btn btn-success">Hopwood National<br>Evaluations</button>
+          </div>
+          <div class="btn-group" role="group" aria-label="contest_applicants">
             <a id="ktchensinkBtn" type="button" class="btn btn-info" href="kitchensink.csv"><i class="fa fa-download"></i></a>
           </div>
         </div>
@@ -114,7 +117,9 @@ $_SESSION['isAdmin'] = true;
       <?php
       } else {
       ?>
-      <!-- if there is not a record for $login_name display the basic information form. Upon submitting this data display the contest available section -->
+      <!-- if there is not a record for $login_name display the basic
+      information form. Upon submitting this data display the contest available
+       section -->
       <div id="notAdmin">
         <div class="row clearfix">
           <div class="col-md-12">
