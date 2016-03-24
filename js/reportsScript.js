@@ -114,7 +114,7 @@ $( document ).ready(function(){
                "<td>" + this.firstname + "</td><td>" + this.lastname + "</td>"+
                "<td>" + this.applicantUniq + "</td>"+
                 "<td class='tblCenter'>" + this.evaluation + "</td><td>" + this.evaluator + "</td>"+
-                "<td>" + this.comment + "</td><td>" + this.created + "</td></tr>");
+                "<td><div class='cellHeight'>" + this.comment + "</div></td><td>" + this.created + "</td></tr>");
             }
           });
         }

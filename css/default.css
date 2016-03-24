@@ -85,3 +85,8 @@ select {
 .tblGrow {
 	background-color: #e0ffff;
 }
+.cellHeight {
+	width: 400px;
+	height: 100px;
+	overflow: scroll;
+}
