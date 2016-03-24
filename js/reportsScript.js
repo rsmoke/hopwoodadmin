@@ -96,7 +96,7 @@ $( document ).ready(function(){
           '<th>Entry ID</th><th>File</th><th>Title</th><th>Type</th>'+
           '<th>Grad/Ugrad</th><th>Pen Name</th><th>First Name</th>'+
           '<th>Last Name</th><th>Applicant<br>uniqname</th><th>Evaluation</th>'+
-          '<th>Judge</th><th>comment</th><th><small>Eval<br>TimeStamp</small></th>'+
+          '<th>Judge</th><th>comment (scroll to see more)</th><th><small>Eval<br>TimeStamp</small></th>'+
           '</thead><tbody>');
 
           $.each(data.result, function(){
