@@ -90,7 +90,7 @@ $( document ).ready(function(){
         for (var i=0;i<contestArray.length;i++){
         $("#outputReportData").append(
           // '<h4>' + contestArray[i] + '</h4>'+
-          '<h4>Hopwood Graduate / Undergraduate</h4>'+
+          '<h4>Hopwood Graduate / Undergraduate</h4><a href="natEvalDownload.php"><button id="facApptDownload" class="btn btn-xs btn-info" data-toggle="tooltip" data-placement="right" title="Download the list"><span class="glyphicon glyphicon-download-alt"></span></button></a>'+
           '<table class="table table-hover dataout-' + i + '">'+
           '<thead>'+
           '<th>Entry ID</th><th>File</th><th>Title</th><th>Type</th>'+
