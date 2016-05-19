@@ -4,6 +4,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 if (session_status() == PHP_SESSION_NONE) {
 session_start();
 }
+//$_SESSION['flashMessage'] = "FLASHER";
 $isAdmin = false;
 $_SESSION['isAdmin'] = false;
 $sqlSelect = <<< _SQL
@@ -77,6 +78,7 @@ $_SESSION['isAdmin'] = true;
     <?php if ($isAdmin) {
     ?>
     <div class="container"><!-- container of all things -->
+    <div id="flashArea"><span class='flashNotify'><?php echo $_SESSION['flashMessage']; $_SESSION['flashMessage'] = ""; ?></span></div>
     <div class="row clearfix">
       <div class="col-md-12">
         <div class="btn-toolbar pagination-centered" role="toolbar" aria-label="admin_button_toolbar">
@@ -246,8 +248,7 @@ SQL;
       <div class="col-md-12">
         <div class="btn-toolbar" role="toolbar" aria-label="contest_button_toolbar">
           <div class="btn-group" role="group" aria-label="contests_management">
-            <button id="addContest" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="Click to create a new instance of one of the contests listed below">Add New Contest Instance</button>
-            <!-- <button id="addContestsType" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Click to create a new contests area">Add New Contest Type</button> -->
+            <a href="newContestSubmit.php" id="addContest" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="Click to create a new instance of one of the contests listed below">Add New Contest Instance</a>
           </div>
         </div>
         <span class="allContests">

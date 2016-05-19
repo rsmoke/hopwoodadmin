@@ -45,6 +45,11 @@ $( document ).ready(function(){
     $('#output').hide();
   });
 
+
+
+  $('.flashNotify').fadeOut(6000);
+
+
   //When the submit button of the admin page is selected the database is updated with
   //  the new admins name entered in the text box
   $("#adminSub").click(function() {
@@ -64,10 +69,6 @@ $( document ).ready(function(){
   });
 
   //on the admin management page each admin uniqname has a RED X that has an anchor tag with the  class of 'delete'
-
-  // $('.btnDelADM').click( function ( event ){ 
-  //  console.log($(this).data('delid'));
-  // });
   $('.btnDelADM').click( function ( event ){
     var stuff = $(this).data('delid');
     $.post('deleteAdm.php', {'delid' : stuff}).done(function( data ){
@@ -97,10 +98,9 @@ $( document ).ready(function(){
           $("span#currAdmins").append("<div><button class='btn btn-xs btn-danger btnDelADM' data-delID='" + this.adminID + "'><span class='glyphicon glyphicon-remove'></span></button>&nbsp;<strong>" + this.admin + "</strong> -- " + this.adminFname + " " + this.adminLname + "</div>");
             });
     });
-
   }
 
-  $('#contests').on('click', '.editBtn', function ( event ){
+  $('#contest').on('click', '.editBtn', function ( event ){
     var useContests = $(this).data('contestsid');
     var contestName = "";
     $.getJSON("contestsInstance.php", {id: useContests} ,function(data){
@@ -117,21 +117,14 @@ $( document ).ready(function(){
     });
   });
 
-  $('#addContest').click( function(){
-    var optionSet = "";
+  $('#contestSelect').text( function(){
+    var optionSet = "<option value=''>Select a Contest Type</option>";
     $.getJSON("contestsList.php", function( data ){
       $.each(data.result, function(){
         optionSet += "<option value='" + this.contestsID + "'>" + this.name + "</option>";
       });
-    $("span#outputData").empty();
-    $("span#outputData").append("<div class='outputContainer'><form action='ADMIN/newContestSubmit.php' method='post' id='addContestForm' class='form-horizontal'><div class='form-group'> \
-      <label for='contest' class='col-sm-2 control-label'>Select the type of contest</label><div class='col-sm-10'><select name='contestID' class='form-control' required>\
-      <option value=''>Select a Contest Type</option>" + optionSet + "</select>\
-      </div></div><div class='form-group'><label for='openDate' class='col-sm-2 control-label'>Open Date</label><div class='col-sm-10'>\
-      <input type='datetime-local' name='openDate' required></div></div><div class='form-group'><label for='closeDate' class='col-sm-2 control-label'>Close Date</label>\
-      <div class='col-sm-10'><input type='datetime-local' name='closeDate' required></div></div><div class='form-group'><label for='notes' class='col-sm-2 control-label'>Notes</label>\
-      <div class='col-sm-10'><input type='text' class='form-control' name='notes' placeholder='Notes'></div></div><div class='form-group'>\
-      <div class='col-sm-offset-2 col-sm-10'><button id='addContestSubmit' type='submit' class='btn btn-default'>Submit</button></div></div></form></div>");
+    $("#contestSelect").empty();
+    $("#contestSelect").append( optionSet );
     });
   });
 });
