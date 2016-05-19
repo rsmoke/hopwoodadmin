@@ -248,8 +248,7 @@ SQL;
       <div class="col-md-12">
         <div class="btn-toolbar" role="toolbar" aria-label="contest_button_toolbar">
           <div class="btn-group" role="group" aria-label="contests_management">
-            <button id="addContest" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="Click to create a new instance of one of the contests listed below">Add New Contest Instance</button>
-            <!-- <button id="addContestsType" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Click to create a new contests area">Add New Contest Type</button> -->
+            <a href="newContestSubmit.php" id="addContest" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="Click to create a new instance of one of the contests listed below">Add New Contest Instance</a>
           </div>
         </div>
         <span class="allContests">
