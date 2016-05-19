@@ -5,6 +5,7 @@ $( document ).ready(function(){
   $('#contests').hide();
   $('#admin_access').hide();
   $('#output').hide();
+  //$('.flashNotify').hide();
 
   $('#admContestBtn').click( function(){
     $('#contest').toggle();
@@ -44,6 +45,11 @@ $( document ).ready(function(){
     $('#initialView').hide();
     $('#output').hide();
   });
+
+
+
+  $('.flashNotify').fadeOut(6000);
+
 
   //When the submit button of the admin page is selected the database is updated with
   //  the new admins name entered in the text box

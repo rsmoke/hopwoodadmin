@@ -90,3 +90,8 @@ select {
 	height: 100px;
 	overflow: scroll;
 }
+
+#flashArea {
+	height: 20px;
+	margin-left: 20px;
+}

@@ -4,6 +4,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 if (session_status() == PHP_SESSION_NONE) {
 session_start();
 }
+//$_SESSION['flashMessage'] = "FLASHER";
 $isAdmin = false;
 $_SESSION['isAdmin'] = false;
 $sqlSelect = <<< _SQL
@@ -77,6 +78,7 @@ $_SESSION['isAdmin'] = true;
     <?php if ($isAdmin) {
     ?>
     <div class="container"><!-- container of all things -->
+    <div id="flashArea"><span class='flashNotify'><?php echo $_SESSION['flashMessage']; $_SESSION['flashMessage'] = ""; ?></span></div>
     <div class="row clearfix">
       <div class="col-md-12">
         <div class="btn-toolbar pagination-centered" role="toolbar" aria-label="admin_button_toolbar">
