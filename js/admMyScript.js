@@ -71,7 +71,7 @@ $( document ).ready(function(){
 
   //on the admin management page each admin uniqname has a RED X that has an anchor tag with the  class of 'delete'
 
-  // $('.btnDelADM').click( function ( event ){ 
+  // $('.btnDelADM').click( function ( event ){
   //  console.log($(this).data('delid'));
   // });
   $('.btnDelADM').click( function ( event ){
