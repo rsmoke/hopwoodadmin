@@ -1,5 +1,5 @@
 $( document ).ready(function(){
-  $('#contest').hide();
+  //$('#contest').hide();
   $('#applicant').hide();
   $('#manuscript_type').hide();
   $('#contests').hide();
@@ -7,7 +7,7 @@ $( document ).ready(function(){
   $('#output').hide();
 
   $('#admContestBtn').click( function(){
-    $('#contest').toggle();
+    //$('#contest').toggle();
     $('#applicant').hide();
     $('#manuscript_type').hide();
     $('#contests').hide();
@@ -17,7 +17,7 @@ $( document ).ready(function(){
   });
 
   $('#admApplicantBtn').click( function(){
-    $('#contests').hide();
+    //$('#contests').hide();
     $('#applicant').toggle();
     $('#contest').hide();
     $('#admin_access').hide();
@@ -26,7 +26,7 @@ $( document ).ready(function(){
   });
 
   $('#admContestsBtn').click( function(){
-    $('#contests').toggle();
+    //$('#contests').toggle();
     $('#applicant').hide();
     $('#contest').hide();
     $('#admin_access').hide();
@@ -38,7 +38,7 @@ $( document ).ready(function(){
   $('#admAdminManageBtn').click( function(){
     $('#admin_access').toggle();
     $('#applicant').hide();
-    $('#contest').hide();
+    //$('#contest').hide();
     $('#contests').hide();
     $('#manuscript_type').hide();
     $('#initialView').hide();

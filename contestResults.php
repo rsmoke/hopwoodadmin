@@ -115,7 +115,101 @@ if($login_name == 'rsmoke'){
         </div>
       </div>
     </div>
+    <div id="contest">
+      <div class="row clearfix">
+        <div class="col-md-12">
+          <h5 class="text-muted">Select a contest that you want to view</h5>
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <?php
+            //query for existing contests and populate the panels
+            $sqlContestSelect = <<<SQL
+            SELECT
+            `tbl_contest`.`id` AS ContestId,
+            `tbl_contest`.`date_open`,
+            `tbl_contest`.`date_closed`,
+            `tbl_contest`.`notes` AS ContestNotes,
+            `tbl_contest`.`created_by`,
+            `lk_contests`.`name`,
+            `lk_contests`.`shortName`,
+            `lk_contests`.`freshmanEligible`,
+            `lk_contests`.`sophmoreEligible`,
+            `lk_contests`.`juniorEligible`,
+            `lk_contests`.`seniorEligible`,
+            `lk_contests`.`graduateEligible`
+            FROM tbl_contest
+            JOIN `lk_contests` ON ((`tbl_contest`.`contestsID` = `lk_contests`.`id`))
+            ORDER BY date_closed DESC, name
+SQL;
+            $results = $db->query($sqlContestSelect);
+            if (!$results) {
+            echo "There is no contest information available";
+            } else {
+            $count = $i = 0;
+            while ($instance = $results->fetch_assoc()) {
+            $count = $i++;
+            $panelColor = ($instance['date_closed'] >= date("Y-m-d H:i:s")) ? 'panel-success' : 'panel-default';
 
+            ?>
+            <div class="panel <?php echo $panelColor; ?> ">
+              <div class="panel-heading" role="tab" id="heading<?php echo $count ?>">
+                <h6 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $count ?>" aria-expanded="false" aria-controls="collapse<?php echo $count ?>">
+                  <?php echo $instance['name'] . "  ----->  opened: " . $instance['date_open'] . " - " . "closed: " . $instance['date_closed'] ?>
+                </a>
+                </h6>
+              </div>
+              <div id="collapse<?php echo $count ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?php echo $count ?>">
+                <div class="panel-body">
+                  <div class="well well-sm">Eligibility:
+                    <?php
+                    echo($instance['freshmanEligible'])? "Fr " : "";
+                    echo($instance['sophmoreEligible'])? "So " : "";
+                    echo($instance['juniorEligible'])? "Jr " : "";
+                    echo($instance['seniorEligible'])? "Sr " : "";
+                    echo($instance['graduateEligible'])? "Grd " : "";
+                    ?>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-hover table-condensed">
+                      <tr>
+                        <th>AppID</th><th>File</th><th>Applicant Name</th><th>uniqname</th><th>Title</th><th>Pen Name</th><th>Date Entered</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                      $sqlIndEntry = <<<SQL
+                      SELECT *
+                      FROM vw_entrydetail
+                      WHERE ContestInstance = {$instance['ContestId']}  AND vw_entrydetail.status = 0
+                      ORDER BY uniqname
+SQL;
+                      $resultsInd = $db->query($sqlIndEntry);
+                      if (!$resultsInd) {
+                      echo "There are no applicants available";
+                      } else {
+                      $entryCount = 0;
+                      while ($entry = $resultsInd->fetch_assoc()) {
+                        $entryCount++;
+                        echo '<tr><td>' . $entry['EntryId'] . '</td><td><a class="btn btn-xs btn-info" href="contestfiles/' . $entry['document'] .
+               '" target="_blank"><i class="fa fa-book"></i></a></td><td>' . $entry['firstname'] . " " . $entry['lastname'] . '</td><td>' . $entry['uniqname'] . '</td><td>' . $entry['title'] . '</td><td>' . $entry['penName'] . '</td><td>' . $entry['datesubmitted'] . '</td></tr>';
+                      }
+                      echo '<small>' . $entryCount . '</small>';
+                      }
+                      ?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <?php
+          }
+          }
+          ?>
+        </div>
+      </div>
+    </div>
+  </div>
   <div id="applicant">
     <div class="row clearfix">
       <div class="col-md-12">
