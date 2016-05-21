@@ -17,18 +17,18 @@ $( document ).ready(function(){
   });
 
   $('#admApplicantBtn').click( function(){
-    //$('#contests').hide();
+    $('#contests').hide();
     $('#applicant').toggle();
-    $('#contest').hide();
+    //$('#contest').hide();
     $('#admin_access').hide();
     $('#initialView').hide();
     $('#output').hide();
   });
 
   $('#admContestsBtn').click( function(){
-    //$('#contests').toggle();
+    $('#contests').toggle();
     $('#applicant').hide();
-    $('#contest').hide();
+    //$('#contest').hide();
     $('#admin_access').hide();
     $('#initialView').hide();
     $('#output').toggle();

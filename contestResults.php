@@ -82,6 +82,15 @@ $_SESSION['isAdmin'] = true;
     <div class="row clearfix">
       <div class="col-md-12">
         <div class="btn-toolbar pagination-centered" role="toolbar" aria-label="admin_button_toolbar">
+          <div class="btn-group" role="group" aria-label="contest_management">
+            <a id="backToIndexBtn" type="button" class="btn btn-xs btn-default" href="index.php">Back to Contest Management</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-md-12">
+        <div class="btn-toolbar pagination-centered" role="toolbar" aria-label="admin_button_toolbar">
           <div class="btn-group" role="group" aria-label="contest_contest">
             <a href="contestResults.php" id="admContestBtn" type="button" class="btn btn-primary">Contest</a>
           </div>
