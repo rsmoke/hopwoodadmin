@@ -54,7 +54,7 @@ $( document ).ready(function(){
         $("#outputReportData").append(
           '<h4>' + contestArray[i] + '</h4>'+
           '<table class="table table-hover dataout-' + i + '">'+
-          '<thead><th><small>Entry ID</small></th><th>File</th><th>Title</th><th>Type</th><th>ClassLevel</th><th>Pen Name</th><th>First-Name</th><th>Last Name</th><th>Rank</th><th>Ranked By</th><th>comment</th></thead>'+
+          '<thead><th><small>Entry ID</small></th><th>File</th><th>Title</th><th>Type</th><th>ClassLevel</th><th>Pen Name</th><th>First-Name</th><th>Last Name</th><th>UMID</th><th>Rank</th><th>Ranked By</th><th>comment</th></thead>'+
           '<tbody>');
 
           $.each(data.result, function(){
@@ -62,7 +62,7 @@ $( document ).ready(function(){
               $(".dataout-" + i).append("<tr><td><small>" + this.entryid +
                 "</small></td><td><a class='btn btn-xs btn-info' href='contestfiles/" + this.document +
                "' target='_blank'><i class='fa fa-book'></i></a></td><td>" + this.title + "</td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td>" + this.penName +
-                "</td><td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Trnscrpt/TrnscrptInfoList.aspx?ID=" + this.umid + "' target='_blank'>" + this.firstname + "</a></td><td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Trnscrpt/TrnscrptInfoList.aspx?ID=" + this.umid + "' target='_blank'>" + this.lastname + "</a></td><td>" + this.rank +
+                "</td><td>" + this.firstname + "</a></td><td>" + this.lastname + "</td><td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=" + this.umid + "' target='_blank'>" + this.umid + "</a></td><td>" + this.rank +
                  "</td><td>" + this.rankedby + "</td><td>" + this.comment + "</td></tr>");
               //https://webapps.lsa.umich.edu/UGStuFileV2/App/Trnscrpt/TrnscrptInfoList.aspx?ID=XXXXXXXX
             }
