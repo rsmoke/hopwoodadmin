@@ -3,7 +3,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContest.php')
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 
   $queryFinAid = <<<SQL
-    SELECT vw.EntryId, rank.entryid, title, firstname, lastname, penName, contestName, rank, rankedby, vw.document, rank.comment,vw.manuscriptType,CASE WHEN vw.classLevel > 12 THEN 'G' ELSE 'U' END AS classLevel
+    SELECT vw.EntryId, rank.entryid, title, firstname, lastname, umid, penName, contestName, rank, rankedby, vw.document, rank.comment,vw.manuscriptType,CASE WHEN vw.classLevel > 12 THEN 'G' ELSE 'U' END AS classLevel
     FROM `vw_entrydetail_with_classlevel` AS vw
     JOIN tbl_ranking AS rank ON(vw.EntryID = rank.entryid)
     WHERE rank.rank > 0
@@ -22,6 +22,7 @@ SQL;
           'title' =>$item["title"],
           'firstname' =>$item["firstname"],
           'lastname' =>$item["lastname"],
+          'umid' => $item["umid"],
           'penName' =>$item["penName"],
           'contestName' => $item["contestName"],
           'rank' => $item["rank"],
