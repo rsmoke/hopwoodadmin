@@ -88,6 +88,15 @@ if (isset($_POST['insertContest'])) {
     ?>
     <div class="container"><!-- container of all things -->
     <div id="flashArea"><span class='flashNotify'><?php echo $_SESSION['flashMessage']; $_SESSION['flashMessage'] = ""; ?></span></div>
+        <div class="row clearfix">
+      <div class="col-md-12">
+        <div class="btn-toolbar pagination-centered" role="toolbar" aria-label="admin_button_toolbar">
+          <div class="btn-group" role="group" aria-label="contest_management">
+            <a id="backToIndexBtn" type="button" class="btn btn-xs btn-default" href="index.php">Back to Contest Management</a>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="row clearfix">
       <div class='outputContainer col-sm-8 col-md-offset-2'>
         <form action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>' method='post' id='addContestForm' >
