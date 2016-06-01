@@ -78,7 +78,14 @@ $_SESSION['isAdmin'] = true;
     <?php if ($isAdmin) {
     ?>
     <div class="container"><!-- container of all things -->
-    <div id="flashArea"><span class='flashNotify'><?php echo $_SESSION['flashMessage']; $_SESSION['flashMessage'] = ""; ?></span></div>
+    <div id="flashArea"><span class='flashNotify'>
+    <?php
+    if (isset($_SESSION['flashMessage'])) {
+        echo $_SESSION['flashMessage'];
+        $_SESSION['flashMessage'] = "";
+    }
+    ?>
+    </span></div>
     <div class="row clearfix">
       <div class="col-md-12">
         <div class="btn-toolbar pagination-centered" role="toolbar" aria-label="admin_button_toolbar">
@@ -128,7 +135,7 @@ if($login_name == 'rsmoke'){
                 <thead><th>Last Name</th><th>First Name</th><th>Pen name</th><th>UniqName</th><th>UMID</th></thead>
                 <tbody>';
           while ($row = $resApp->fetch_assoc()) {
-          echo '<tr class="record" id="record-' . $row['id'] . '"><td>' . $row['userLname'] . '</td><td>' . $row['userFname'] .  '</td><td>' . $row['penName'] .  '</td><td><strong>' . $row['uniqname'] .'</strong></td><td>' . $row['umid'] . '</td></tr>';
+          echo '<tr class="record" id="record-' . $row['id'] . '"><td>' . $row['userLname'] . '</td><td>' . $row['userFname'] .  '</td><td>' . $row['penName'] .  '</td><td><strong>' . $row['uniqname'] .'</strong></td><td><a href="https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=' . $row['umid'] . '" target=_"blank">' . $row['umid'] . '</td></tr>';
           }
           echo '</tbody></table>';
           ?>
