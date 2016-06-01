@@ -78,7 +78,14 @@ $_SESSION['isAdmin'] = true;
     <?php if ($isAdmin) {
     ?>
     <div class="container"><!-- container of all things -->
-    <div id="flashArea"><span class='flashNotify'><?php echo $_SESSION['flashMessage']; $_SESSION['flashMessage'] = ""; ?></span></div>
+    <div id="flashArea"><span class='flashNotify'>
+    <?php
+    if (isset($_SESSION['flashMessage'])) {
+        echo $_SESSION['flashMessage'];
+        $_SESSION['flashMessage'] = "";
+    }
+    ?>
+    </span></div>
     <div class="row clearfix">
       <div class="col-md-12">
         <div class="btn-toolbar pagination-centered" role="toolbar" aria-label="admin_button_toolbar">
@@ -88,101 +95,61 @@ $_SESSION['isAdmin'] = true;
         </div>
       </div>
     </div>
-    <div id="contest">
-      <div class="row clearfix">
-        <div class="col-md-12">
-          <h5 class="text-muted">Select a contest that you want to view</h5>
-          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-            <?php
-            //query for existing contests and populate the panels
-            $sqlContestSelect = <<<SQL
-            SELECT
-            `tbl_contest`.`id` AS ContestId,
-            `tbl_contest`.`date_open`,
-            `tbl_contest`.`date_closed`,
-            `tbl_contest`.`notes` AS ContestNotes,
-            `tbl_contest`.`created_by`,
-            `lk_contests`.`name`,
-            `lk_contests`.`shortName`,
-            `lk_contests`.`freshmanEligible`,
-            `lk_contests`.`sophmoreEligible`,
-            `lk_contests`.`juniorEligible`,
-            `lk_contests`.`seniorEligible`,
-            `lk_contests`.`graduateEligible`
-            FROM tbl_contest
-            JOIN `lk_contests` ON ((`tbl_contest`.`contestsID` = `lk_contests`.`id`))
-            ORDER BY date_closed DESC, name
-SQL;
-            $results = $db->query($sqlContestSelect);
-            if (!$results) {
-            echo "There is no contest information available";
-            } else {
-            $count = $i = 0;
-            while ($instance = $results->fetch_assoc()) {
-            $count = $i++;
-            $panelColor = ($instance['date_closed'] >= date("Y-m-d H:i:s")) ? 'panel-success' : 'panel-default';
-
-            ?>
-            <div class="panel <?php echo $panelColor; ?> ">
-              <div class="panel-heading" role="tab" id="heading<?php echo $count ?>">
-                <h6 class="panel-title">
-                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $count ?>" aria-expanded="false" aria-controls="collapse<?php echo $count ?>">
-                  <?php echo $instance['name'] . "  ----->  opened: " . $instance['date_open'] . " - " . "closed: " . $instance['date_closed'] ?>
-                </a>
-                </h6>
-              </div>
-              <div id="collapse<?php echo $count ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?php echo $count ?>">
-                <div class="panel-body">
-                  <div class="well well-sm">Eligibility:
-                    <?php
-                    echo($instance['freshmanEligible'])? "Fr " : "";
-                    echo($instance['sophmoreEligible'])? "So " : "";
-                    echo($instance['juniorEligible'])? "Jr " : "";
-                    echo($instance['seniorEligible'])? "Sr " : "";
-                    echo($instance['graduateEligible'])? "Grd " : "";
-                    ?>
-                  </div>
-                  <div class="table-responsive">
-                    <table class="table table-hover table-condensed">
-                      <tr>
-                        <th>AppID</th><th>File</th><th>Applicant Name</th><th>uniqname</th><th>Title</th><th>Pen Name</th><th>Date Entered</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php
-                      $sqlIndEntry = <<<SQL
-                      SELECT *
-                      FROM vw_entrydetail
-                      WHERE ContestInstance = {$instance['ContestId']}  AND vw_entrydetail.status = 0
-                      ORDER BY uniqname
-SQL;
-                      $resultsInd = $db->query($sqlIndEntry);
-                      if (!$resultsInd) {
-                      echo "There are no applicants available";
-                      } else {
-                      $entryCount = 0;
-                      while ($entry = $resultsInd->fetch_assoc()) {
-                        $entryCount++;
-                        echo '<tr><td>' . $entry['EntryId'] . '</td><td><a class="btn btn-xs btn-info" href="contestfiles/' . $entry['document'] .
-               '" target="_blank"><i class="fa fa-book"></i></a></td><td>' . $entry['firstname'] . " " . $entry['lastname'] . '</td><td>' . $entry['uniqname'] . '</td><td>' . $entry['title'] . '</td><td>' . $entry['penName'] . '</td><td>' . $entry['datesubmitted'] . '</td></tr>';
-                      }
-                      echo '<small>' . $entryCount . '</small>';
-                      }
-                      ?>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
+  <div id="contests">
+    <div class="row clearfix">
+      <div class="col-md-12">
+        <div class="btn-toolbar" role="toolbar" aria-label="contest_button_toolbar">
+          <div class="btn-group" role="group" aria-label="contests_management">
+            <a href="newContestSubmit.php" id="addContest" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="Click to create a new instance of one of the contests listed below">Add New Contest Instance</a>
           </div>
-          <?php
-          }
-          }
-          ?>
+        </div>
+          <span class="allOpenContests">
+            <h4>These are the currently open contests</h4>
+            <?php
+            $resOpenContests = $db->query("SELECT * FROM vw_contestlisting ORDER BY ContestsName");
+            if (!$resOpenContests) {
+            echo "There are no open contests.";
+            } else {
+            while ($instance = $resOpenContests->fetch_assoc()) {
+            echo '<div class="record"><strong><span class="glyphicon glyphicon-asterisk"></span>' . $instance['ContestsName'] . '</strong> OPENED: ' . date("F jS, Y - g:i A", (strtotime($instance['date_open']))) . ' - CLOSES: ' . date("F jS, Y - g:i A", (strtotime($instance['date_closed'])));
+            if(strlen($instance['notes']) > 0){
+              echo '<br><blockquote><em>NOTES: ' . $instance['notes'] . '</em></blockquote>';
+            }
+            echo '</div>';
+            }
+            }
+            ?>
+          </span>
+          <br>
+          <div class="well well-sm">
+            <span class="allOpenContests text-info">
+              <h4>These are the contests set to open in the future</h4>
+              <?php
+              $resOpenContests = $db->query("SELECT * FROM vw_contestlistingfuturedated ORDER BY ContestsName");
+              if (!$resOpenContests) {
+              echo "There are no future contests set to open.";
+              } else {
+              while ($instance = $resOpenContests->fetch_assoc()) {
+              echo '<div class="record"><strong><span class="glyphicon glyphicon-asterisk"></span>' . $instance['ContestsName'] . '</strong> OPENS: ' . date("F jS, Y - g:i A", (strtotime($instance['date_open']))) . ' - CLOSES: ' . date("F jS, Y - g:i A", (strtotime($instance['date_closed']))) . '    <button class="btn btn-danger btn-xs contestdeletebtn" data-entryid="' . $instance["contestid"] . '"><span class="glyphicon glyphicon-remove-sign"></span></button>';
+                          if(strlen($instance['notes']) > 0){
+              echo '<br><blockquote><em>NOTES: ' . $instance['notes'] . '</em></blockquote>';
+            }
+            echo '</div>';
+              }
+              }
+              ?>
+            </span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+      <div id="output">
+        <div class="row clearfix">
+          <div class="col-md-12">
+            <span id="outputData"></span>
+          </div>
+        </div>
+      </div>
       <?php
       } else {
       ?>

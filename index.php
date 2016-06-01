@@ -98,13 +98,9 @@ $_SESSION['isAdmin'] = true;
           <div class="btn-group" role="group" aria-label="contest_applicants">
             <button id="admApplicantBtn" type="button" class="btn btn-success">Applicants</button>
           </div>
-<?php
-if($login_name == 'rsmoke'){
-   echo  '<div class="btn-group" role="group" aria-label="contests_contests">
-            <button id="admContestsBtn" type="button" class="btn btn-info">Contests Administration</button>
-          </div>';
-        }
-?>
+          <div class="btn-group" role="group" aria-label="contests_contests">
+            <a id="admContestsBtn" type="button" class="btn btn-info" href="contestAdmin.php">Contests Administration</a>
+          </div>
 <?php
 if($login_name == 'rsmoke'){
    echo  '<div class="btn-group" role="group" aria-label="admin_access">
@@ -143,69 +139,6 @@ if($login_name == 'rsmoke'){
       </div>
     </div>
   </div>
-  <div id="manuscript_type">
-    <div class="row clearfix">
-      <div class="col-md-12">
-        <span class="allManuscripts">
-          <?php
-          $resManuscript = $db->query("SELECT * FROM lk_category ORDER BY name");
-          while ($row = $resManuscript->fetch_assoc()) {
-          echo '<div class="record" id="record-' . $row['id'] . '">
-          <strong>' . $row['name'] .'</strong>  -- ' . $row['desc'] . '</div>';
-          }
-          ?>
-        </span>
-      </div>
-    </div>
-  </div>
-  <div id="contests">
-    <div class="row clearfix">
-      <div class="col-md-12">
-        <div class="btn-toolbar" role="toolbar" aria-label="contest_button_toolbar">
-          <div class="btn-group" role="group" aria-label="contests_management">
-            <a href="newContestSubmit.php" id="addContest" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="Click to create a new instance of one of the contests listed below">Add New Contest Instance</a>
-          </div>
-        </div>
-        <span class="allContests">
-          <?php
-          $resContests = $db->query("SELECT * FROM lk_contests ORDER BY name");
-          while ($row = $resContests->fetch_assoc()) {
-          echo '<div class="record" id="contests">
-            <strong><span data-contestsid="' . $row['id'] . '" class="btn btn-link editBtn" type="button">' . $row['name'] .'</span></strong>  -- ' . $row['contests_notes'] . '</div>';
-            }
-            ?>
-          </span>
-          <br>
-          <span class="allOpenContests">
-            <h5>These are the currently open contests</h5>
-            <?php
-            $resOpenContests = $db->query("SELECT * FROM vw_contestlisting ORDER BY ContestsName");
-            if (!$resOpenContests) {
-            echo "There are no open contests";
-            } else {
-            while ($instance = $resOpenContests->fetch_assoc()) {
-            echo '<div class="record"><strong>' . $instance['ContestsName'] . '</strong> Opened: ' . $instance['date_open'] . ' - Closes: ' . $instance['date_closed'] . '</div>';
-            }
-            }
-            ?>
-          </span>
-          <br>
-          <span class="allOpenContests">
-            <h5>These are the contests set to open in the future</h5>
-            <?php
-            $resOpenContests = $db->query("SELECT * FROM vw_contestlistingfuturedated ORDER BY ContestsName");
-            if (!$resOpenContests) {
-            echo "There are no open contests";
-            } else {
-            while ($instance = $resOpenContests->fetch_assoc()) {
-            echo '<div class="record"><strong>' . $instance['ContestsName'] . '</strong> Opens: ' . $instance['date_open'] . ' - Closes: ' . $instance['date_closed'] . '</div>';
-            }
-            }
-            ?>
-          </span>
-        </div>
-      </div>
-    </div>
     <div id="admin_access">
       <div class="row clearfix">
         <div class="col-md-12">
