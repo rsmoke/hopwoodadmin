@@ -199,7 +199,7 @@ SQL;
                       $entryCount = 0;
                       while ($entry = $resultsInd->fetch_assoc()) {
                         $entryCount++;
-                        echo '<tr><td>' . $entry['EntryId'] . '</td><td><a class="btn btn-xs btn-info" href="contestfiles/' . $entry['document'] .
+                        echo '<tr><td>' . $entry['EntryId'] . '</td><td><a class="btn btn-xs btn-info" href="fileholder.php?file=' . $entry['document'] .
                '" target="_blank"><i class="fa fa-book"></i></a></td><td>' . $entry['firstname'] . " " . $entry['lastname'] . '</td><td>' . $entry['uniqname'] . '</td><td>' . $entry['title'] . '</td><td>' . $entry['penName'] . '</td><td>' . $entry['datesubmitted'] . '</td></tr>';
                       }
                       echo '<small>' . $entryCount . '</small>';
