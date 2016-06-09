@@ -100,6 +100,17 @@ $( document ).ready(function(){
     });
   }
 
+  $.get( "futureContest.php", function( data ) {
+    $( "#futureContestsData" ).html( data );
+  });
+
+  $("#futureContestsData").on('click','.contestdeletebtn', function(e){
+    $.post( 'contestRemEntry.php',{contestid:$(this).data('contestid')} );
+    $.get( "futureContest.php", function( data ) {
+      $( "#futureContestsData" ).html( data );
+    });
+  });
+
   $('#contest').on('click', '.editBtn', function ( event ){
     var useContests = $(this).data('contestsid');
     var contestName = "";

@@ -78,14 +78,16 @@ $_SESSION['isAdmin'] = true;
     <?php if ($isAdmin) {
     ?>
     <div class="container"><!-- container of all things -->
-    <div id="flashArea"><span class='flashNotify'>
-    <?php
-    if (isset($_SESSION['flashMessage'])) {
-        echo $_SESSION['flashMessage'];
-        $_SESSION['flashMessage'] = "";
-    }
-    ?>
-    </span></div>
+    <div id="flashArea">
+      <span class='flashNotify'>
+      <?php
+        if (isset($_SESSION['flashMessage'])) {
+          echo $_SESSION['flashMessage'];
+          $_SESSION['flashMessage'] = "";
+        }
+      ?>
+      </span>
+    </div>
     <div class="row clearfix">
       <div class="col-md-12">
         <div class="btn-toolbar pagination-centered" role="toolbar" aria-label="admin_button_toolbar">
@@ -95,92 +97,78 @@ $_SESSION['isAdmin'] = true;
         </div>
       </div>
     </div>
-  <div id="contests">
     <div class="row clearfix">
       <div class="col-md-12">
-        <div class="btn-toolbar" role="toolbar" aria-label="contest_button_toolbar">
-          <div class="btn-group" role="group" aria-label="contests_management">
-            <a href="newContestSubmit.php" id="addContest" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="Click to create a new instance of one of the contests listed below">Add New Contest Instance</a>
+        <div id="contests">
+          <div class="btn-toolbar" role="toolbar" aria-label="contest_button_toolbar">
+            <div class="btn-group" role="group" aria-label="contests_management">
+              <a href="newContestSubmit.php" id="addContest" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="Click to create a new instance of one of the contests listed below">Add New Contest Instance</a>
+            </div>
           </div>
-        </div>
-          <div class="allOpenContests">
+          <div id="allOpenContests">
             <h4>These are the currently open contests</h4>
             <?php
-            $resOpenContests = $db->query("SELECT * FROM vw_contestlisting ORDER BY ContestsName");
-            if (!$resOpenContests) {
-            echo "There are no open contests.";
-            } else {
-            while ($instance = $resOpenContests->fetch_assoc()) {
-            echo '<div class="record"><strong><span class="glyphicon glyphicon-asterisk"></span>' . $instance['ContestsName'] . '</strong> OPENED: ' . date("F jS, Y - g:i A", (strtotime($instance['date_open']))) . ' - CLOSES: ' . date("F jS, Y - g:i A", (strtotime($instance['date_closed'])));
-            if(strlen($instance['notes']) > 0){
-              echo '<br><blockquote><em>NOTES: ' . $instance['notes'] . '</em></blockquote>';
-            }
-            echo '</div>';
-            }
-            }
+              $resOpenContests = $db->query("SELECT * FROM vw_contestlisting ORDER BY ContestsName");
+              if (!$resOpenContests) {
+              echo "There are no open contests.";
+              } else {
+                while ($instance = $resOpenContests->fetch_assoc()) {
+                  echo '<div class="record"><strong><span class="glyphicon glyphicon-asterisk"></span>' . $instance['ContestsName'] . '</strong> OPENED: ' . date("F jS, Y - g:i A", (strtotime($instance['date_open']))) . ' - CLOSES: ' . date("F jS, Y - g:i A", (strtotime($instance['date_closed'])));
+                  if(strlen($instance['notes']) > 0){
+                    echo '<br><blockquote><em>NOTES: ' . $instance['notes'] . '</em></blockquote>';
+                  }
+                  echo '</div>';
+                }
+              }
             ?>
           </div>
-          <br>
           <div class="well well-sm">
-            <div class="allOpenContests text-info">
+            <div id="futureContests" class="text-info">
               <h4>These are the contests set to open in the future</h4>
-              <?php
-              $resOpenContests = $db->query("SELECT * FROM vw_contestlistingfuturedated ORDER BY ContestsName");
-              if (!$resOpenContests) {
-              echo "There are no future contests set to open.";
-              } else {
-              while ($instance = $resOpenContests->fetch_assoc()) {
-              echo '<div class="record"><strong><span class="glyphicon glyphicon-asterisk"></span>' . $instance['ContestsName'] . '</strong> OPENS: ' . date("F jS, Y - g:i A", (strtotime($instance['date_open']))) . ' - CLOSES: ' . date("F jS, Y - g:i A", (strtotime($instance['date_closed']))) . '    <button class="btn btn-danger btn-xs contestdeletebtn" data-entryid="' . $instance["contestid"] . '"><span class="glyphicon glyphicon-remove-sign"></span></button>';
-                          if(strlen($instance['notes']) > 0){
-              echo '<br><blockquote><em>NOTES: ' . $instance['notes'] . '</em></blockquote>';
-            }
-            echo '</div>';
-              }
-              }
-              ?>
+                <div id="futureContestsData"></div>
             </div>
           </div>
         </div>
       </div>
     </div>
-      <div id="output">
-        <div class="row clearfix">
-          <div class="col-md-12">
-            <span id="outputData"></span>
-          </div>
-        </div>
-      </div>
-      <?php
-      } else {
-      ?>
-      <!-- if there is not a record for $login_name display the basic information form. Upon submitting this data display the contest available section -->
-      <div id="notAdmin">
-        <div class="row clearfix">
-          <div class="col-md-12">
-            <div id="instructions" style="color:sienna;">
-              <h1 class="text-center" >You are not authorized to this space!!!</h1>
-              <h4>University of Michigan - LSA Computer System Usage Policy</h4>
-              <p>This is the University of Michigan information technology environment. You
-                MUST be authorized to use these resources. As an authorized user, by your use
-                of these resources, you have implicitly agreed to abide by the highest
-                standards of responsibility to your colleagues, -- the students, faculty,
-                staff, and external users who share this environment. You are required to
-                comply with ALL University policies, state, and federal laws concerning
-                appropriate use of information technology. Non-compliance is considered a
-                serious breach of community standards and may result in disciplinary and/or
-              legal action.</p>
-              <div style="postion:fixed;margin:10px 0px 0px 250px;height:280px;width:280px;"><a href="http://www.umich.edu"><img alt="University of Michigan" src="img/michigan.png" /> </a></div>
-              </div><!-- #instructions -->
-            </div>
-          </div>
-        </div>
-        <?php
-        }
-        include("footer.php");?>
-        <!-- //additional script specific to this page -->
-        <script src="js/admMyScript.js"></script>
-        </div><!-- End Container of all things -->
-      </body>
-    </html>
-    <?php
-    $db->close();
+<div id="output">
+  <div class="row clearfix">
+    <div class="col-md-12">
+      <span id="outputData"></span>
+    </div>
+  </div>
+</div>
+<?php
+} else {
+?>
+<!-- if there is not a record for $login_name display the basic information form. Upon submitting this data display the contest available section -->
+<div id="notAdmin">
+<div class="row clearfix">
+<div class="col-md-12">
+  <div id="instructions" style="color:sienna;">
+    <h1 class="text-center" >You are not authorized to this space!!!</h1>
+    <h4>University of Michigan - LSA Computer System Usage Policy</h4>
+    <p>This is the University of Michigan information technology environment. You
+      MUST be authorized to use these resources. As an authorized user, by your use
+      of these resources, you have implicitly agreed to abide by the highest
+      standards of responsibility to your colleagues, -- the students, faculty,
+      staff, and external users who share this environment. You are required to
+      comply with ALL University policies, state, and federal laws concerning
+      appropriate use of information technology. Non-compliance is considered a
+      serious breach of community standards and may result in disciplinary and/or
+    legal action.</p>
+    <div style="postion:fixed;margin:10px 0px 0px 250px;height:280px;width:280px;"><a href="http://www.umich.edu"><img alt="University of Michigan" src="img/michigan.png" /> </a></div>
+    </div><!-- #instructions -->
+  </div>
+</div>
+</div>
+<?php
+}
+include("footer.php");?>
+<!-- //additional script specific to this page -->
+<script src="js/admMyScript.js"></script>
+</div><!-- End Container of all things -->
+</body>
+</html>
+<?php
+$db->close();
