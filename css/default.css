@@ -94,6 +94,7 @@ select {
 #flashArea {
 	height: 20px;
 	margin-left: 20px;
+	font-size: 1.8rem;
 }
 
 #notadmin {
