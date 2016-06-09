@@ -103,7 +103,7 @@ $_SESSION['isAdmin'] = true;
             <a href="newContestSubmit.php" id="addContest" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="Click to create a new instance of one of the contests listed below">Add New Contest Instance</a>
           </div>
         </div>
-          <span class="allOpenContests">
+          <div class="allOpenContests">
             <h4>These are the currently open contests</h4>
             <?php
             $resOpenContests = $db->query("SELECT * FROM vw_contestlisting ORDER BY ContestsName");
@@ -119,10 +119,10 @@ $_SESSION['isAdmin'] = true;
             }
             }
             ?>
-          </span>
+          </div>
           <br>
           <div class="well well-sm">
-            <span class="allOpenContests text-info">
+            <div class="allOpenContests text-info">
               <h4>These are the contests set to open in the future</h4>
               <?php
               $resOpenContests = $db->query("SELECT * FROM vw_contestlistingfuturedated ORDER BY ContestsName");
@@ -138,7 +138,7 @@ $_SESSION['isAdmin'] = true;
               }
               }
               ?>
-            </span>
+            </div>
           </div>
         </div>
       </div>
