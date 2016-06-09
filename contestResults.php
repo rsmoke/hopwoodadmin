@@ -111,6 +111,7 @@ $_SESSION['isAdmin'] = true;
             `lk_contests`.`graduateEligible`
             FROM tbl_contest
             JOIN `lk_contests` ON ((`tbl_contest`.`contestsID` = `lk_contests`.`id`))
+            WHERE `tbl_contest`.`status` = 0
             ORDER BY date_closed DESC, name
 SQL;
             $results = $db->query($sqlContestSelect);
