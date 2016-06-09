@@ -88,42 +88,6 @@ $_SESSION['isAdmin'] = true;
         </div>
       </div>
     </div>
-    <div class="row clearfix">
-      <div class="col-md-12">
-        <div class="btn-toolbar pagination-centered" role="toolbar" aria-label="admin_button_toolbar">
-          <div class="btn-group" role="group" aria-label="contest_contest">
-            <a href="contestResults.php" id="admContestBtn" type="button" class="btn btn-primary">Contest</a>
-          </div>
-          <div class="btn-group" role="group" aria-label="contest_report">
-            <a id="admReportBtn" type="button" class="btn btn-warning" href="reports.php">Reports</a>
-          </div>
-          <div class="btn-group" role="group" aria-label="contest_applicants">
-            <button id="admApplicantBtn" type="button" class="btn btn-success">Applicants</button>
-          </div>
-<?php
-if($login_name == 'rsmoke'){
-   echo  '<div class="btn-group" role="group" aria-label="contests_contests">
-            <button id="admContestsBtn" type="button" class="btn btn-info">Contests Administration</button>
-          </div>';
-        }
-?>
-<?php
-if($login_name == 'rsmoke'){
-   echo  '<div class="btn-group" role="group" aria-label="admin_access">
-            <button id="admAdminManageBtn" type="button" class="btn btn-default">Admin-Access</button>
-          </div>';
-        }
-?>
-        </div>
-      </div>
-    </div>
-    <div id="initialView">
-      <div class="row clearfix">
-        <div class="col-md-12">
-          <div><img src="img/IMG_0970.jpg" class="img img-responsive center-block" width="571" height="304" alt="Hopwood Image"></div>
-        </div>
-      </div>
-    </div>
     <div id="contest">
       <div class="row clearfix">
         <div class="col-md-12">

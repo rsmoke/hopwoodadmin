@@ -100,3 +100,7 @@ select {
 	padding-bottom: 10px;
 
 }
+
+blockquote {
+	font-size: .9em;
+}

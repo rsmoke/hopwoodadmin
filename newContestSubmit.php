@@ -18,7 +18,7 @@ if (isset($_POST['insertContest'])) {
   if($sql->execute()){
     $_SESSION['flashMessage'] = "Successfully added new contest";
     $_POST['insertContest'] = false;
-    safeRedirect();
+    safeRedirect('contestAdmin.php');
   } else {
     db_fatal_error("Execute failed:(" . $sql->errno . ") for user " . $login_name, $sql->error, $sql);
     exit($user_err_message);
@@ -88,6 +88,15 @@ if (isset($_POST['insertContest'])) {
     ?>
     <div class="container"><!-- container of all things -->
     <div id="flashArea"><span class='flashNotify'><?php echo $_SESSION['flashMessage']; $_SESSION['flashMessage'] = ""; ?></span></div>
+        <div class="row clearfix">
+      <div class="col-md-12">
+        <div class="btn-toolbar pagination-centered" role="toolbar" aria-label="admin_button_toolbar">
+          <div class="btn-group" role="group" aria-label="contest_management">
+            <a id="backToIndexBtn" type="button" class="btn btn-xs btn-default" href="contestAdmin.php">Back to Contests Administration</a>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="row clearfix">
       <div class='outputContainer col-sm-8 col-md-offset-2'>
         <form action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>' method='post' id='addContestForm' >
