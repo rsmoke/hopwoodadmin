@@ -15,7 +15,7 @@ if ($_SESSION['isAdmin']) {
 _SQL;
 
         if (!$result= $db->query($sqlDelete)) {
-            db_fatal_error($db->error, $siteTitle, "data delete issue", $sqlDelete);
+            db_fatal_error("data delete issue", $db->error, $sqlDelete ,$login_name);
             exit;
         }
 

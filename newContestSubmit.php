@@ -4,23 +4,28 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 if (session_status() == PHP_SESSION_NONE) {
 session_start();
 }
-$sql = $db->prepare("INSERT INTO tbl_contest
+if (!($stmt = $db->prepare("INSERT INTO tbl_contest
 (`contestsID`,`date_open`,`date_closed`,`notes`,`created_by`)
-VALUES
-(?,?,?,?,?)");
-$sql->bind_param('issss',$contestsID,$contestOpen,$contestClose,$contestNotes,$login_name);
+VALUES (?,?,?,?,?)"))){
+  db_fatal_error("{Prepare failed", "( " . $db->errno . " )" . $db->error, "EMPTY", $login_name);
+  exit($user_err_message);
+}
+if (!$stmt->bind_param('issss',$contestsID,$contestOpen,$contestClose,$contestNotes,$login_name)){
+  db_fatal_error("Bind parameters failed", "( " . $stmt->errno . " )" . $stmt->error, "EMPTY", $login_name);
+  exit($user_err_message);
+}
 
 if (isset($_POST['insertContest'])) {
   $contestsID = $db->real_escape_string(htmlspecialchars($_POST['contestID']));
   $contestNotes = $db->real_escape_string(htmlspecialchars($_POST['notes']));
   $contestOpen = date("Y-m-d H:i:s", (strtotime($_POST['openDate'])));
   $contestClose = date("Y-m-d H:i:s", (strtotime($_POST['closeDate'])));
-  if($sql->execute()){
+  if($stmt->execute()){
     $_SESSION['flashMessage'] = "Successfully added new contest";
     $_POST['insertContest'] = false;
     safeRedirect('contestAdmin.php');
   } else {
-    db_fatal_error("Execute failed:(" . $sql->errno . ") for user " . $login_name, $sql->error, $sql);
+    db_fatal_error("Execute failed", "( " . $stmt->errno . " )" . $stmt->error, "EMPTY", $login_name);
     exit($user_err_message);
   }
 } else {

@@ -14,7 +14,7 @@ WHERE uniqname = '$login_name'
 ORDER BY uniqname
 _SQL;
 if (!$resAdmin = $db->query($sqlSelect)) {
-db_fatal_error("data insert issue", $db->error);
+db_fatal_error("data read issue", $db->error, $sqlSelect, $login_name);
 exit;
 }
 if ($resAdmin->num_rows > 0) {
