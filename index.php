@@ -101,13 +101,10 @@ $_SESSION['isAdmin'] = true;
           <div class="btn-group" role="group" aria-label="contests_contests">
             <a id="admContestsBtn" type="button" class="btn btn-info" href="contestAdmin.php">Contests Administration</a>
           </div>
-<?php
-if($login_name == 'rsmoke'){
-   echo  '<div class="btn-group" role="group" aria-label="admin_access">
-            <button id="admAdminManageBtn" type="button" class="btn btn-default">Admin-Access</button>
-          </div>';
-        }
-?>
+          <div class="btn-group pull-right" role="group" aria-label="admin_access">
+            <button id="admAdminManageBtn" type="button" class="btn btn-sm btn-default">Admin-Access</button>
+          </div>
+
         </div>
       </div>
     </div>
