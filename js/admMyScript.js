@@ -5,53 +5,21 @@ $( document ).ready(function(){
     $('body').prepend("<div class='bg-danger text-center'>THIS IS A DEVELOPMENT ENVIRONMENT -- THIS IS A DEVELOPMENT ENVIRONMENT -- THIS IS A DEVELOPMENT ENVIRONMENT -- THIS IS A DEVELOPMENT ENVIRONMENT </div>");
   }
 
-  //$('#contest').hide();
   $('#applicant').hide();
-  //$('#manuscript_type').hide();
-  //$('#contests').hide();
   $('#admin_access').hide();
-  $('#output').hide();
-
-  // $('#admContestBtn').click( function(){
-  //   //$('#contest').toggle();
-  //   $('#applicant').hide();
-  //   //$('#manuscript_type').hide();
-  //   //$('#contests').hide();
-  //   $('#admin_access').hide();
-  //   //$('#initialView').hide();
-  //   $('#output').hide();
-  // });
 
   $('#admApplicantBtn').click( function(){
-    //$('#contests').hide();
     $('#applicant').toggle();
-    //$('#contest').hide();
     $('#admin_access').hide();
     $('#initialView').hide();
-    $('#output').hide();
   });
-
-  // $('#admContestsBtn').click( function(){
-  //   //$('#contests').toggle();
-  //   $('#applicant').hide();
-  //   //$('#contest').hide();
-  //   $('#admin_access').hide();
-  //   $('#initialView').hide();
-  //   $('#output').toggle();
-  //   $("span#outputData").empty();
-  // });
 
   $('#admAdminManageBtn').click( function(){
     $('#admin_access').toggle();
     $('#applicant').hide();
-    //$('#contest').hide();
-    //$('#contests').hide();
     $('#manuscript_type').hide();
     $('#initialView').hide();
-    $('#output').hide();
   });
-
-
 
   $('.flashNotify').fadeOut(6000);
 
