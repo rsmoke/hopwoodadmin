@@ -179,5 +179,4 @@ include("footer.php");?>
 </body>
 </html>
 <?php
-$sql->close();
 $db->close();
