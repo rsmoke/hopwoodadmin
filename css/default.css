@@ -44,13 +44,11 @@ footer a img {
 footer a {
 	color: #5e8bac;
 	text-decoration: none;
-	font-size: 14px;
 	}
 
 footer a:hover {
 	background-color: transparent;
 	text-decoration: underline;
-	font-size: 14px;
 }
 
 footer .mlogo {

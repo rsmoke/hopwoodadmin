@@ -21,13 +21,13 @@
 		<div class="col-xs-4 hidden-xs">
 			<a href="mailto:<?php echo strtolower($addressEmail);?>"><?php echo strtolower($addressEmail);?></a>
 			<h4>
-		    <a data-toggle="tooltip" data-placement="right" title="How to use this site" href="https://goo.gl/vsAuSy" target="_blank"><i class="fa fa-info-circle" aria-hidden="true"></i> Help Documents</a>
+		    <a data-toggle="tooltip" data-placement="right" title="How to use this site" href="https://goo.gl/vsAuSy" target="_blank"><i class="fa fa-info-circle fa-2x" aria-hidden="true"></i> Help Documents</a>
 			</h4>
 		</div>
 		<div class="col-xs-4 visible-xs-block">
 			<a href="mailto:<?php echo strtolower($addressEmail);?>">eMail</a>
 			<h4>
-		    <a data-toggle="tooltip" data-placement="right" title="How to use this site" href="https://goo.gl/vsAuSy" target="_blank"><i class="fa fa-info-circle" aria-hidden="true"></i> Help Documents</a>
+		    <a data-toggle="tooltip" data-placement="right" title="How to use this site" href="https://goo.gl/vsAuSy" target="_blank"><i class="fa fa-info-circle fa-2x" aria-hidden="true"></i> Help Documents</a>
 			</h4>
 		</div>
 		<div class="col-xs-1"></div>
