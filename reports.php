@@ -102,7 +102,7 @@ $_SESSION['isAdmin'] = true;
             <button id="reportNationalEvalBtn" type="button" class="btn btn-success">Hopwood National<br>Evaluations</button>
           </div> -->
           <div class="btn-group" role="group" aria-label="contest_applicants">
-            <a id="ktchensinkBtn" type="button" class="btn btn-info" href="kitchensink.csv"><i class="fa fa-download"></i></a>
+            <a id="ktchensinkBtn" type="button" class="btn btn-info" href="kitchensink.php" data-toggle="tooltip" data-placement="right" title="Click to download details of all the applications ever submitted"><i class="fa fa-download"></i></a>
           </div>
         </div>
       </div>
