@@ -78,107 +78,96 @@ $_SESSION['isAdmin'] = true;
     <?php if ($isAdmin) {
     ?>
     <div class="container"><!-- container of all things -->
-    <div id="flashArea"><span class='flashNotify'>
-    <?php
-    if (isset($_SESSION['flashMessage'])) {
-        echo $_SESSION['flashMessage'];
-        $_SESSION['flashMessage'] = "";
-    }
-    ?>
-    </span></div>
+    <div id="flashArea"><span class='flashNotify'><?php echo $_SESSION['flashMessage']; $_SESSION['flashMessage'] = ""; ?></span></div>
     <div class="row clearfix">
       <div class="col-md-12">
         <div class="btn-toolbar pagination-centered" role="toolbar" aria-label="admin_button_toolbar">
-          <div class="btn-group" role="group" aria-label="contest_contest">
-            <a href="currentContests.php" id="admContestBtn" type="button" class="btn btn-primary">Contest</a>
+          <div class="btn-group" role="group" aria-label="contest_management">
+            <a id="backToIndexBtn" type="button" class="btn btn-xs btn-default" href="index.php">Back to Contest Management</a>
           </div>
-          <div class="btn-group" role="group" aria-label="contest_report">
-            <a id="admReportBtn" type="button" class="btn btn-warning" href="reports.php">Reports</a>
-          </div>
-          <div class="btn-group" role="group" aria-label="contest_applicants">
-            <button id="admApplicantBtn" type="button" class="btn btn-success">Applicants</button>
-          </div>
-          <div class="btn-group" role="group" aria-label="contests_contests">
-            <a id="admContestsBtn" type="button" class="btn btn-info" href="contestAdmin.php">Contests Administration</a>
-          </div>
-          <div class="btn-group pull-right" role="group" aria-label="admin_access">
-            <button id="admAdminManageBtn" type="button" class="btn btn-sm btn-default">Admin-Access</button>
-          </div>
-
         </div>
       </div>
     </div>
-    <div id="initialView">
+    <div id="contest">
       <div class="row clearfix">
         <div class="col-md-12">
-          <div><img src="img/IMG_0970.jpg" class="img img-responsive center-block" width="571" height="304" alt="Hopwood Image"></div>
-        </div>
-      </div>
-    </div>
+          <h5 class="text-muted">These are the most recent instances of the contests being offered</h5>
+          <p class="text-warning"><a href="contestResults.php">Listing of all contests</a>
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <?php
+            //query for existing contests and populate the panels
+            $sqlContestSelect = <<<SQL
+            SELECT c1.id AS ContestId, c1.contestsID, c1.date_open, c1.date_closed, `lk_contests`.`name`
+            FROM tbl_contest c1
+            INNER JOIN (SELECT MAX(c2.date_open) AS OPENS, c2.contestsID
+                  FROM tbl_contest c2
+                  WHERE c2.date_open <= NOW()
+                  GROUP BY c2.contestsID) AS MAX
+              ON (MAX.contestsID = c1.contestsID AND MAX.OPENS = c1.date_open)
+              JOIN `lk_contests` ON ((c1.contestsID = `lk_contests`.`id`))
+            ORDER BY contestsID
+SQL;
+            $results = $db->query($sqlContestSelect);
+            if (!$results) {
+            echo "There is no contest information available";
+            } else {
+            $count = $i = 0;
+            while ($instance = $results->fetch_assoc()) {
+            $count = $i++;
+            $panelColor = ($instance['date_closed'] >= date("Y-m-d H:i:s")) ? 'panel-success' : 'panel-default';
 
-  <div id="applicant">
-    <div class="row clearfix">
-      <div class="col-md-12">
-        <h5 class="text-muted">All applicants by last name</h5>
-        <!-- <p>By clicking on the applicants uniqname you can see their complete profile</p> -->
-        <span id="allApplicants">
+            ?>
+            <div class="panel <?php echo $panelColor; ?> ">
+              <div class="panel-heading" role="tab" id="heading<?php echo $count ?>">
+                <h6 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $count ?>" aria-expanded="false" aria-controls="collapse<?php echo $count ?>">
+                  <?php echo $instance['name'] . "  ----->  opened: " . $instance['date_open'] . " - " . "closed: " . $instance['date_closed'] ?>
+                </a>
+                </h6>
+              </div>
+              <div id="collapse<?php echo $count ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?php echo $count ?>">
+                <div class="panel-body">
+                  <div class="table-responsive">
+                    <table class="table table-hover table-condensed">
+                      <tr>
+                        <th>AppID</th><th>File</th><th>Applicant Name</th><th>uniqname</th><th>Title</th><th>Pen Name</th><th>Date Entered</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                      $sqlIndEntry = <<<SQL
+                      SELECT *
+                      FROM vw_entrydetail
+                      WHERE ContestInstance = {$instance['ContestId']}  AND vw_entrydetail.status = 0
+                      ORDER BY uniqname
+SQL;
+                      $resultsInd = $db->query($sqlIndEntry);
+                      if (!$resultsInd) {
+                      echo "There are no applicants available";
+                      } else {
+                      $entryCount = 0;
+                      while ($entry = $resultsInd->fetch_assoc()) {
+                        $entryCount++;
+                        echo '<tr><td>' . $entry['EntryId'] . '</td><td><a class="btn btn-xs btn-info" href="fileholder.php?file=' . $entry['document'] .
+               '" target="_blank"><i class="fa fa-book"></i></a></td><td>' . $entry['firstname'] . " " . $entry['lastname'] . '</td><td>' . $entry['uniqname'] . '</td><td>' . $entry['title'] . '</td><td>' . $entry['penName'] . '</td><td>' . $entry['datesubmitted'] . '</td></tr>';
+                      }
+                      echo '<small>' . $entryCount . '</small>';
+                      }
+                      ?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
           <?php
-          $resApp = $db->query("SELECT * FROM tbl_applicant ORDER BY userLname");
-          echo '<table class="table table-hover">
-                <thead><th>Last Name</th><th>First Name</th><th>Pen name</th><th>UniqName</th><th>UMID</th></thead>
-                <tbody>';
-          while ($row = $resApp->fetch_assoc()) {
-          echo '<tr class="record" id="record-' . $row['id'] . '"><td>' . $row['userLname'] . '</td><td>' . $row['userFname'] .  '</td><td>' . $row['penName'] .  '</td><td><strong>' . $row['uniqname'] .'</strong></td><td><a href="https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=' . $row['umid'] . '" target=_"blank">' . $row['umid'] . '</td></tr>';
           }
-          echo '</tbody></table>';
+          }
           ?>
-        </span>
+        </div>
       </div>
     </div>
   </div>
-    <div id="admin_access">
-      <div class="row clearfix">
-        <div class="col-md-12">
-          <div id="instructions">
-            <p>These are the current individuals who are permitted to manage the <?php echo "$contestTitle";?> Application</p>
-            </div><!-- #instructions -->
-            <div id="adminList">
-              <span id="currAdmins">
-                <?php
-                $sqlAdmSel = <<<SQL
-                SELECT *
-                FROM tbl_contestadmin
-                ORDER BY uniqname
-SQL;
-                if (!$resADM = $db->query($sqlAdmSel)) {
-                db_fatal_error("data read issue", $db->error, $sqlAdmSel, $login_name);
-                exit;
-                }
-                while ($row = $resADM->fetch_assoc()) {
-                $fullname = ldapGleaner($row['uniqname']);
-                echo '<div class="record">
-                  <button type="button" class="btn btn-xs btn-danger btnDelADM" data-delid="' . $row['id'] . '"><span class="glyphicon glyphicon-remove"></span></button>
-                <strong>' . $row['uniqname'] . '</strong>  -- ' . $fullname[0] . " " . $fullname[1] . '</div>';
-                }
-                ?>
-              </span>
-            </div>
-            <br />
-            <div id="myAdminForm"><!-- add Admin -->
-            To add an Administrator please enter their <b>uniqname</b> below:<br>
-            <input class="form_control" type="text" name="name" /><br>
-            <button class="btn btn-info btn-xs" id="adminSub">Add Administrator</button><br /><i>--look up uniqnames using the <a href="https://mcommunity.umich.edu/" target="_blank">Mcommunity directory</a>--</i>
-            </div><!-- add Admin -->
-          </div>
-        </div>
-      </div>
-      <div id="output">
-        <div class="row clearfix">
-          <div class="col-md-12">
-            <span id="outputData"></span>
-          </div>
-        </div>
-      </div>
       <?php
       } else {
       ?>
@@ -213,3 +202,5 @@ SQL;
     </html>
     <?php
     $db->close();
+
+
