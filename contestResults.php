@@ -91,7 +91,8 @@ $_SESSION['isAdmin'] = true;
     <div id="contest">
       <div class="row clearfix">
         <div class="col-md-12">
-          <h5 class="text-muted">Select a contest that you want to view</h5>
+          <h5 class="text-muted">Select a contest that you want to view (Contests in <span class="text-success bg-success">green</span> are currently open for submissions,
+            Contests in <span class="text-info bg-info">blue</span> are set to open for submissions in the future)</h5>
           <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             <?php
             //query for existing contests and populate the panels
@@ -110,7 +111,7 @@ $_SESSION['isAdmin'] = true;
             `lk_contests`.`seniorEligible`,
             `lk_contests`.`graduateEligible`
             FROM tbl_contest
-            JOIN `lk_contests` ON ((`tbl_contest`.`contestsID` = `lk_contests`.`id`))
+            JOIN `lk_contests` ON (`tbl_contest`.`contestsID` = `lk_contests`.`id`)
             WHERE `tbl_contest`.`status` = 0
             ORDER BY date_closed DESC, name
 SQL;
@@ -122,13 +123,14 @@ SQL;
             while ($instance = $results->fetch_assoc()) {
             $count = $i++;
             $panelColor = ($instance['date_closed'] >= date("Y-m-d H:i:s")) ? 'panel-success' : 'panel-default';
+            $panelColor = ($instance['date_open'] > date("Y-m-d H:i:s")) ? 'panel-info' : $panelColor;
 
             ?>
             <div class="panel <?php echo $panelColor; ?> ">
               <div class="panel-heading" role="tab" id="heading<?php echo $count ?>">
                 <h6 class="panel-title">
                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $count ?>" aria-expanded="false" aria-controls="collapse<?php echo $count ?>">
-                  <?php echo $instance['name'] . "  ----->  opened: " . $instance['date_open'] . " - " . "closed: " . $instance['date_closed'] ?>
+                  <?php echo $instance['name'] . "  -->  <span class='text-muted'>open:</span> " . date("F jS, Y - g:i A", (strtotime($instance['date_open']))) . " - " . "<span class='text-muted'>close:</span> " . date("F jS, Y - g:i A", (strtotime($instance['date_closed']))) ?>
                 </a>
                 </h6>
               </div>

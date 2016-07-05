@@ -91,20 +91,21 @@ $_SESSION['isAdmin'] = true;
     <div id="contest">
       <div class="row clearfix">
         <div class="col-md-12">
-          <h5 class="text-muted">These are the most recent instances of the contests being offered</h5>
-          <p class="text-warning"><a href="contestResults.php">Listing of all contests</a>
+          <h4 class="text-muted">These are the most recent instances of the contests being offered (Contests in <span class="text-success bg-success">green</span> are currently open for submissions)</h4>
+          <p><a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Click to show the archive of all contests" href="contestResults.php">Listing of all contests</a></p>
           <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             <?php
             //query for existing contests and populate the panels
             $sqlContestSelect = <<<SQL
-            SELECT c1.id AS ContestId, c1.contestsID, c1.date_open, c1.date_closed, `lk_contests`.`name`
+            SELECT c1.id AS ContestId, c1.contestsID, c1.date_open, c1.date_closed, `lk_contests`.`name`,c1.status
             FROM tbl_contest c1
             INNER JOIN (SELECT MAX(c2.date_open) AS OPENS, c2.contestsID
                   FROM tbl_contest c2
                   WHERE c2.date_open <= NOW()
                   GROUP BY c2.contestsID) AS MAX
               ON (MAX.contestsID = c1.contestsID AND MAX.OPENS = c1.date_open)
-              JOIN `lk_contests` ON ((c1.contestsID = `lk_contests`.`id`))
+              JOIN `lk_contests` ON (c1.contestsID = `lk_contests`.`id`)
+              WHERE c1.status = 0
             ORDER BY contestsID
 SQL;
             $results = $db->query($sqlContestSelect);
@@ -121,7 +122,7 @@ SQL;
               <div class="panel-heading" role="tab" id="heading<?php echo $count ?>">
                 <h6 class="panel-title">
                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $count ?>" aria-expanded="false" aria-controls="collapse<?php echo $count ?>">
-                  <?php echo $instance['name'] . "  ----->  opened: " . $instance['date_open'] . " - " . "closed: " . $instance['date_closed'] ?>
+                  <?php echo $instance['name'] . "  -->  <span class='text-muted'>open: </span>" . date("F jS, Y - g:i A", (strtotime($instance['date_open']))) . " <=> " . "<span class='text-muted'>close:</span> " . date("F jS, Y - g:i A", (strtotime($instance['date_closed']))) ?>
                 </a>
                 </h6>
               </div>
