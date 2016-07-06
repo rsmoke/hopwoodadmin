@@ -167,14 +167,29 @@ include("footer.php");?>
 <script src="js/admMyScript.js"></script>
 <script src="js/moment.js"></script>
 <script src="js/bootstrap-datetimepicker.min.js"></script>
-      <script type="text/javascript">
+<script type="text/javascript">
+ //Using Bootstrap 3 Datepicker v4 https://eonasdan.github.io/bootstrap-datetimepicker/
+    $(function () {
+        $('#datetimepicker1').datetimepicker();
+        $('#datetimepicker2').datetimepicker({
+            useCurrent: false //Important! See issue #1075
+        });
+        $("#datetimepicker1").on("dp.change", function (e) {
+            $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker2").on("dp.change", function (e) {
+            $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+</script>
+<!--       <script type="text/javascript">
         $(function () {
             $('#datetimepicker1').datetimepicker();
         });
         $(function () {
             $('#datetimepicker2').datetimepicker();
         });
-      </script>
+      </script> -->
 </div><!-- End Container of all things -->
 </body>
 </html>
