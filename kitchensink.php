@@ -35,6 +35,7 @@ if ($isAdmin) {
                 $sqlSelect2 = <<<SQL
                     SELECT *
                     FROM  vw_kitchensink2
+                    WHERE EntryStatus = 0
 SQL;
 
     if (!$result = $db->query($sqlSelect2)) {
