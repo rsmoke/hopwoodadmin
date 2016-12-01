@@ -97,10 +97,10 @@ $_SESSION['isAdmin'] = true;
           </div>
 <!--          <div class="btn-group" role="group" aria-label="contest_applicants">
             <button id="reportRatingBtn" type="button" class="btn btn-success">Evaluations</button>
-          </div>
-          <div class="btn-group" role="group" aria-label="contest_applicants">
-            <button id="reportNationalEvalBtn" type="button" class="btn btn-success">Hopwood National<br>Evaluations</button>
           </div> -->
+          <div class="btn-group" role="group" aria-label="contest_applicants">
+            <button id="reportNationalEvalBtn" type="button" class="btn btn-success">Hopwood Evaluations</button>
+          </div>
           <div class="btn-group" role="group" aria-label="contest_applicants">
             <a id="ktchensinkBtn" type="button" class="btn btn-info" href="kitchensink.php" data-toggle="tooltip" data-placement="right" title="Click to download details of all the applications ever submitted"><i class="fa fa-download"></i></a>
           </div>
