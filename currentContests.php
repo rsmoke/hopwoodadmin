@@ -106,7 +106,7 @@ $_SESSION['isAdmin'] = true;
               ON (MAX.contestsID = c1.contestsID AND MAX.OPENS = c1.date_open)
               JOIN `lk_contests` ON (c1.contestsID = `lk_contests`.`id`)
               WHERE c1.status = 0
-            ORDER BY contestsID
+            ORDER BY date_closed, name
 SQL;
             $results = $db->query($sqlContestSelect);
             if (!$results) {
