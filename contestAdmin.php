@@ -108,7 +108,7 @@ $_SESSION['isAdmin'] = true;
           <div id="allOpenContests">
             <h4>These are the currently open contests</h4>
             <?php
-              $resOpenContests = $db->query("SELECT * FROM vw_contestlisting WHERE status = 0 ORDER BY ContestsName");
+              $resOpenContests = $db->query("SELECT * FROM vw_contestlisting WHERE status = 0 ORDER BY date_closed, ContestsName");
               if (!$resOpenContests) {
               echo "There are no open contests.";
               } else {

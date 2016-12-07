@@ -10,7 +10,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
     tbl_applicant ON (tbl_entry.applicantID = tbl_applicant.id)
   WHERE
     finAid = 1 AND status = 0
-    ORDER BY uniqname
+    ORDER BY userLname
 SQL;
 
   $resSelect = $db->query($queryFinAid);
