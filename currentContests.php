@@ -140,7 +140,7 @@ SQL;
                       SELECT *
                       FROM vw_entrydetail
                       WHERE ContestInstance = {$instance['ContestId']}  AND vw_entrydetail.status = 0
-                      ORDER BY uniqname
+                      ORDER BY lastname
 SQL;
                       $resultsInd = $db->query($sqlIndEntry);
                       if (!$resultsInd) {
