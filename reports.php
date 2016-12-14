@@ -95,9 +95,9 @@ $_SESSION['isAdmin'] = true;
           <div class="btn-group" role="group" aria-label="contest_applicants">
             <button id="reportRecLetterBtn" type="button" class="btn btn-success">Reference Letter Required</button>
           </div>
-<!--          <div class="btn-group" role="group" aria-label="contest_applicants">
+          <div class="btn-group" role="group" aria-label="contest_applicants">
             <button id="reportRatingBtn" type="button" class="btn btn-success">Evaluations</button>
-          </div> -->
+          </div>
           <div class="btn-group" role="group" aria-label="contest_applicants">
             <button id="reportNationalEvalBtn" type="button" class="btn btn-success">Hopwood Evaluations</button>
           </div>

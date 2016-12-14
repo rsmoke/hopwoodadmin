@@ -50,6 +50,9 @@ $( document ).ready(function(){
       $("#outputReportData").empty();
 
     $.getJSON("ratingReport.php", function(data){
+      if ($.isEmptyObject(data.result)){
+        $(".dataout").append("<tr><td colspan='5'>There are no records.</td></td>");
+      } else {
        //iterate through and get the names of all the contests that have been rated and push into an array
         var contestArray = [];
         $.each(data.result, function(){
@@ -62,7 +65,7 @@ $( document ).ready(function(){
         $("#outputReportData").append(
           '<h4>' + contestArray[i] + '</h4>'+
           '<table class="table table-hover dataout-' + i + '">'+
-          '<thead><th><small>Entry ID</small></th><th>File</th><th>Title</th><th>Type</th><th>ClassLevel</th><th>Pen Name</th><th>First-Name</th><th>Last Name</th><th>UMID</th><th>Rank</th><th>Ranked By</th><th>comment</th></thead>'+
+          '<thead><th><small>Entry ID</small></th><th>File</th><th>Title</th><th>Type</th><th>ClassLevel</th><th>Pen Name</th><th>First-Name</th><th>Last Name</th><th>UMID</th><th>Rating</th><th>Evaluator</th><th>Contestant comment</th><th>Committee comment</th></thead>'+
           '<tbody>');
 
           $.each(data.result, function(){
@@ -71,11 +74,12 @@ $( document ).ready(function(){
                 "</small></td><td><a class='btn btn-xs btn-info' href='contestfiles/" + this.document +
                "' target='_blank'><i class='fa fa-book'></i></a></td><td>" + this.title + "</td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td>" + this.penName +
                 "</td><td>" + this.firstname + "</a></td><td>" + this.lastname + "</td><td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=" + this.umid + "' target='_blank'>" + this.umid + "</a></td><td>" + this.rank +
-                 "</td><td>" + this.rankedby + "</td><td>" + this.comment + "</td></tr>");
+                 "</td><td>" + this.rankedby + "</td><td>" + this.contestantcomment + "</td><td>" + this.committeecomment + "</td></tr>");
               //https://webapps.lsa.umich.edu/UGStuFileV2/App/Trnscrpt/TrnscrptInfoList.aspx?ID=XXXXXXXX
             }
           });
         }
+      }
     });
     $("#outputReportData").append('</tbody></table>');
 
