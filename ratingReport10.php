@@ -22,8 +22,8 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 
     FROM `vw_entrydetail_with_classlevel_currated` AS vw
     JOIN vw_current_evaluations AS eval ON(vw.EntryID = eval.entry_id)
-    WHERE eval.rating > 0 AND eval.created > '2016-09-01'
-    ORDER BY contestName, vw.manuscriptType, eval.evaluator, eval.rating, classLevel
+    WHERE created > '2016-09-01' AND contestsID = 10
+    ORDER BY evaluator, manuscriptType
 SQL;
 
   $resSelect = $db->query($queryRating);

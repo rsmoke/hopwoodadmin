@@ -88,98 +88,89 @@ $_SESSION['isAdmin'] = true;
     </div>
     <div class="row clearfix">
       <div class="col-md-12">
-        <div class="well">
-            <p>Select the contest button to review the judge's evaluations.<br>
-            For entries in contests that move forward to the National Judging
+        <div class="bg-warning" style="padding:5px;">
+        <ul>
+            <li>Select the contest button to review the judge's evaluations.</li>
+            <li>For entries in contests that move forward to the National Judging
             stage you will find a check box at that entries row. Place a check
             in the box if the associated entry is to be sent to the National
-            Judging stage</p>
+            Judging stage</li>
+          </ul>
         </div>
       </div>
     </div>
     <div class="row clearfix">
-      <div class="col-md-12">
+      <div class="col-md-6">
         <h5>Local Results</h5>
-        <div class="btn-toolbar pagination-centered" role="toolbar" aria-label="evaluation_button_toolbar">
-          <div class="btn-group" role="group" aria-label="contest_applicants">
-            <button id="reportRatingBtn" type="button" class="btn btn-xs btn-success">Hopwood Underclassmen - Fiction</button>
-            <button id="reportRatingBtn" type="button" class="btn btn-xs btn-success">Hopwood Underclassmen - Nonfiction</button>
-            <button id="reportRatingBtn" type="button" class="btn btn-xs btn-success">Hopwood Underclassmen - Poetry</button>
+          <div class="btn-group" role="group" aria-label="local_results">
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Hopwood Contests <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a id="reportRatingBtn18">Hopwood Underclassmen - Fiction</a></li>
+                <li><a id="reportRatingBtn17">Hopwood Underclassmen - Nonfiction</a></li>
+                <li><a id="reportRatingBtn1">Hopwood Underclassmen - Poetry</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a id="reportRatingBtn20">Hopwood - Drama</a></li>
+                <li><a id="reportRatingBtn19">Hopwood - Novel</a></li>
+                <li><a id="reportRatingBtn2">Hopwood - Screenplay</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a id="reportRatingBtn21">Hopwood Graduate - Nonfiction</a></li>
+                <li><a id="reportRatingBtn23">Hopwood Graduate - Poetry</a></li>
+                <li><a id="reportRatingBtn22">Hopwood Graduate - Short Fiction</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a id="reportRatingBtn24">Hopwood Undergraduate - Nonfiction</a></li>
+                <li><a id="reportRatingBtn26">Hopwood Undergraduate - Poetry</a></li>
+                <li><a id="reportRatingBtn25">Hopwood Undergraduate - Short Fiction</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a id="reportRatingBtn9">Hopwood_Award Theodore Roethke Prize</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a id="reportRatingBtn7">Summer Hopwood</a></li>
+              </ul>
+            </div>
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Other Contests <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a id="reportRatingBtn16">The Academy of American Poets (Graduate)</a></li>
+                <li><a id="reportRatingBtn5">The Academy of American Poets (Undergraduate)</a></li>
+                <li><a id="reportRatingBtn12">The Arthur Miller Award</a></li>
+                <li><a id="reportRatingBtn6">The Bain-Swiggett Poetry Prize</a></li>
+                <li><a id="reportRatingBtn8">The Jeffrey L. Weisberg Memorial Prize in Poetry</a></li>
+                <li><a id="reportRatingBtn11">The Kasdan Scholarship in Creative Writing</a></li>
+                <li><a id="reportRatingBtn15">The Marjorie Rapaport Award in Poetry</a></li>
+                <li><a id="reportRatingBtn7">The Michael R. Gutterman Award in Poetry</a></li>
+                <li><a id="reportRatingBtn10">The Roy W. Cowden Memorial Fellowship</a></li>
+              </ul>
+            </div>
           </div>
-          <div class="btn-group" role="group" aria-label="contest_applicants">
-            <button id="reportRatingBtn" type="button" class="btn btn-xs btn-info">Hopwood - Drama</button>
-            <button id="reportRatingBtn" type="button" class="btn btn-xs btn-info">Hopwood - Novel</button>
-            <button id="reportRatingBtn" type="button" class="btn btn-xs btn-info">Hopwood - Screenplay</button>
-          </div>
-          <div class="btn-group" role="group" aria-label="contest_applicants">
-            <button id="reportRatingBtn" type="button" class="btn btn-xs btn-default">Hopwood Graduate - Nonfiction</button>
-            <button id="reportRatingBtn" type="button" class="btn btn-xs btn-default">Hopwood Graduate - Poetry</button>
-            <button id="reportRatingBtn" type="button" class="btn btn-xs btn-default">Hopwood Graduate - Short Fiction</button>
-          </div>
-          <div class="btn-group" role="group" aria-label="contest_applicants">
-            <button id="reportRatingBtn" type="button" class="btn btn-xs btn-success">Hopwood Undergraduate - Nonfiction</button>
-            <button id="reportRatingBtn" type="button" class="btn btn-xs btn-success">Hopwood Undergraduate - Poetry</button>
-            <button id="reportRatingBtn" type="button" class="btn btn-xs btn-success">Hopwood Undergraduate - Short Fiction</button>
-          </div>
-          <div class="btn-group" role="group" aria-label="contest_applicants">
-            <button id="reportRatingBtn" type="button" class="btn btn-xs btn-success">Hopwood_Award Theodore Roethke Prize</button>
-            <button id="reportRatingBtn" type="button" class="btn btn-xs btn-success">Summer Hopwood</button>
-          </div>
-
+      </div>
+      <div class="col-md-6">
+        <h5>National Results</h5>
           <div class="btn-group">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Other Contests <span class="caret"></span>
+            <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Contest Results <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-              <li><a id="reportRatingBtn1">The Academy of American Poets (Graduate)</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
+              <li><a id="reportNationalEvalBtn9">Hopwood_Award Theodore Roethke Prize</a></li>
               <li role="separator" class="divider"></li>
-              <li><a href="#">Separated link</a></li>
+              <li><a id="reportNationalEvalBtn11">The Kasdan Scholarship in Creative Writing</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a id="reportNationalEvalBtn20">Hopwood - Drama</a></li>
+              <li><a id="reportNationalEvalBtn19">Hopwood - Novel</a></li>
+              <li><a id="reportNationalEvalBtn2">Hopwood - Screenplay</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a id="reportNationalEvalBtn21">Hopwood Graduate - Nonfiction</a></li>
+              <li><a id="reportNationalEvalBtn23">Hopwood Graduate - Poetry</a></li>
+              <li><a id="reportNationalEvalBtn22">Hopwood Graduate - Short Fiction</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a id="reportNationalEvalBtn24">Hopwood Undergraduate - Nonfiction</a></li>
+              <li><a id="reportNationalEvalBtn26">Hopwood Undergraduate - Poetry</a></li>
+              <li><a id="reportNationalEvalBtn25">Hopwood Undergraduate - Short Fiction</a></li>
             </ul>
           </div>
-
-
-
-          <div class="btn-group" role="group" aria-label="contest_applicants">
-            <button id="reportNationalEvalBtn" type="button" class="btn btn-xs btn-success">The Academy of American Poets (Graduate)</button>
-            <button id="reportNationalEvalBtn" type="button" class="btn btn-xs btn-success">The Academy of American Poets (Undergraduate)</button>
-            <button id="reportNationalEvalBtn" type="button" class="btn btn-xs btn-success">The Arthur Miller Award</button>
-            <button id="reportNationalEvalBtn" type="button" class="btn btn-xs btn-success">The Bain-Swiggett Poetry Prize</button>
-            <button id="reportNationalEvalBtn" type="button" class="btn btn-xs btn-success">The Jeffrey L. Weisberg Memorial Prize in Poetry</button>
-            <button id="reportNationalEvalBtn" type="button" class="btn btn-xs btn-success">The Kasdan Scholarship in Creative Writing</button>
-            <button id="reportNationalEvalBtn" type="button" class="btn btn-xs btn-success">The Marjorie Rapaport Award in Poetry</button>
-            <button id="reportNationalEvalBtn" type="button" class="btn btn-xs btn-success">The Michael R. Gutterman Award in Poetry</button>
-            <button id="reportNationalEvalBtn" type="button" class="btn btn-xs btn-success">The Roy W. Cowden Memorial Fellowship</button>
-          </div>
-        </div>
-
-        <h5>National Results</h5>
-        <div class="btn-toolbar pagination-centered" role="toolbar" aria-label="national_evaluation_button_toolbar">
-          <div class="btn-group" role="group" aria-label="contest_applicants">
-            <button id="reportRatingBtn" type="button" class="btn btn-xs btn-info">Hopwood - Drama</button>
-            <button id="reportRatingBtn" type="button" class="btn btn-xs btn-info">Hopwood - Novel</button>
-            <button id="reportRatingBtn" type="button" class="btn btn-xs btn-info">Hopwood - Screenplay</button>
-          </div>
-          <div class="btn-group" role="group" aria-label="contest_applicants">
-            <button id="reportRatingBtn" type="button" class="btn btn-xs btn-default">Hopwood Graduate - Nonfiction</button>
-            <button id="reportRatingBtn" type="button" class="btn btn-xs btn-default">Hopwood Graduate - Poetry</button>
-            <button id="reportRatingBtn" type="button" class="btn btn-xs btn-default">Hopwood Graduate - Short Fiction</button>
-          </div>
-          <div class="btn-group" role="group" aria-label="contest_applicants">
-            <button id="reportRatingBtn" type="button" class="btn btn-xs btn-success">Hopwood Undergraduate - Nonfiction</button>
-            <button id="reportRatingBtn" type="button" class="btn btn-xs btn-success">Hopwood Undergraduate - Poetry</button>
-            <button id="reportRatingBtn" type="button" class="btn btn-xs btn-success">Hopwood Undergraduate - Short Fiction</button>
-          </div>
-          <div class="btn-group" role="group" aria-label="contest_applicants">
-            <button id="reportRatingBtn" type="button" class="btn btn-xs btn-success">Hopwood_Award Theodore Roethke Prize</button>
-            <button id="reportRatingBtn" type="button" class="btn btn-xs btn-success">The Kasdan Scholarship in Creative Writing</button>
-          </div>
-          <div class="btn-group" role="group" aria-label="contest_applicants">
-            <button id="reportRatingBtn" type="button" class="btn btn-xs btn-success">The Marjorie Rapaport Award in Poetry</button>
-            <button id="reportRatingBtn" type="button" class="btn btn-xs btn-success">Summer Hopwood</button>
-          </div>
-        </div>
       </div>
     </div>
     <div class="row clearfix">
