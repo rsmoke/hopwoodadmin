@@ -95,6 +95,9 @@ $_SESSION['isAdmin'] = true;
           <div class="btn-group" role="group" aria-label="contest_report">
             <a id="admReportBtn" type="button" class="btn btn-warning" href="reports.php">Reports</a>
           </div>
+          <div class="btn-group" role="group" aria-label="contest_evaluation">
+            <a id="admEvaluationBtn" type="button" class="btn btn-default" href="evaluations.php">Evaluations</a>
+          </div>
           <div class="btn-group" role="group" aria-label="contest_applicants">
             <button id="admApplicantBtn" type="button" class="btn btn-success">Applicants</button>
           </div>
