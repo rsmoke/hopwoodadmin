@@ -95,6 +95,8 @@ $_SESSION['isAdmin'] = true;
             stage you will find a check box at that entries row. Place a check
             in the box if the associated entry is to be sent to the National
             Judging stage</li>
+            <li>If an entry did not receive a rating and no comments were made,
+             it will not show in the results.</li>
           </ul>
         </div>
       </div>
@@ -108,25 +110,25 @@ $_SESSION['isAdmin'] = true;
                 Hopwood Contests <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
-                <li><a id="reportRatingBtn18">Hopwood Underclassmen - Fiction</a></li>
-                <li><a id="reportRatingBtn17">Hopwood Underclassmen - Nonfiction</a></li>
-                <li><a id="reportRatingBtn1">Hopwood Underclassmen - Poetry</a></li>
+                <li><a id="reportRatingBtn18" class="reportRatingBtn" data-contest="18" >Hopwood Underclassmen - Fiction</a></li>
+                <li><a id="reportRatingBtn17" class="reportRatingBtn" data-contest="17" >Hopwood Underclassmen - Nonfiction</a></li>
+                <li><a id="reportRatingBtn1"  class="reportRatingBtn" data-contest="1" >Hopwood Underclassmen - Poetry</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a id="reportRatingBtn20">Hopwood - Drama</a></li>
-                <li><a id="reportRatingBtn19">Hopwood - Novel</a></li>
-                <li><a id="reportRatingBtn2">Hopwood - Screenplay</a></li>
+                <li><a id="reportRatingBtn20" class="reportRatingBtn" data-contest="20" >Hopwood - Drama</a></li>
+                <li><a id="reportRatingBtn19" class="reportRatingBtn" data-contest="19" >Hopwood - Novel</a></li>
+                <li><a id="reportRatingBtn2" class="reportRatingBtn" data-contest="2" >Hopwood - Screenplay</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a id="reportRatingBtn21">Hopwood Graduate - Nonfiction</a></li>
-                <li><a id="reportRatingBtn23">Hopwood Graduate - Poetry</a></li>
-                <li><a id="reportRatingBtn22">Hopwood Graduate - Short Fiction</a></li>
+                <li><a id="reportRatingBtn21" class="reportRatingBtn" data-contest="21" >Hopwood Graduate - Nonfiction</a></li>
+                <li><a id="reportRatingBtn23" class="reportRatingBtn" data-contest="23" >Hopwood Graduate - Poetry</a></li>
+                <li><a id="reportRatingBtn22" class="reportRatingBtn" data-contest="22" >Hopwood Graduate - Short Fiction</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a id="reportRatingBtn24">Hopwood Undergraduate - Nonfiction</a></li>
-                <li><a id="reportRatingBtn26">Hopwood Undergraduate - Poetry</a></li>
-                <li><a id="reportRatingBtn25">Hopwood Undergraduate - Short Fiction</a></li>
+                <li><a id="reportRatingBtn24" class="reportRatingBtn" data-contest="24" >Hopwood Undergraduate - Nonfiction</a></li>
+                <li><a id="reportRatingBtn26" class="reportRatingBtn" data-contest="26" >Hopwood Undergraduate - Poetry</a></li>
+                <li><a id="reportRatingBtn25" class="reportRatingBtn" data-contest="25" >Hopwood Undergraduate - Short Fiction</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a id="reportRatingBtn9">Hopwood_Award Theodore Roethke Prize</a></li>
+                <li><a id="reportRatingBtn9" class="reportRatingBtn" data-contest="9" >Hopwood_Award Theodore Roethke Prize</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a id="reportRatingBtn7">Summer Hopwood</a></li>
+                <li><a id="reportRatingBtn7" class="reportRatingBtn" data-contest="3" >Summer Hopwood</a></li>
               </ul>
             </div>
             <div class="btn-group" role="group">
@@ -134,15 +136,15 @@ $_SESSION['isAdmin'] = true;
                 Other Contests <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
-                <li><a id="reportRatingBtn16">The Academy of American Poets (Graduate)</a></li>
-                <li><a id="reportRatingBtn5">The Academy of American Poets (Undergraduate)</a></li>
-                <li><a id="reportRatingBtn12">The Arthur Miller Award</a></li>
-                <li><a id="reportRatingBtn6">The Bain-Swiggett Poetry Prize</a></li>
-                <li><a id="reportRatingBtn8">The Jeffrey L. Weisberg Memorial Prize in Poetry</a></li>
-                <li><a id="reportRatingBtn11">The Kasdan Scholarship in Creative Writing</a></li>
-                <li><a id="reportRatingBtn15">The Marjorie Rapaport Award in Poetry</a></li>
-                <li><a id="reportRatingBtn7">The Michael R. Gutterman Award in Poetry</a></li>
-                <li><a id="reportRatingBtn10">The Roy W. Cowden Memorial Fellowship</a></li>
+                <li><a id="reportRatingBtn16" class="reportRatingBtn" data-contest="16" >The Academy of American Poets (Graduate)</a></li>
+                <li><a id="reportRatingBtn5" class="reportRatingBtn" data-contest="5" >The Academy of American Poets (Undergraduate)</a></li>
+                <li><a id="reportRatingBtn12" class="reportRatingBtn" data-contest="12" >The Arthur Miller Award</a></li>
+                <li><a id="reportRatingBtn6" class="reportRatingBtn" data-contest="6" >The Bain-Swiggett Poetry Prize</a></li>
+                <li><a id="reportRatingBtn8" class="reportRatingBtn" data-contest="8" >The Jeffrey L. Weisberg Memorial Prize in Poetry</a></li>
+                <li><a id="reportRatingBtn11" class="reportRatingBtn" data-contest="11" >The Kasdan Scholarship in Creative Writing</a></li>
+                <li><a id="reportRatingBtn15" class="reportRatingBtn" data-contest="15" >The Marjorie Rapaport Award in Poetry</a></li>
+                <li><a id="reportRatingBtn7" class="reportRatingBtn" data-contest="7" >The Michael R. Gutterman Award in Poetry</a></li>
+                <li><a id="reportRatingBtn10" class="reportRatingBtn" data-contest="10" >The Roy W. Cowden Memorial Fellowship</a></li>
               </ul>
             </div>
           </div>
@@ -154,21 +156,21 @@ $_SESSION['isAdmin'] = true;
               Contest Results <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-              <li><a id="reportNationalEvalBtn9">Hopwood_Award Theodore Roethke Prize</a></li>
+              <li><a id="reportNationalEvalBtn9" class="reportNatRatingBtn" data-contest="9" >Hopwood_Award Theodore Roethke Prize</a></li>
               <li role="separator" class="divider"></li>
-              <li><a id="reportNationalEvalBtn11">The Kasdan Scholarship in Creative Writing</a></li>
+              <li><a id="reportNationalEvalBtn11" class="reportNatRatingBtn" data-contest=11 >The Kasdan Scholarship in Creative Writing</a></li>
               <li role="separator" class="divider"></li>
-              <li><a id="reportNationalEvalBtn20">Hopwood - Drama</a></li>
-              <li><a id="reportNationalEvalBtn19">Hopwood - Novel</a></li>
-              <li><a id="reportNationalEvalBtn2">Hopwood - Screenplay</a></li>
+              <li><a id="reportNationalEvalBtn20" class="reportNatRatingBtn" data-contest="20" >Hopwood - Drama</a></li>
+              <li><a id="reportNationalEvalBtn19" class="reportNatRatingBtn" data-contest="19" >Hopwood - Novel</a></li>
+              <li><a id="reportNationalEvalBtn2" class="reportNatRatingBtn" data-contest="2" >Hopwood - Screenplay</a></li>
               <li role="separator" class="divider"></li>
-              <li><a id="reportNationalEvalBtn21">Hopwood Graduate - Nonfiction</a></li>
-              <li><a id="reportNationalEvalBtn23">Hopwood Graduate - Poetry</a></li>
-              <li><a id="reportNationalEvalBtn22">Hopwood Graduate - Short Fiction</a></li>
+              <li><a id="reportNationalEvalBtn21" class="reportNatRatingBtn" data-contest="21" >Hopwood Graduate - Nonfiction</a></li>
+              <li><a id="reportNationalEvalBtn23" class="reportNatRatingBtn" data-contest="23" >Hopwood Graduate - Poetry</a></li>
+              <li><a id="reportNationalEvalBtn22" class="reportNatRatingBtn" data-contest="22" >Hopwood Graduate - Short Fiction</a></li>
               <li role="separator" class="divider"></li>
-              <li><a id="reportNationalEvalBtn24">Hopwood Undergraduate - Nonfiction</a></li>
-              <li><a id="reportNationalEvalBtn26">Hopwood Undergraduate - Poetry</a></li>
-              <li><a id="reportNationalEvalBtn25">Hopwood Undergraduate - Short Fiction</a></li>
+              <li><a id="reportNationalEvalBtn24" class="reportNatRatingBtn" data-contest="24" >Hopwood Undergraduate - Nonfiction</a></li>
+              <li><a id="reportNationalEvalBtn26" class="reportNatRatingBtn" data-contest="26" >Hopwood Undergraduate - Poetry</a></li>
+              <li><a id="reportNationalEvalBtn25" class="reportNatRatingBtn" data-contest="25" >Hopwood Undergraduate - Short Fiction</a></li>
             </ul>
           </div>
       </div>

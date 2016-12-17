@@ -2,6 +2,10 @@
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContest.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 
+$selectContests = $_GET['id'];
+
+$where = ($selectContests != 10)? "rating > 0 AND " : "";
+
   $queryRating = <<<SQL
     SELECT
     vw.EntryId
@@ -22,9 +26,10 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 
     FROM `vw_entrydetail_with_classlevel_currated` AS vw
     JOIN vw_current_evaluations AS eval ON(vw.EntryID = eval.entry_id)
-    WHERE created > '2016-09-01' AND contestsID = 10
-    ORDER BY evaluator, manuscriptType
+    WHERE $where created > '2016-09-01' AND contestsID = $selectContests
+    ORDER BY evaluator, rating
 SQL;
+
 
   $resSelect = $db->query($queryRating);
   if (!$resSelect) {
