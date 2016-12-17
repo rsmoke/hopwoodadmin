@@ -4,7 +4,6 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 if (session_status() == PHP_SESSION_NONE) {
 session_start();
 }
-//$_SESSION['flashMessage'] = "FLASHER";
 $isAdmin = false;
 $_SESSION['isAdmin'] = false;
 $sqlSelect = <<< _SQL
@@ -14,7 +13,7 @@ WHERE uniqname = '$login_name'
 ORDER BY uniqname
 _SQL;
 if (!$resAdmin = $db->query($sqlSelect)) {
-db_fatal_error("data read issue", $db->error, $sqlSelect, $login_name);
+db_fatal_error("data insert issue", $db->error, $sqlSelect, $login_name);
 exit;
 }
 if ($resAdmin->num_rows > 0) {
@@ -76,95 +75,37 @@ $_SESSION['isAdmin'] = true;
       </div>
     </nav>
     <?php if ($isAdmin) {
+      $resApp = $db->query("SELECT * FROM tbl_applicant ORDER BY userLname");
     ?>
     <div class="container"><!-- container of all things -->
-    <div id="flashArea"><span class='flashNotify'>
-    <?php
-    if (isset($_SESSION['flashMessage'])) {
-        echo $_SESSION['flashMessage'];
-        $_SESSION['flashMessage'] = "";
-    }
-    ?>
-    </span></div>
     <div class="row clearfix">
       <div class="col-md-12">
         <div class="btn-toolbar pagination-centered" role="toolbar" aria-label="admin_button_toolbar">
-          <div class="btn-group" role="group" aria-label="contest_contest">
-            <a href="currentContests.php" id="admContestBtn" type="button" class="btn btn-primary">Contest</a>
+          <div class="btn-group" role="group" aria-label="contest_management">
+            <a id="backToIndexBtn" type="button" class="btn btn-xs btn-default" href="index.php">Back to Contest Management</a>
           </div>
-          <div class="btn-group" role="group" aria-label="contest_report">
-            <a id="admReportBtn" type="button" class="btn btn-warning" href="reports.php">Reports</a>
-          </div>
-          <div class="btn-group" role="group" aria-label="contest_evaluation">
-            <a id="admEvaluationBtn" type="button" class="btn btn-default" href="evaluations.php">Evaluations</a>
-          </div>
-          <div class="btn-group" role="group" aria-label="contest_applicants">
-            <a id="admApplicantBtn" type="button" class="btn btn-success" href="allApplicants.php">Applicants</a>
-          </div>
-          <div class="btn-group" role="group" aria-label="contests_contests">
-            <a id="admContestsBtn" type="button" class="btn btn-info" href="contestAdmin.php">Contests Administration</a>
-          </div>
-          <div class="btn-group pull-right" role="group" aria-label="admin_access">
-            <button id="admAdminManageBtn" type="button" class="btn btn-sm btn-default">Admin-Access</button>
-          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-md-12">
+        <table class="table table-hover">
+          <thead><th>Last Name</th><th>First Name</th><th>Pen name</th><th>UniqName</th><th>UMID</th></thead>
+          <tbody>
+          <?php while ($row = $resApp->fetch_assoc()) {
+          echo '<tr class="record" id="record-' . $row['id'] . '"><td>' . $row['userLname'] . '</td><td>' . $row['userFname'] .  '</td><td>' . $row['penName'] .  '</td><td><strong>' . $row['uniqname'] .'</strong></td><td><a href="https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=' . $row['umid'] . '" target=_"blank">' . $row['umid'] . '</td></tr>';
+          }
+          echo '</tbody></table>';
+          ?>
+      </div>
+    </div>
 
-        </div>
-      </div>
-    </div>
-    <div id="initialView">
-      <div class="row clearfix">
-        <div class="col-md-12">
-          <div><img src="img/IMG_0970.jpg" class="img img-responsive center-block" width="571" height="304" alt="Hopwood Image"></div>
-        </div>
-      </div>
-    </div>
-    <div id="admin_access">
-      <div class="row clearfix">
-        <div class="col-md-12">
-          <div id="instructions">
-            <p>These are the current individuals who are permitted to manage the <?php echo "$contestTitle";?> Application</p>
-            </div><!-- #instructions -->
-            <div id="adminList">
-              <span id="currAdmins">
-                <?php
-                $sqlAdmSel = <<<SQL
-                SELECT *
-                FROM tbl_contestadmin
-                ORDER BY uniqname
-SQL;
-                if (!$resADM = $db->query($sqlAdmSel)) {
-                db_fatal_error("data read issue", $db->error, $sqlAdmSel, $login_name);
-                exit;
-                }
-                while ($row = $resADM->fetch_assoc()) {
-                $fullname = ldapGleaner($row['uniqname']);
-                echo '<div class="record">
-                  <button type="button" class="btn btn-xs btn-danger btnDelADM" data-delid="' . $row['id'] . '"><span class="glyphicon glyphicon-remove"></span></button>
-                <strong>' . $row['uniqname'] . '</strong>  -- ' . $fullname[0] . " " . $fullname[1] . '</div>';
-                }
-                ?>
-              </span>
-            </div>
-            <br />
-            <div id="myAdminForm"><!-- add Admin -->
-            To add an Administrator please enter their <b>uniqname</b> below:<br>
-            <input class="form_control" type="text" name="name" /><br>
-            <button class="btn btn-info btn-xs" id="adminSub">Add Administrator</button><br /><i>--look up uniqnames using the <a href="https://mcommunity.umich.edu/" target="_blank">Mcommunity directory</a>--</i>
-            </div><!-- add Admin -->
-          </div>
-        </div>
-      </div>
-      <div id="output">
-        <div class="row clearfix">
-          <div class="col-md-12">
-            <span id="outputData"></span>
-          </div>
-        </div>
-      </div>
       <?php
       } else {
       ?>
-      <!-- if there is not a record for $login_name display the basic information form. Upon submitting this data display the contest available section -->
+      <!-- if there is not a record for $login_name display the basic
+      information form. Upon submitting this data display the contest available
+       section -->
       <div id="notAdmin">
         <div class="row clearfix">
           <div class="col-md-12">
@@ -189,7 +130,7 @@ SQL;
         }
         include("footer.php");?>
         <!-- //additional script specific to this page -->
-        <script src="js/admMyScript.js"></script>
+        <script src="js/evaluations.js"></script>
         </div><!-- End Container of all things -->
       </body>
     </html>
