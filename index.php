@@ -105,7 +105,7 @@ $_SESSION['isAdmin'] = true;
             <a id="admContestsBtn" type="button" class="btn btn-info" href="contestAdmin.php">Contests Administration</a>
           </div>
           <div class="btn-group pull-right" role="group" aria-label="admin_access">
-            <button id="admAdminManageBtn" type="button" class="btn btn-sm btn-default">Admin-Access</button>
+            <a id="admAdminManageBtn" type="button" class="btn btn-sm btn-default" href="adminAccess.php">Admin-Access</a>
           </div>
 
         </div>
@@ -118,49 +118,6 @@ $_SESSION['isAdmin'] = true;
         </div>
       </div>
     </div>
-    <div id="admin_access">
-      <div class="row clearfix">
-        <div class="col-md-12">
-          <div id="instructions">
-            <p>These are the current individuals who are permitted to manage the <?php echo "$contestTitle";?> Application</p>
-            </div><!-- #instructions -->
-            <div id="adminList">
-              <span id="currAdmins">
-                <?php
-                $sqlAdmSel = <<<SQL
-                SELECT *
-                FROM tbl_contestadmin
-                ORDER BY uniqname
-SQL;
-                if (!$resADM = $db->query($sqlAdmSel)) {
-                db_fatal_error("data read issue", $db->error, $sqlAdmSel, $login_name);
-                exit;
-                }
-                while ($row = $resADM->fetch_assoc()) {
-                $fullname = ldapGleaner($row['uniqname']);
-                echo '<div class="record">
-                  <button type="button" class="btn btn-xs btn-danger btnDelADM" data-delid="' . $row['id'] . '"><span class="glyphicon glyphicon-remove"></span></button>
-                <strong>' . $row['uniqname'] . '</strong>  -- ' . $fullname[0] . " " . $fullname[1] . '</div>';
-                }
-                ?>
-              </span>
-            </div>
-            <br />
-            <div id="myAdminForm"><!-- add Admin -->
-            To add an Administrator please enter their <b>uniqname</b> below:<br>
-            <input class="form_control" type="text" name="name" /><br>
-            <button class="btn btn-info btn-xs" id="adminSub">Add Administrator</button><br /><i>--look up uniqnames using the <a href="https://mcommunity.umich.edu/" target="_blank">Mcommunity directory</a>--</i>
-            </div><!-- add Admin -->
-          </div>
-        </div>
-      </div>
-      <div id="output">
-        <div class="row clearfix">
-          <div class="col-md-12">
-            <span id="outputData"></span>
-          </div>
-        </div>
-      </div>
       <?php
       } else {
       ?>

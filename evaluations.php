@@ -81,7 +81,7 @@ $_SESSION['isAdmin'] = true;
       <div class="col-md-12">
         <div class="btn-toolbar pagination-centered" role="toolbar" aria-label="admin_button_toolbar">
           <div class="btn-group" role="group" aria-label="contest_management">
-            <a id="backToIndexBtn" type="button" class="btn btn-xs btn-default" href="index.php">Back to Contest Management</a>
+            <a id="backToIndexBtn" type="button" class="btn btn-xs btn-default" href="index.php"><i class="fa fa-home" aria-hidden="true"></i></a>
           </div>
         </div>
       </div>
