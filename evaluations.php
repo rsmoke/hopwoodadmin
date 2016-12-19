@@ -102,7 +102,7 @@ $_SESSION['isAdmin'] = true;
       </div>
     </div>
     <div class="row clearfix">
-      <div class="col-md-6">
+      <div class="col-xs-6">
         <h5>Local Results</h5>
           <div class="btn-group" role="group" aria-label="local_results">
             <div class="btn-group" role="group">
@@ -149,7 +149,7 @@ $_SESSION['isAdmin'] = true;
             </div>
           </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-xs-6">
         <h5>National Results</h5>
           <div class="btn-group">
             <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
