@@ -5,22 +5,6 @@ $( document ).ready(function(){
     $('body').prepend("<div class='bg-danger text-center'>THIS IS A DEVELOPMENT ENVIRONMENT -- THIS IS A DEVELOPMENT ENVIRONMENT -- THIS IS A DEVELOPMENT ENVIRONMENT -- THIS IS A DEVELOPMENT ENVIRONMENT </div>");
   }
 
-  $('#applicant').hide();
-  $('#admin_access').hide();
-
-  $('#admApplicantBtn').click( function(){
-    $('#applicant').toggle();
-    $('#admin_access').hide();
-    $('#initialView').hide();
-  });
-
-  $('#admAdminManageBtn').click( function(){
-    $('#admin_access').toggle();
-    $('#applicant').hide();
-    $('#manuscript_type').hide();
-    $('#initialView').hide();
-  });
-
   $('.flashNotify').fadeOut(6000);
 
 
