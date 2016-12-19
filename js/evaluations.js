@@ -41,7 +41,6 @@ $( document ).ready(function(){
   $(".reportNatRatingBtn").click ( function( event ){
     var useContests = $(this).data('contest');
       $("#outputEvalData").empty();
-      console.log ("National " + useContests);
 
     $.getJSON("ratingNatReport.php", {id: useContests}, function(data){
       if (data.result.length == 0 ){
