@@ -25,7 +25,7 @@ $where = ($selectContests != 10)? "rating > 0 AND " : "";
     ,CASE WHEN vw.classLevel > 12 THEN 'G' ELSE 'U' END AS classLevel
 
     FROM `vw_entrydetail_with_classlevel_currated` AS vw
-    JOIN vw_current_evaluations AS eval ON(vw.EntryID = eval.entry_id)
+    JOIN vw_current_national_evaluations AS eval ON(vw.EntryID = eval.entry_id)
     WHERE $where created > '2016-09-01' AND contestsID = $selectContests AND fwdToNational = 1
     ORDER BY evaluator, rating
 SQL;
