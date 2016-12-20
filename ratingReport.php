@@ -23,6 +23,7 @@ $where = ($selectContests != 10)? "rating > 0 AND " : "";
     ,eval.committeecomment AS committeecomment
     ,vw.manuscriptType AS manuscriptType
     ,CASE WHEN vw.classLevel > 12 THEN 'G' ELSE 'U' END AS classLevel
+    ,vw.fwdToNational AS nationalstatus
 
     FROM `vw_entrydetail_with_classlevel_currated` AS vw
     JOIN vw_current_evaluations AS eval ON(vw.EntryID = eval.entry_id)
@@ -52,7 +53,8 @@ SQL;
           'contestantcomment' => $item["contestantcomment"],
           'committeecomment' => $item["committeecomment"],
           'manuscriptType' => $item["manuscriptType"],
-          'classLevel' => $item["classLevel"]
+          'classLevel' => $item["classLevel"],
+          'nationalstatus' => $item["nationalstatus"]
           )
 
         );
