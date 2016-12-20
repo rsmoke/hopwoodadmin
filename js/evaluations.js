@@ -31,7 +31,7 @@ $( document ).ready(function(){
             }
               $(".dataout").append("<tr><td><input type='checkbox' class='natCheckBox' " + set_check + " data-item='" + this.entryid + "' ></td>" +
                 "<td><small>" + this.entryid + "</small></td>" +
-                "<td><a class='btn btn-xs btn-info' href='contestfiles/" + this.document +
+                "<td><a class='btn btn-xs btn-info' href='fileholder.php?file=" + this.document +
                "' target='_blank'><i class='fa fa-book'></i></a></td><td>" + this.title + "</td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td>" + this.penName +
                 "</td><td>" + this.firstname + "</a></td><td>" + this.lastname + "</td><td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=" + this.umid + "' target='_blank'>" + this.umid + "</a></td><td>" + this.rank +
                  "</td><td>" + this.rankedby + "</td><td>" + this.contestantcomment + "</td><td>" + this.committeecomment + "</td></tr>");
@@ -48,7 +48,7 @@ $( document ).ready(function(){
 
           $.each(data.result, function(){
               $(".dataout").append("<tr><td><small>" + this.entryid +
-                "</small></td><td><a class='btn btn-xs btn-info' href='contestfiles/" + this.document +
+                "</small></td><td><a class='btn btn-xs btn-info' href='fileholder.php?file=" + this.document +
                "' target='_blank'><i class='fa fa-book'></i></a></td><td>" + this.title + "</td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td>" + this.penName +
                 "</td><td>" + this.firstname + "</a></td><td>" + this.lastname + "</td><td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=" + this.umid + "' target='_blank'>" + this.umid + "</a></td><td>" + this.rank +
                  "</td><td>" + this.rankedby + "</td><td>" + this.contestantcomment + "</td><td>" + this.committeecomment + "</td></tr>");
@@ -76,7 +76,7 @@ $( document ).ready(function(){
 
           $.each(data.result, function(){
               $(".dataout").append("<tr><td><small>" + this.entryid +
-                "</small></td><td><a class='btn btn-xs btn-info' href='contestfiles/" + this.document +
+                "</small></td><td><a class='btn btn-xs btn-info' href='fileholder.php?file=" + this.document +
                "' target='_blank'><i class='fa fa-book'></i></a></td><td>" + this.title + "</td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td>" + this.penName +
                 "</td><td>" + this.firstname + "</a></td><td>" + this.lastname + "</td><td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=" + this.umid + "' target='_blank'>" + this.umid + "</a></td><td>" + this.rank +
                  "</td><td>" + this.rankedby + "</td><td>" + this.contestantcomment + "</td><td>" + this.committeecomment + "</td></tr>");
