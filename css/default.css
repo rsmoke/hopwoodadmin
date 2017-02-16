@@ -105,3 +105,10 @@ select {
 blockquote {
 	font-size: .9em;
 }
+
+.truncate_cell {
+	 width: 100px;
+   white-space: nowrap;
+   overflow: hidden;         
+   text-overflow: ellipsis;
+ }

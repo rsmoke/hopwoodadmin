@@ -16,6 +16,7 @@ $( document ).ready(function(){
         $("#outputEvalData").html('<p>There are no evaluated entries to display.</p>');
       } else if (isNational){
         $("#outputEvalData").html('<h4>' + data.result[0].contestName  + '</h4>' +
+            '<div class="table-responsive">' +
             '<table class="table table-hover dataout"><thead>' +
             '<th><small>Send to National</small></th>' +
             '<th><small>Entry ID</small></th><th>File</th>' +
@@ -34,11 +35,12 @@ $( document ).ready(function(){
                 "<td><a class='btn btn-xs btn-info' href='fileholder.php?file=" + this.document +
                "' target='_blank'><i class='fa fa-book'></i></a></td><td>" + this.title + "</td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td>" + this.penName +
                 "</td><td>" + this.firstname + "</a></td><td>" + this.lastname + "</td><td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=" + this.umid + "' target='_blank'>" + this.umid + "</a></td><td>" + this.rank +
-                 "</td><td>" + this.rankedby + "</td><td>" + this.contestantcomment + "</td><td>" + this.committeecomment + "</td></tr>");
+                 "</td><td>" + this.rankedby + "</td><td data-toggle='tooltip' data-placement='right' title='"+ this.contestantcomment + "'><div class='truncate_cell'>" + this.contestantcomment + "</div></td><td data-toggle='tooltip' data-placement='right' title='"+ this.committeecomment + "'><div class='truncate_cell'>" + this.committeecomment + "</div></td></tr>");
           });
-        $("#outputEvalData").append('</tbody></table>');
+        $("#outputEvalData").append('</tbody></table></div>');
       } else {
           $("#outputEvalData").html('<h4>' + data.result[0].contestName  + '</h4>' +
+            '<div class="table-responsive">' +
             '<table class="table table-hover dataout"><thead>' +
             '<th><small>Entry ID</small></th><th>File</th>' +
             '<th>Title</th><th>Type</th><th>ClassLevel</th><th>Pen Name</th>' +
@@ -51,9 +53,9 @@ $( document ).ready(function(){
                 "</small></td><td><a class='btn btn-xs btn-info' href='fileholder.php?file=" + this.document +
                "' target='_blank'><i class='fa fa-book'></i></a></td><td>" + this.title + "</td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td>" + this.penName +
                 "</td><td>" + this.firstname + "</a></td><td>" + this.lastname + "</td><td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=" + this.umid + "' target='_blank'>" + this.umid + "</a></td><td>" + this.rank +
-                 "</td><td>" + this.rankedby + "</td><td>" + this.contestantcomment + "</td><td>" + this.committeecomment + "</td></tr>");
+                 "</td><td>" + this.rankedby + "</td><td data-toggle='tooltip' data-placement='right' title='"+ this.contestantcomment + "'><div class='truncate_cell'>" + this.contestantcomment + "</div></td><td data-toggle='tooltip' data-placement='right' title='"+ this.committeecomment + "'><div class='truncate_cell'>" + this.committeecomment + "</div></td></tr>");
           });
-        $("#outputEvalData").append('</tbody></table>');
+        $("#outputEvalData").append('</tbody></table></div>');
       }
     });
   });
@@ -70,6 +72,7 @@ $( document ).ready(function(){
       } else {
         $("#outputEvalData").html(
           '<h4>' + data.result[0].contestName  + '</h4>' +
+          '<div class="table-responsive">' +
           '<table class="table table-hover dataout">'+
           '<thead><th><small>Entry ID</small></th><th>File</th><th>Title</th><th>Type</th><th>ClassLevel</th><th>Pen Name</th><th>First-Name</th><th>Last Name</th><th>UMID</th><th>Rating</th><th>Evaluator</th><th>Contestant comment</th><th>Committee comment</th></thead>'+
           '<tbody>');
@@ -79,9 +82,9 @@ $( document ).ready(function(){
                 "</small></td><td><a class='btn btn-xs btn-info' href='fileholder.php?file=" + this.document +
                "' target='_blank'><i class='fa fa-book'></i></a></td><td>" + this.title + "</td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td>" + this.penName +
                 "</td><td>" + this.firstname + "</a></td><td>" + this.lastname + "</td><td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=" + this.umid + "' target='_blank'>" + this.umid + "</a></td><td>" + this.rank +
-                 "</td><td>" + this.rankedby + "</td><td>" + this.contestantcomment + "</td><td>" + this.committeecomment + "</td></tr>");
+                 "</td><td>" + this.rankedby + "</td><td data-toggle='tooltip' data-placement='right' title='"+ this.contestantcomment + "'><div class='truncate_cell'>" + this.contestantcomment + "</div></td><td data-toggle='tooltip' data-placement='right' title='"+ this.committeecomment + "'><div class='truncate_cell'>" + this.committeecomment + "</div></td></tr>");
           });
-        $("#outputEvalData").append('</tbody></table>');
+        $("#outputEvalData").append('</tbody></table></div>');
       }
     });
   });
