@@ -1,4 +1,9 @@
+function htmlEntities(str) {
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
 $( document ).ready(function(){
+
   $("#outputEvalData").empty();
 
   // ========== LOCAL RESULTS
@@ -35,7 +40,7 @@ $( document ).ready(function(){
                 "<td><a class='btn btn-xs btn-info' href='fileholder.php?file=" + this.document +
                "' target='_blank'><i class='fa fa-book'></i></a></td><td>" + this.title + "</td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td>" + this.penName +
                 "</td><td>" + this.firstname + "</a></td><td>" + this.lastname + "</td><td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=" + this.umid + "' target='_blank'>" + this.umid + "</a></td><td>" + this.rank +
-                 "</td><td>" + this.rankedby + "</td><td data-toggle='tooltip' data-placement='right' title='"+ this.contestantcomment + "'><div class='truncate_cell'>" + this.contestantcomment + "</div></td><td data-toggle='tooltip' data-placement='right' title='"+ this.committeecomment + "'><div class='truncate_cell'>" + this.committeecomment + "</div></td></tr>");
+                "</td><td>" + this.rankedby + "</td><td data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.contestantcomment) + "'><div class='truncate_cell'>" + htmlEntities(this.contestantcomment) + "</div></td><td data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.committeecomment) + "'><div class='truncate_cell'>" + htmlEntities(this.committeecomment) + "</div></td></tr>");
           });
         $("#outputEvalData").append('</tbody></table></div>');
       } else {
@@ -53,7 +58,7 @@ $( document ).ready(function(){
                 "</small></td><td><a class='btn btn-xs btn-info' href='fileholder.php?file=" + this.document +
                "' target='_blank'><i class='fa fa-book'></i></a></td><td>" + this.title + "</td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td>" + this.penName +
                 "</td><td>" + this.firstname + "</a></td><td>" + this.lastname + "</td><td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=" + this.umid + "' target='_blank'>" + this.umid + "</a></td><td>" + this.rank +
-                 "</td><td>" + this.rankedby + "</td><td data-toggle='tooltip' data-placement='right' title='"+ this.contestantcomment + "'><div class='truncate_cell'>" + this.contestantcomment + "</div></td><td data-toggle='tooltip' data-placement='right' title='"+ this.committeecomment + "'><div class='truncate_cell'>" + this.committeecomment + "</div></td></tr>");
+                "</td><td>" + this.rankedby + "</td><td data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.contestantcomment) + "'><div class='truncate_cell'>" + htmlEntities(this.contestantcomment) + "</div></td><td data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.committeecomment) + "'><div class='truncate_cell'>" + htmlEntities(this.committeecomment) + "</div></td></tr>");
           });
         $("#outputEvalData").append('</tbody></table></div>');
       }
@@ -82,7 +87,7 @@ $( document ).ready(function(){
                 "</small></td><td><a class='btn btn-xs btn-info' href='fileholder.php?file=" + this.document +
                "' target='_blank'><i class='fa fa-book'></i></a></td><td>" + this.title + "</td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td>" + this.penName +
                 "</td><td>" + this.firstname + "</a></td><td>" + this.lastname + "</td><td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=" + this.umid + "' target='_blank'>" + this.umid + "</a></td><td>" + this.rank +
-                 "</td><td>" + this.rankedby + "</td><td data-toggle='tooltip' data-placement='right' title='"+ this.contestantcomment + "'><div class='truncate_cell'>" + this.contestantcomment + "</div></td><td data-toggle='tooltip' data-placement='right' title='"+ this.committeecomment + "'><div class='truncate_cell'>" + this.committeecomment + "</div></td></tr>");
+                "</td><td>" + this.rankedby + "</td><td data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.contestantcomment) + "'><div class='truncate_cell'>" + htmlEntities(this.contestantcomment) + "</div></td><td data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.committeecomment) + "'><div class='truncate_cell'>" + htmlEntities(this.committeecomment) + "</div></td></tr>");
           });
         $("#outputEvalData").append('</tbody></table></div>');
       }
