@@ -95,8 +95,10 @@ $_SESSION['isAdmin'] = true;
           <div class="btn-group" role="group" aria-label="contest_applicants">
             <button id="reportRecLetterBtn" type="button" class="btn btn-success">Reference Letter Required</button>
           </div>
-          <div class="btn-group" role="group" aria-label="contest_applicants">
-            <a id="ktchensinkBtn" type="button" class="btn btn-info" href="kitchensink.php" data-toggle="tooltip" data-placement="right" title="Click to download details of all the applications ever submitted"><i class="fa fa-download"></i></a>
+          <div class="btn-group-vertical pull-right" role="group" aria-label="contest_applicants">
+            <a id="ktchensinkBtn" type="button" class="btn btn-xs btn-info" href="kitchensink.php" data-toggle="tooltip" data-placement="right" title="Click to download details of all the applications ever submitted"><i class="fa fa-download"></i> Details of Entries</a>
+            <a id="localEvalDownloadBtn" type="button" class="btn btn-xs btn-info" href="localEvalDownload.php" data-toggle="tooltip" data-placement="right" title="Click to download all submitted Local evaluations"><i class="fa fa-download"></i> All Local Evaluations</a>
+            <a id="natEvalDownloadBtn" type="button" class="btn btn-xs btn-info" href="natEvalDownload.php" data-toggle="tooltip" data-placement="right" title="Click to download all submitted National evaluations"><i class="fa fa-download"></i> All National Evaluations</a>
           </div>
         </div>
       </div>
