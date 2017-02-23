@@ -4,13 +4,13 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestAdmin.
 
 // output headers so that the file is downloaded rather than displayed
 header('Content-Type: text/csv; charset=utf-8');
-header("Content-Disposition: attachment; filename=National_Evaluations-printed_on-" . date('Y-m-d') . ".csv");
+header("Content-Disposition: attachment; filename=Local_Evaluations-printed_on-" . date('Y-m-d') . ".csv");
 
 // create a file pointer connected to the output stream
 $output = fopen('php://output', 'w');
 
 // output the column headings
-fputcsv($output, array('EntryId', 'Title', 'Contest_Name', 'Rating', 'Firstname', 'Lastname', 'umid', 'ClassLevel', 'Pen_Name', 'Evaluator', 'Document', 'Contestant_comment', 'Committee_comment', 'Manuscript_Type'));
+fputcsv($output, array('EntryId', 'Title', 'Contest_Name', 'Rating', 'Firstname', 'Lastname', 'umid', 'ClassLevel', 'Pen_Name', 'Evaluator', 'Document', 'Contestant_comment', 'Committee_comment', 'Manuscript_Type', 'National_status'));
 
 // fetch the data
 $queryLocalEval = <<<SQL
@@ -29,10 +29,11 @@ $queryLocalEval = <<<SQL
     ,eval.contestantcomment AS contestantcomment
     ,eval.committeecomment AS committeecomment
     ,vw.manuscriptType AS manuscriptType
+    ,CASE WHEN vw.fwdToNational = 1 THEN 'Sent to Nationals' ELSE '' END AS nationalstatus
 
     FROM `vw_entrydetail_with_classlevel_currated` AS vw
-    JOIN vw_current_national_evaluations AS eval ON(vw.EntryID = eval.entry_id)
-    WHERE created > '2016-09-01' AND fwdToNational = 1
+    JOIN vw_current_evaluations AS eval ON(vw.EntryID = eval.entry_id)
+    WHERE created > '2016-09-01'
     ORDER BY contestName, evaluator, -rating DESC
 SQL;
 

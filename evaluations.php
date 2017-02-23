@@ -103,7 +103,9 @@ $_SESSION['isAdmin'] = true;
     </div>
     <div class="row clearfix">
       <div class="col-xs-6">
-        <h5>Local Results</h5>
+        <strong>Local Results</strong>
+          <a id="localEvalDownloadBtn" type="button" class="btn btn-xs btn-info" href="localEvalDownload.php" data-toggle="tooltip" data-placement="right" title="Click to download all submitted Local evaluations"><i class="fa fa-download"></i> All Local Evaluations</a>
+          <br><br>
           <div class="btn-group" role="group" aria-label="local_results">
             <div class="btn-group" role="group">
               <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -150,7 +152,9 @@ $_SESSION['isAdmin'] = true;
           </div>
       </div>
       <div class="col-xs-6">
-        <h5>National Results</h5>
+        <strong>National Results</strong>
+          <a id="natEvalDownloadBtn" type="button" class="btn btn-xs btn-info" href="natEvalDownload.php" data-toggle="tooltip" data-placement="right" title="Click to download all submitted National evaluations"><i class="fa fa-download"></i> All National Evaluations</a>
+          <br><br>
           <div class="btn-group">
             <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Contest Results <span class="caret"></span>
