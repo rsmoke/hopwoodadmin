@@ -38,9 +38,9 @@ $( document ).ready(function(){
               $(".dataout").append("<tr><td><input type='checkbox' class='natCheckBox' " + set_check + " data-item='" + this.entryid + "' ></td>" +
                 "<td><small>" + this.entryid + "</small></td>" +
                 "<td><a class='btn btn-xs btn-info' href='fileholder.php?file=" + this.document +
-               "' target='_blank'><i class='fa fa-book'></i></a></td><td>" + this.title + "</td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td>" + this.penName +
+               "' target='_blank'><i class='fa fa-book'></i></a></td><td class='comment_cell'><div class='commentBlock'>" + this.title + "</div></td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td>" + this.penName +
                 "</td><td>" + this.firstname + "</a></td><td>" + this.lastname + "</td><td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=" + this.umid + "' target='_blank'>" + this.umid + "</a></td><td>" + this.rank +
-                "</td><td>" + this.rankedby + "</td><td data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.contestantcomment) + "'><div class='truncate_cell'>" + htmlEntities(this.contestantcomment) + "</div></td><td data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.committeecomment) + "'><div class='truncate_cell'>" + htmlEntities(this.committeecomment) + "</div></td></tr>");
+                "</td><td>" + this.rankedby + "</td><td class='comment_cell' data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.contestantcomment) + "'><div class='commentBlock'>" + htmlEntities(this.contestantcomment) + "</div></td><td class='comment_cell' data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.committeecomment) + "'><div class='commentBlock'>" + htmlEntities(this.committeecomment) + "</div></td></tr>");
           });
         $("#outputEvalData").append('</tbody></table></div>');
       } else {
@@ -56,9 +56,9 @@ $( document ).ready(function(){
           $.each(data.result, function(){
               $(".dataout").append("<tr><td><small>" + this.entryid +
                 "</small></td><td><a class='btn btn-xs btn-info' href='fileholder.php?file=" + this.document +
-               "' target='_blank'><i class='fa fa-book'></i></a></td><td>" + this.title + "</td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td>" + this.penName +
+               "' target='_blank'><i class='fa fa-book'></i></a></td><td class='comment_cell'><div class='commentBlock'>" + this.title + "</div></td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td>" + this.penName +
                 "</td><td>" + this.firstname + "</a></td><td>" + this.lastname + "</td><td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=" + this.umid + "' target='_blank'>" + this.umid + "</a></td><td>" + this.rank +
-                "</td><td>" + this.rankedby + "</td><td data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.contestantcomment) + "'><div class='truncate_cell'>" + htmlEntities(this.contestantcomment) + "</div></td><td data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.committeecomment) + "'><div class='truncate_cell'>" + htmlEntities(this.committeecomment) + "</div></td></tr>");
+                "</td><td>" + this.rankedby + "</td><td class='comment_cell' class='comment_cell' data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.contestantcomment) + "'><div class='commentBlock'>" + htmlEntities(this.contestantcomment) + "</div></td><td class='comment_cell' class='comment_cell' data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.committeecomment) + "'><div class='commentBlock'>" + htmlEntities(this.committeecomment) + "</div></td></tr>");
           });
         $("#outputEvalData").append('</tbody></table></div>');
       }
@@ -85,9 +85,9 @@ $( document ).ready(function(){
           $.each(data.result, function(){
               $(".dataout").append("<tr><td><small>" + this.entryid +
                 "</small></td><td><a class='btn btn-xs btn-info' href='fileholder.php?file=" + this.document +
-               "' target='_blank'><i class='fa fa-book'></i></a></td><td>" + this.title + "</td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td>" + this.penName +
+               "' target='_blank'><i class='fa fa-book'></i></a></td><td class='comment_cell'><div class='commentBlock'>" + this.title + "</div></td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td>" + this.penName +
                 "</td><td>" + this.firstname + "</a></td><td>" + this.lastname + "</td><td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=" + this.umid + "' target='_blank'>" + this.umid + "</a></td><td>" + this.rank +
-                "</td><td>" + this.rankedby + "</td><td data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.contestantcomment) + "'><div class='truncate_cell'>" + htmlEntities(this.contestantcomment) + "</div></td><td data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.committeecomment) + "'><div class='truncate_cell'>" + htmlEntities(this.committeecomment) + "</div></td></tr>");
+                "</td><td>" + this.rankedby + "</td><td class='comment_cell' data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.contestantcomment) + "'><div class='commentBlock'>" + htmlEntities(this.contestantcomment) + "</div></td><td class='comment_cell' data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.committeecomment) + "'><div class='commentBlock'>" + htmlEntities(this.committeecomment) + "</div></td></tr>");
           });
         $("#outputEvalData").append('</tbody></table></div>');
       }

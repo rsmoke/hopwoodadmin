@@ -112,3 +112,13 @@ blockquote {
    overflow: hidden;         
    text-overflow: ellipsis;
  }
+
+ .comment_cell {
+  min-width: 250px;
+}
+
+.commentBlock{
+  height: 50px;
+  max-width: 350px;
+  overflow-y:auto;
+}
