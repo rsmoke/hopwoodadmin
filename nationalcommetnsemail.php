@@ -24,138 +24,39 @@ $_SESSION['isAdmin'] = true;
 }
 
 // This is gets all the entries and national evals
-$nat_entries_evaluation_details = <<< _SQLNATENTRIESDETAILS
+
+
+$nat_rating_email = <<< _SQLNATRATINGEMAIL
 SELECT 
-id
-,entry_id
-,contestName
-,ContestInstance
-,title
-,contestantcomment
-,MAX(cn.evaluator) AS njudge1 
-,CASE WHEN MAX(cn.evaluator) <> MIN(cn.evaluator) THEN MIN(cn.evaluator) ELSE NULL END AS njudge2
-,GROUP_CONCAT(rating) AS ratings
-,SUM(rating) AS ratingsTTL
-,penName
-
-FROM vw_current_national_evaluations AS cn
-LEFT OUTER JOIN vw_entrydetail_with_classlevel AS ed ON cn.entry_id = ed.EntryId
-GROUP BY entry_id
-ORDER BY contestName, rating
-
-_SQLNATENTRIESDETAILS;
-
-$nat_Contests_count = <<< _SQLNATCONTESTCOUNT
-SELECT 
-CASE WHEN MAX(natjudge.uniqname) <> MIN(natjudge.uniqname) THEN CAST(COUNT(EntryID)/4 AS DECIMAL(3,0)) ELSE COUNT(EntryID) END AS count_of_entries, 
-ed.contestName, 
-ed.ContestInstance, ed.contestsID,
-MIN(natjudge.uniqname) AS Nat_judge1, 
-CASE WHEN MAX(natjudge.uniqname) <> MIN(natjudge.uniqname) THEN MAX(natjudge.uniqname) ELSE NULL END AS Nat_judge2,
-MIN(locjudge.uniqname) AS Loc_judge1, 
-CASE WHEN MAX(locjudge.uniqname) <> MIN(locjudge.uniqname) THEN MAX(locjudge.uniqname) ELSE NULL END AS Loc_judge2
-FROM quilleng_ContestManager.vw_entrydetail_with_classlevel_currated AS ed
-LEFT OUTER JOIN tbl_nationalcontestjudge AS natjudge ON ed.contestsID = natjudge.contestsID
-LEFT OUTER JOIN tbl_contestjudge AS locjudge ON ed.contestsID = locjudge.contestsID
-
-WHERE status = 0 AND contestName IN ( SELECT DISTINCT contestName FROM vw_entrydetail_with_classlevel_currated WHERE fwdToNational = 1)
-
-GROUP BY contestName
-
-_SQLNATCONTESTCOUNT;
-
-$nat_rating_ttl = <<< _SQLNATRATINGTTL
-SELECT 
-entry_id
-,SUM(rating) AS ratingTTL
+cn.entry_id AS entryID
+,ed.contestName AS contest_name
+,ed.title AS title
+,ed.uniqname AS uniqname
+,CONCAT(ed.firstname, " ", ed.lastname) AS author_fullname
+,MAX(CONCAT("Judge: ",cn.evaluator, " commented- ",cn.contestantcomment)) AS judge1
+,MIN(CONCAT("Judge: ",cn.evaluator, " commented- ",cn.contestantcomment)) AS judge2
 
 FROM quilleng_ContestManager.vw_current_national_evaluations AS cn
-LEFT OUTER JOIN vw_entrydetail_with_classlevel AS ed ON cn.entry_id = ed.EntryId
--- WHERE ContestInstance = 35
+LEFT OUTER JOIN vw_entrydetail_with_classlevel_currated AS ed ON cn.entry_id = ed.EntryId
+
 GROUP BY entry_id
+ORDER BY uniqname
 
-_SQLNATRATINGTTL;
+_SQLNATRATINGEMAIL;
 
-  $resNatEntryEvalDetail = $db->query($nat_entries_evaluation_details);
-  $resultNatEntryEvalDetail = array();
+  $resNatRatingEmail = $db->query($nat_rating_email);
+  $resultNatRatingEmail = array();
   
   if ($db->error) {
       try {    
-          throw new Exception("MySQL error $db->error <br> Query:<br> $nat_entries_evaluation_details", $db->errno);    
+          throw new Exception("MySQL error $db->error <br> Query:<br> $nat_rating_email", $db->errno);    
       } catch(Exception $e ) {
           echo "Error No: ".$e->getCode(). " - ". $e->getMessage() . "<br >";
           echo nl2br($e->getTraceAsString());
       }
   }
-  while($item= $resNatEntryEvalDetail->fetch_assoc()){
-    array_push($resultNatEntryEvalDetail, 
-      array(
-        'entry_id' =>$item["entry_id"]
-        ,'contestName' =>$item["contestName"]
-        ,'ContestInstance' =>$item["ContestInstance"]
-        ,'title' =>$item["title"]
-        ,'ratings' =>$item["ratings"]
-        ,'ratingsTTL' => $item["ratingsTTL"]
-        ,'contestantcomment' =>$item["contestantcomment"]
-        ,'njudge1' =>$item["njudge1"]
-        ,'njudge2' =>$item["njudge2"]
-        ,'penName' =>$item["penName"]
-      )
-    );
-  }
-
-//   print_r2 ($resultNatEntryEvalDetail);
-
-// echo "=======================================================<br />";
-// echo "=======================================================";
-
-
-  $resNatContestscount = $db->query($nat_Contests_count);
-  $resultNatContestscount = array();
-  
-  if ($db->error) {
-      try {    
-          throw new Exception("MySQL error $db->error <br> Query:<br> $nat_Contests_count", $db->errno);    
-      } catch(Exception $e ) {
-          echo "Error No: ".$e->getCode(). " - ". $e->getMessage() . "<br >";
-          echo nl2br($e->getTraceAsString());
-      }
-  }
-  while($item= $resNatContestscount->fetch_assoc()){
-    array_push($resultNatContestscount, 
-      array(
-        'count_of_entries' =>$item["count_of_entries"]
-        ,'contestName' =>$item["contestName"]
-        ,'ContestInstance' =>$item["ContestInstance"]
-        ,'contestsID' =>$item["contestsID"]
-        ,'Nat_judge1' =>$item["Nat_judge1"]
-        ,'Nat_judge2' =>$item["Nat_judge2"]
-        ,'Loc_judge1' =>$item["Loc_judge1"]
-        ,'Loc_judge2' =>$item["Loc_judge2"]
-      )
-    );
-  }
-
-// Gets the current list of contests, count of entries, national and local judge names
-  // print_r2 ($resultNatContestscount);
-
-  // echo "=======================================================<br />";
-  // echo "======================================================="; 
-
-
-  $resNatRatingTtl = $db->query($nat_rating_ttl);
-  $resultNatRatingTtl = array();
-  
-  if ($db->error) {
-      try {    
-          throw new Exception("MySQL error $db->error <br> Query:<br> $nat_rating_ttl", $db->errno);    
-      } catch(Exception $e ) {
-          echo "Error No: ".$e->getCode(). " - ". $e->getMessage() . "<br >";
-          echo nl2br($e->getTraceAsString());
-      }
-  }
-  while($item= $resNatRatingTtl->fetch_assoc()){
-    array_push($resultNatRatingTtl, 
+  while($item= $resNatRatingEmail->fetch_assoc()){
+    array_push($resultNatRatingEmail, 
       array(
         'entry_id' =>$item["entry_id"]
         ,'ratingTTL' =>$item["ratingTTL"]
@@ -334,11 +235,3 @@ _SQLNATRATINGTTL;
     </html>
     <?php
     $db->close();
-
-
-
-
-
-
-
-
