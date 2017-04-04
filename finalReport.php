@@ -131,6 +131,7 @@ echo "=======================================================";
     );
   }
 
+// Gets the current list of contests, count of entries, national and local judge names
   print_r2 ($resultNatContestscount);
 
   echo "=======================================================<br />";
@@ -223,14 +224,73 @@ echo "=======================================================";
     <div class="container"><!-- container of all things -->
     <?php
     // for ($i=0;$i<sizeof($resultNatEntryEvalDetail);$i++){
+    $summarySection = "";
     foreach($resultNatContestscount as $contest){
-    
-      echo"<h2>" . $contest["contestName"] . "</h1>";
-      echo"<h4>Total number of submissions: " . $contest["count_of_entries"] . "</h4>";
-      echo"<h4>National judges: " . $contest["Nat_judge1"] . " and " . $contest["Nat_judge2"] . "</h4>"; 
-      echo"<h4>Local judges: " . $contest["Loc_judge1"] . " and " . $contest["Loc_judge2"] . "</h4>"; 
-      echo "<br />";
+      $summarySection .= "<div class='contest'>";
+      $summarySection .= "<hr>";
+      $summarySection .= "<h2>" . $contest["contestName"] . $contest["ContestInstance"] . "</h1>";
+      $summarySection .= "<h4>Total number of submissions: " . $contest["count_of_entries"] . "</h4>";
+      $summarySection .= "<h4>National judges: ";
+      $summarySection .= strlen($contest["Nat_judge1"]) > 1 ? $contest["Nat_judge1"] : " -- ";
+      $summarySection .= strlen($contest["Nat_judge2"]) > 1 ? " and " . $contest["Nat_judge2"] : "";
+      $summarySection .= "</h4>"; 
+      $summarySection .= "<h4>Local judges: ";
+      $summarySection .= strlen($contest["Loc_judge1"]) > 1 ? $contest["Loc_judge1"] : " -- ";
+      $summarySection .= strlen($contest["Loc_judge2"]) > 1 ? " and " . $contest["Loc_judge2"] : ""; 
+      $summarySection .= "</h4>"; 
+      $summarySection .= "<br />";
+      $summarySection .= "<table class='table table-hover table-condensed'><thead><tr>";
+      $summarySection .= "<th>Pen name, Title</th>";
+      $summarySection .= "<th>";
+      $summarySection .= strlen($contest["Nat_judge1"]) > 1 ? $contest["Nat_judge1"] : " -- " ;
+      $summarySection .=  "</th>";
+      $summarySection .= "<th>";
+      $summarySection .= strlen($contest["Nat_judge2"]) > 1 ? $contest["Nat_judge2"] : "";
+      $summarySection .= "</th>";
+      $summarySection .= "<th>Total</th><th>Local Judges</th>"; 
+      $summarySection .= "</tr></thead>";
+      $summarySection .= "<tbody>";
+
+      foreach($resultNatEntryEvalDetail as $entry){
+        $contestEntries = array();
+        if ($entry["ContestInstance"] == $contest["ContestInstance"]){
+          array_push($contestEntries, $entry);
+            // array(
+            //   'entry_id' =>$item["entry_id"]
+            //   // ,'contestName' =>$item["contestName"]
+            //   // ,'ContestInstance' =>$item["ContestInstance"]
+            //   ,'title' =>$item["title"]
+            //   ,'rating' =>$item["rating"]
+            //   // ,'contestantcomment' =>$item["contestantcomment"]
+            //   ,'evaluator' =>$item["evaluator"]
+            //   ,'penName' =>$item["penName"]
+            // )
+          }
+          foreach($contestEntries as $item){
+            $summarySection .= "<tr>";
+            $summarySection .= "<td>" . $item["penName"] . ", <em>" . $item["title"] . "</em></td>";
+            $summarySection .= "<td class='text-center'>7</td>";
+            $summarySection .= "<td class='text-center'>6</td>";
+            $summarySection .= "<td class='text-center'>13</td>";
+            $summarySection .= "<td class='text-center'> 2 -- </td>";
+            $summarySection .= "</tr>";
+
+          }
+
+      };
+      // $summarySection .= "<tr>";
+      // $summarySection .= "<td>Sara Bellum, <em>Thoughts on Thoughts</em></td>";
+      // $summarySection .= "<td>7</td>";
+      // $summarySection .= "<td>6</td>";
+      // $summarySection .= "<td>13</td>";
+      // $summarySection .= "<td> 2 -- </td>";
+      // $summarySection .= "</tr>";
+      $summarySection .= "</tbody>";
+      $summarySection .= "</table>";
+      $summarySection .= "</div>";
+
      };
+     echo $summarySection;
      ?> 
     </div>
       <?php
