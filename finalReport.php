@@ -228,7 +228,8 @@ _SQLNATRATINGTTL;
     ?>
     <div class="container"><!-- container of all things -->
     <?php
-    // for ($i=0;$i<sizeof($resultNatEntryEvalDetail);$i++){
+    
+    echo "<header><h1>Hopwood Writing Contest Final Judging Report</h1></header>";
     $summarySection = "";
     foreach($resultNatContestscount as $contest){
       $summarySection .= "<div class='contest'>";
