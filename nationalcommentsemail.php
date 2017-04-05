@@ -33,11 +33,13 @@ cn.entry_id AS entryID
 ,ed.title AS title
 ,ed.uniqname AS uniqname
 ,CONCAT(ed.firstname, " ", ed.lastname) AS author_fullname
-,MAX(CONCAT("Judge: ",cn.evaluator, " commented- ",cn.contestantcomment)) AS judge1
-,MIN(CONCAT("Judge: ",cn.evaluator, " commented- ",cn.contestantcomment)) AS judge2
-
+,MAX(CONCAT("<strong>Judge: ",CONCAT(nj.firstname, ' ',nj.lastname), " commented- </strong>",cn.contestantcomment)) AS judge1comments
+,MIN(CONCAT("<strong>Judge: ",CONCAT(nj.firstname, ' ',nj.lastname), " commented- </strong>",cn.contestantcomment)) AS judge2comments
+,MAX(cn.evaluator) AS judge1
+,MIN(cn.evaluator) AS judge2
 FROM quilleng_ContestManager.vw_current_national_evaluations AS cn
 LEFT OUTER JOIN vw_entrydetail_with_classlevel_currated AS ed ON cn.entry_id = ed.EntryId
+LEFT OUTER JOIN tbl_nationalcontestjudge AS nj ON cn.evaluator = nj.uniqname
 
 GROUP BY entry_id
 ORDER BY uniqname
@@ -55,21 +57,24 @@ _SQLNATRATINGEMAIL;
           echo nl2br($e->getTraceAsString());
       }
   }
-  while($item= $resNatRatingEmail->fetch_assoc()){
+  while($item = $resNatRatingEmail->fetch_assoc()){
     array_push($resultNatRatingEmail, 
       array(
-        'entry_id' =>$item["entry_id"]
-        ,'ratingTTL' =>$item["ratingTTL"]
+        'entryID' =>$item["entryID"]
+        ,'contest_name' =>$item["contest_name"]
+        ,'title' =>$item["title"]
+        ,'uniqname' =>$item["uniqname"]
+        ,'author_fullname' =>$item["author_fullname"]
+        ,'judge1' =>$item["judge1"]
+        ,'judge2' =>$item["judge2"]
+        ,'judge1comments' =>$item["judge1comments"]
+        ,'judge2comments' =>$item["judge2comments"]
+
       )
     );
   }
 
-  // print_r2 ($resultNatRatingTtl);
-
-  // echo "=======================================================<br />";
-  // echo "=======================================================<br />";   
-  // echo "=======================================================<br />";
-  // echo "=======================================================";
+ //print_r2 ($resultNatRatingEmail);
 
   ?>
   <!DOCTYPE html>
@@ -130,72 +135,26 @@ _SQLNATRATINGEMAIL;
     <div class="container"><!-- container of all things -->
     <?php
     // for ($i=0;$i<sizeof($resultNatEntryEvalDetail);$i++){
+
     $summarySection = "";
-    foreach($resultNatContestscount as $contest){
-      $summarySection .= "<div class='contest'>";
+    foreach($resultNatRatingEmail as $item){
+      $summarySection .= "<div class='contest_email'>";
       $summarySection .= "<hr>";
-      $summarySection .= "<h2>" . $contest["contestName"] . "</h1>";
-      $summarySection .= "<h4>Total number of submissions: " . $contest["count_of_entries"] . "</h4>";
-      $summarySection .= "<h4>National judges: ";
-      $summarySection .= strlen($contest["Nat_judge1"]) > 1 ? $contest["Nat_judge1"] : " -- ";
-      $summarySection .= strlen($contest["Nat_judge2"]) > 1 ? " and " . $contest["Nat_judge2"] : "";
-      $summarySection .= "</h4>"; 
-      $summarySection .= "<h4>Local judges: ";
-      $summarySection .= strlen($contest["Loc_judge1"]) > 1 ? $contest["Loc_judge1"] : " -- ";
-      $summarySection .= strlen($contest["Loc_judge2"]) > 1 ? " and " . $contest["Loc_judge2"] : ""; 
-      $summarySection .= "</h4>"; 
+      $summarySection .= "TO: " . $item["uniqname"] . "@umich.edu";
       $summarySection .= "<br />";
-      $summarySection .= "<table class='table table-hover table-condensed'><thead><tr>";
-      $summarySection .= "<th>Pen name, Title</th>";
-      $summarySection .= "<th>";
-      $summarySection .= strlen($contest["Nat_judge1"]) > 1 ? $contest["Nat_judge1"] : " -- " ;
-      $summarySection .=  "</th>";
-      $summarySection .= "<th>";
-      $summarySection .= strlen($contest["Nat_judge2"]) > 1 ? $contest["Nat_judge2"] : "";
-      $summarySection .= "</th>";
-      $summarySection .= "<th>Total</th><th>Local Judges</th>"; 
-      $summarySection .= "</tr></thead>";
-      $summarySection .= "<tbody>";
-
-      foreach($resultNatEntryEvalDetail as $entry){
-        $contestEntries = array();
-        if ($entry["ContestInstance"] == $contest["ContestInstance"]){
-          array_push($contestEntries, $entry);
-            // array(
-            //   'entry_id' =>$item["entry_id"]
-            //   // ,'contestName' =>$item["contestName"]
-            //   // ,'ContestInstance' =>$item["ContestInstance"]
-            //   ,'title' =>$item["title"]
-            //   ,'rating' =>$item["rating"]
-            //   // ,'contestantcomment' =>$item["contestantcomment"]
-            //   ,'evaluator' =>$item["evaluator"]
-            //   ,'penName' =>$item["penName"]
-            // )
-          }
-          foreach($contestEntries as $item){
-            $summarySection .= "<tr>";
-            $summarySection .= "<td>" . $item["penName"] . ", <em>" . $item["title"] . "</em></td>";
-            $tempRatings = explode(",",$item["ratings"]);
-            // $judge2rating = count($tempRatings) > 0? : $tempRatings[1] : ""; 
-            $summarySection .= "<td class='text-center'>" . $tempRatings[0] . "</td>";
-            $summarySection .= "<td class='text-center'>" . $tempRatings[1] . "</td>";
-            $summarySection .= "<td class='text-center'>" . $item["ratingsTTL"] . "</td>";
-            $summarySection .= "<td class='text-center'> -- </td>";
-            $summarySection .= "</tr>";
-
-          }
-
-      };
-      // $summarySection .= "<tr>";
-      // $summarySection .= "<td>Sara Bellum, <em>Thoughts on Thoughts</em></td>";
-      // $summarySection .= "<td>7</td>";
-      // $summarySection .= "<td>6</td>";
-      // $summarySection .= "<td>13</td>";
-      // $summarySection .= "<td> 2 -- </td>";
-      // $summarySection .= "</tr>";
-      $summarySection .= "</tbody>";
-      $summarySection .= "</table>";
-      $summarySection .= "</div>";
+      $summarySection .= "FROM: hopwoodcontestnotify@umich.edu";
+      $summarySection .= "<p>";
+      $summarySection .= "Hello " . $item["author_fullname"] . ",";
+      $summarySection .= "<br />";
+      $summarySection .= "Here are the comments you received for your <strong>" . $item["contest_name"] ."</strong> entry titled <em>" . $item["title"] . "</em>.";
+      $summarySection .= "</p><p>";
+      $summarySection .= strlen($item["judge1"]) > 1 ? $item["judge1comments"] : "";
+      $summarySection .= "</p><p>";
+      $summarySection .= $item["judge2"] <> $item["judge1"] ? $item["judge2comments"] : "";
+      $summarySection .= "</p><p>";
+      $summarySection .= "<strong>-- Please do not reply to this email --</strong><br />";
+      $summarySection .= "If you have any questions or comments about your entry, please contact the Hopwood Writing Contests at <a href='mailto:hopwoodcontestnotify@umich.edu'>Hopwood Contest Notify</a>";
+      $summarySection .= "<p>Thank you</p>";
 
      };
      echo $summarySection;
