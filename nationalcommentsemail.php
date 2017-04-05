@@ -132,9 +132,15 @@ _SQLNATRATINGEMAIL;
     </nav>
     <?php if ($isAdmin) {
     ?>
-    <div class="container"><!-- container of all things -->
+    <div class="container"><!-- START container of all things -->
     <?php
-    // for ($i=0;$i<sizeof($resultNatEntryEvalDetail);$i++){
+    ?>
+    <header><h3>Please review these generated emails carefully.<br />When you are ready to send them click the button below <strong>only once</strong>. Each time you click the button it is sending this set of emails!</h3><br />
+      <div class='sendmailbutton'>
+        <a href="nationalcommentssendemail.php" type='button' id='send_national_comments' class='btn btn-success'>Send National Comments</a>
+      </div>
+    </header>
+    <?php
 
     $summarySection = "";
     foreach($resultNatRatingEmail as $item){
@@ -159,7 +165,12 @@ _SQLNATRATINGEMAIL;
      };
      echo $summarySection;
      ?> 
+    <div><h3>Please review these generated emails carefully.<br />When you are ready to send them click the button below <strong>only once</strong>. Each time you click the button it is sending this set of emails!</h3><br />
+      <div class='sendmailbutton'>
+        <a href="nationalcommentssendemail.php" type='button' id='send_national_comments' class='btn btn-success'>Send National Comments</a>
+      </div>
     </div>
+    </div> <!--END container of all things -->
       <?php
       } else {
       ?>
