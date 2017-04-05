@@ -50,11 +50,11 @@ SELECT
 CASE WHEN MAX(natjudge.uniqname) <> MIN(natjudge.uniqname) THEN CAST(COUNT(EntryID)/4 AS DECIMAL(3,0)) ELSE COUNT(EntryID) END AS count_of_entries, 
 ed.contestName, 
 ed.ContestInstance, ed.contestsID,
-MIN(natjudge.uniqname) AS Nat_judge1, 
-CASE WHEN MAX(natjudge.uniqname) <> MIN(natjudge.uniqname) THEN MAX(natjudge.uniqname) ELSE NULL END AS Nat_judge2,
-MIN(locjudge.uniqname) AS Loc_judge1, 
-CASE WHEN MAX(locjudge.uniqname) <> MIN(locjudge.uniqname) THEN MAX(locjudge.uniqname) ELSE NULL END AS Loc_judge2
-FROM quilleng_ContestManager.vw_entrydetail_with_classlevel_currated AS ed
+MIN(CONCAT(natjudge.uniqname,':',natjudge.firstname,' ',natjudge.lastname)) AS Nat_judge1,
+CASE WHEN MAX(natjudge.uniqname) <> MIN(natjudge.uniqname) THEN MAX(CONCAT(natjudge.uniqname,':',natjudge.firstname,' ',natjudge.lastname))  ELSE NULL END AS Nat_judge2,
+MIN(CONCAT(locjudge.uniqname,':',locjudge.firstname,' ',locjudge.lastname)) AS Loc_judge1,
+CASE WHEN MAX(locjudge.uniqname) <> MIN(locjudge.uniqname) THEN MAX(CONCAT(locjudge.uniqname,':',locjudge.firstname,' ',locjudge.lastname))  ELSE NULL END AS Loc_judge2
+FROM vw_entrydetail_with_classlevel_currated AS ed
 LEFT OUTER JOIN tbl_nationalcontestjudge AS natjudge ON ed.contestsID = natjudge.contestsID
 LEFT OUTER JOIN tbl_contestjudge AS locjudge ON ed.contestsID = locjudge.contestsID
 
@@ -128,16 +128,16 @@ _SQLNATRATINGTTL;
         ,'contestName' =>$item["contestName"]
         ,'ContestInstance' =>$item["ContestInstance"]
         ,'contestsID' =>$item["contestsID"]
-        ,'Nat_judge1' =>$item["Nat_judge1"]
-        ,'Nat_judge2' =>$item["Nat_judge2"]
-        ,'Loc_judge1' =>$item["Loc_judge1"]
-        ,'Loc_judge2' =>$item["Loc_judge2"]
+        ,'Nat_judge1' =>explode(':',$item["Nat_judge1"])[1]
+        ,'Nat_judge2' =>$item["Nat_judge2"]? explode(':',$item["Nat_judge2"])[1] : ''
+        ,'Loc_judge1' =>explode(':',$item["Loc_judge1"])[1]
+        ,'Loc_judge2' =>$item["Loc_judge2"]? explode(':',$item["Loc_judge2"])[1] : ''
       )
     );
   }
 
 // Gets the current list of contests, count of entries, national and local judge names
-  // print_r2 ($resultNatContestscount);
+ //print_r2 ($resultNatContestscount);
 
   // echo "=======================================================<br />";
   // echo "======================================================="; 
@@ -274,10 +274,10 @@ _SQLNATRATINGTTL;
           foreach($contestEntries as $item){
             $summarySection .= "<tr>";
             $summarySection .= "<td>" . $item["penName"] . ", <em>" . $item["title"] . "</em></td>";
-            $tempRatings = explode(",",$item["ratings"]);
-            // $judge2rating = count($tempRatings) > 0? : $tempRatings[1] : ""; 
-            $summarySection .= "<td class='text-center'>" . $tempRatings[0] . "</td>";
-            $summarySection .= "<td class='text-center'>" . $tempRatings[1] . "</td>";
+            $judgerating = explode(',',$item["ratings"]); 
+            $judge2rating = sizeof($judgerating) > 1? $judgerating[1] : '';
+            $summarySection .= "<td class='text-center'>" . $judgerating[0] . "</td>";
+            $summarySection .= "<td class='text-center'>" . $judge2rating . "</td>";
             $summarySection .= "<td class='text-center'>" . $item["ratingsTTL"] . "</td>";
             $summarySection .= "<td class='text-center'> -- </td>";
             $summarySection .= "</tr>";
@@ -285,13 +285,6 @@ _SQLNATRATINGTTL;
           }
 
       };
-      // $summarySection .= "<tr>";
-      // $summarySection .= "<td>Sara Bellum, <em>Thoughts on Thoughts</em></td>";
-      // $summarySection .= "<td>7</td>";
-      // $summarySection .= "<td>6</td>";
-      // $summarySection .= "<td>13</td>";
-      // $summarySection .= "<td> 2 -- </td>";
-      // $summarySection .= "</tr>";
       $summarySection .= "</tbody>";
       $summarySection .= "</table>";
       $summarySection .= "</div>";
