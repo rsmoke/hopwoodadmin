@@ -246,13 +246,13 @@ _SQLNATRATINGTTL;
       $summarySection .= "<br />";
       $summarySection .= "<table class='table table-hover table-condensed'><thead><tr>";
       $summarySection .= "<th>Pen name, Title</th>";
-      $summarySection .= "<th>";
+      $summarySection .= "<th class='text-center'>";
       $summarySection .= strlen($contest["Nat_judge1"]) > 1 ? $contest["Nat_judge1"] : " -- " ;
       $summarySection .=  "</th>";
-      $summarySection .= "<th>";
+      $summarySection .= "<th class='text-center'>";
       $summarySection .= strlen($contest["Nat_judge2"]) > 1 ? $contest["Nat_judge2"] : "";
       $summarySection .= "</th>";
-      $summarySection .= "<th>Total</th><th>Local Judges</th>"; 
+      $summarySection .= "<th class='text-center'>Total</th><th class='text-center'>Local Judges</th>"; 
       $summarySection .= "</tr></thead>";
       $summarySection .= "<tbody>";
 
@@ -260,16 +260,6 @@ _SQLNATRATINGTTL;
         $contestEntries = array();
         if ($entry["ContestInstance"] == $contest["ContestInstance"]){
           array_push($contestEntries, $entry);
-            // array(
-            //   'entry_id' =>$item["entry_id"]
-            //   // ,'contestName' =>$item["contestName"]
-            //   // ,'ContestInstance' =>$item["ContestInstance"]
-            //   ,'title' =>$item["title"]
-            //   ,'rating' =>$item["rating"]
-            //   // ,'contestantcomment' =>$item["contestantcomment"]
-            //   ,'evaluator' =>$item["evaluator"]
-            //   ,'penName' =>$item["penName"]
-            // )
           }
           foreach($contestEntries as $item){
             $summarySection .= "<tr>";
