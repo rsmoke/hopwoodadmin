@@ -87,14 +87,14 @@ _SQLNATRATINGEMAIL;
 
       $mailSection .= "Hello " . $item["author_fullname"] . ",";
       $mailSection .= "\n";
-      $mailSection .= "Here are the comments you received for your <strong>" . $item["contest_name"] ."</strong> entry titled <em>" . $item["title"] . "</em>.";
-      $mailSection .= "\n";
+      $mailSection .= "Here are the comments you received for your " . $item["contest_name"] ." entry titled: " . $item["title"];
+      $mailSection .= "\n\n";
       $mailSection .= strlen($item["judge1"]) > 1 ? $item["judge1comments"] : "";
       $mailSection .= "\n";
       $mailSection .= $item["judge2"] <> $item["judge1"] ? $item["judge2comments"] : "";
       $mailSection .= "\n";
       $mailSection .= "-- Please do not reply to this email --\n";
-      $mailSection .= "If you have any questions or comments about your entry, please contact the Hopwood Writing Contests at <a href='mailto:hopwoodcontestnotify@umich.edu'>Hopwood Contest Notify</a>";
+      $mailSection .= "If you have any questions or comments about your entry, please contact the Hopwood Writing Contests at hopwoodcontestnotify@umich.edu";
       $mailSection .= "\nThank you";
       $mailSection = wordwrap($mailSection,70, "\n");
 
