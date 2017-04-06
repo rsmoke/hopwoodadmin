@@ -33,8 +33,8 @@ cn.entry_id AS entryID
 ,ed.title AS title
 ,ed.uniqname AS uniqname
 ,CONCAT(ed.firstname, " ", ed.lastname) AS author_fullname
-,MAX(CONCAT("<strong>Judge: ",CONCAT(nj.firstname, ' ',nj.lastname), " commented- </strong>",cn.contestantcomment)) AS judge1comments
-,MIN(CONCAT("<strong>Judge: ",CONCAT(nj.firstname, ' ',nj.lastname), " commented- </strong>",cn.contestantcomment)) AS judge2comments
+,MAX(CONCAT("Judge: ",CONCAT(nj.firstname, ' ',nj.lastname), " commented- ",cn.contestantcomment)) AS judge1comments
+,MIN(CONCAT("Judge: ",CONCAT(nj.firstname, ' ',nj.lastname), " commented- ",cn.contestantcomment)) AS judge2comments
 ,MAX(cn.evaluator) AS judge1
 ,MIN(cn.evaluator) AS judge2
 FROM quilleng_ContestManager.vw_current_national_evaluations AS cn
