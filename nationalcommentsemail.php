@@ -133,15 +133,14 @@ _SQLNATRATINGEMAIL;
     <?php if ($isAdmin) {
     ?>
     <div class="container"><!-- START container of all things -->
-    <?php
-    ?>
     <header><h3>Please review these generated emails carefully.<br />When you are ready to send them click the button below <strong><u>only once</u></strong>. Each time you click the button it is sending this set of emails!</h3><br />
+  <?php if ($login_name == 'rsmoke'){ ?>
       <div class='sendmailbutton'>
         <a href="nationalcommentssendemail.php" type='button' id='send_national_comments' class='btn btn-warning'>Send National Comments</a>
       </div>
+  <?php }  // temp if statement to prevent users issues due to pressing the send button, Call me paranoid ?> 
     </header>
     <?php
-
     $summarySection = "";
     $emailCounter = 0;
     foreach($resultNatRatingEmail as $item){
@@ -169,9 +168,11 @@ _SQLNATRATINGEMAIL;
      echo "<hr><h5>You have created " . $emailCounter . " emails.</h5>";
      ?> 
     <div><h3>Please review these generated emails carefully.<br />When you are ready to send them click the button below <strong><u>only once</u></strong>. Each time you click the button it is sending this set of emails!</h3><br />
+  <?php if ($login_name == 'rsmoke'){ ?>    
       <div class='sendmailbutton'>
         <a href="nationalcommentssendemail.php" type='button' id='send_national_comments' class='btn btn-warning'>Send National Comments</a>
       </div>
+  <?php }  // temp if statement to prevent users issues due to pressing the send button, Call me paranoid ?>    
     </div>
     </div> <!--END container of all things -->
       <?php
