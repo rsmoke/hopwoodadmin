@@ -135,17 +135,20 @@ _SQLNATRATINGEMAIL;
     <div class="container"><!-- START container of all things -->
     <?php
     ?>
-    <header><h3>Please review these generated emails carefully.<br />When you are ready to send them click the button below <strong>only once</strong>. Each time you click the button it is sending this set of emails!</h3><br />
+    <header><h3>Please review these generated emails carefully.<br />When you are ready to send them click the button below <strong><u>only once</u></strong>. Each time you click the button it is sending this set of emails!</h3><br />
       <div class='sendmailbutton'>
-        <a href="nationalcommentssendemail.php" type='button' id='send_national_comments' class='btn btn-success'>Send National Comments</a>
+        <a href="nationalcommentssendemail.php" type='button' id='send_national_comments' class='btn btn-warning'>Send National Comments</a>
       </div>
     </header>
     <?php
 
     $summarySection = "";
+    $emailCounter = 0;
     foreach($resultNatRatingEmail as $item){
+      $emailCounter++;
       $summarySection .= "<div class='contest_email'>";
       $summarySection .= "<hr>";
+      $summarySection .= "<h6>" . $emailCounter . "</h6>";
       $summarySection .= "TO: " . $item["uniqname"] . "@umich.edu";
       $summarySection .= "<br />";
       $summarySection .= "FROM: hopwoodcontestnotify@umich.edu";
@@ -161,13 +164,13 @@ _SQLNATRATINGEMAIL;
       $summarySection .= "<strong>-- Please do not reply to this email --</strong><br />";
       $summarySection .= "If you have any questions or comments about your entry, please contact the Hopwood Writing Contests at <a href='mailto:hopwoodcontestnotify@umich.edu'>Hopwood Contest Notify</a>";
       $summarySection .= "<p>Thank you</p>";
-
      };
      echo $summarySection;
+     echo "<hr><h5>You have created " . $emailCounter . " emails.</h5>";
      ?> 
-    <div><h3>Please review these generated emails carefully.<br />When you are ready to send them click the button below <strong>only once</strong>. Each time you click the button it is sending this set of emails!</h3><br />
+    <div><h3>Please review these generated emails carefully.<br />When you are ready to send them click the button below <strong><u>only once</u></strong>. Each time you click the button it is sending this set of emails!</h3><br />
       <div class='sendmailbutton'>
-        <a href="nationalcommentssendemail.php" type='button' id='send_national_comments' class='btn btn-success'>Send National Comments</a>
+        <a href="nationalcommentssendemail.php" type='button' id='send_national_comments' class='btn btn-warning'>Send National Comments</a>
       </div>
     </div>
     </div> <!--END container of all things -->

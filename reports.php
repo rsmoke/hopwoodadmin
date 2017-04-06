@@ -99,6 +99,8 @@ $_SESSION['isAdmin'] = true;
             <a id="ktchensinkBtn" type="button" class="btn btn-xs btn-info" href="kitchensink.php" data-toggle="tooltip" data-placement="right" title="Click to download details of all the applications ever submitted"><i class="fa fa-download"></i> Details of Entries</a>
             <a id="localEvalDownloadBtn" type="button" class="btn btn-xs btn-info" href="localEvalDownload.php" data-toggle="tooltip" data-placement="right" title="Click to download all submitted Local evaluations"><i class="fa fa-download"></i> All Local Evaluations</a>
             <a id="natEvalDownloadBtn" type="button" class="btn btn-xs btn-info" href="natEvalDownload.php" data-toggle="tooltip" data-placement="right" title="Click to download all submitted National evaluations"><i class="fa fa-download"></i> All National Evaluations</a>
+            <hr>
+            <a href="nationalcommentsemail.php" type='button' id='send_national_comments' class='btn btn-xs btn-warning'>Send National Comments</a>
           </div>
         </div>
       </div>
