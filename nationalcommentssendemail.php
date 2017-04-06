@@ -23,7 +23,7 @@ $isAdmin = true;
 $_SESSION['isAdmin'] = true;
 }
 
-// This is gets all the entries and national evals
+// This gets all the entries, national evals and judges
 
 
 $nat_rating_email = <<< _SQLNATRATINGEMAIL
@@ -75,26 +75,6 @@ _SQLNATRATINGEMAIL;
   }
 
  if ($isAdmin) {
-    
-    // $to = "um_ricks+p8lizbzwi3rwjww5f8vh@boards.trello.com"; // this is your Email address
-    // $from = htmlspecialchars($_POST['email']); // this is the sender's Email address
-    // $first_name = htmlspecialchars($_POST['first_name']);
-    // $last_name = htmlspecialchars($_POST['last_name']);
-    // $subject = "Hopwood WritingContest - " . htmlspecialchars($_POST['topic']) . " email=> " . $from . " " . date("Y/m/d h:i:sa");
-    // $subject2 = "Copy of your Hopwood WritingContest comment or question form submission";
-    // $messageFooter = "-- Please do not reply to this email. If you requested a reply or if we need more information, we will contact you at the email address you provided. --";
-    // $message = "logged in as=> " . $login_name . " " . $first_name . " " . $last_name . " email=> " . $from . " wrote the following:" . "\n\n" . htmlspecialchars($_POST['message']);
-    // $message2 = "Here is a copy of your message " . $first_name . ":\n\n" . htmlspecialchars($_POST['message']) . "\n\n" . $messageFooter;
-
-
-    // $headers = "From:" . $from;
-    // $headers2 = "From:" . $to;
-    // mail($to,$subject,$message,$headers);
-    // mail($from,$subject2,$message2, "From:english.department@umich.edu"); // sends a copy of the message to the sender
-    // echo "<h4>Mail Sent.</h4> <p>Thank you " . $first_name . " for getting in touch! We’ve sent you a copy of this message at the email address you provided.<br> Have a great day!</p>";
-    // echo "<a class='btn btn-info' href='index.php'>Return to Hopwood Writing Contest</a>";
-
-    // $summarySection = "";
   $_SESSION['emailsentcount'] = 0;
   $emailSentCounter = 0;
     foreach($resultNatRatingEmail as $item){
@@ -108,14 +88,16 @@ _SQLNATRATINGEMAIL;
       $mailSection .= "Hello " . $item["author_fullname"] . ",";
       $mailSection .= "\n";
       $mailSection .= "Here are the comments you received for your <strong>" . $item["contest_name"] ."</strong> entry titled <em>" . $item["title"] . "</em>.";
-      $mailSection .= "\n\n";
+      $mailSection .= "\n";
       $mailSection .= strlen($item["judge1"]) > 1 ? $item["judge1comments"] : "";
       $mailSection .= "\n";
       $mailSection .= $item["judge2"] <> $item["judge1"] ? $item["judge2comments"] : "";
-      $mailSection .= "\n\n";
+      $mailSection .= "\n";
       $mailSection .= "-- Please do not reply to this email --\n";
       $mailSection .= "If you have any questions or comments about your entry, please contact the Hopwood Writing Contests at <a href='mailto:hopwoodcontestnotify@umich.edu'>Hopwood Contest Notify</a>";
-      $mailSection .= "\n\nThank you";
+      $mailSection .= "\nThank you";
+      $mailSection = wordwrap($mailSection,70, "\n");
+
       $headers = "From:" . $from;
       mail($to,$subject,$mailSection,$headers);
       $emailSentCounter++;
