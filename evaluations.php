@@ -130,10 +130,10 @@ $_SESSION['isAdmin'] = true;
                 <li role="separator" class="divider"></li>
                 <li><a id="reportRatingBtn9" class="reportRatingBtn" data-contest="9" >Hopwood_Award Theodore Roethke Prize</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a id="reportRatingBtn7" class="reportRatingBtn" data-contest="30" >Summer Hopwood - Drama or Screenplay</a></li>
-                <li><a id="reportRatingBtn7" class="reportRatingBtn" data-contest="27" >Summer Hopwood - Nonfiction</a></li>
-                <li><a id="reportRatingBtn7" class="reportRatingBtn" data-contest="28" >Summer Hopwood - Short Fiction</a></li>
-                <li><a id="reportRatingBtn7" class="reportRatingBtn" data-contest="30" >Summer Hopwood - Poetry</a></li>
+                <li><a id="reportRatingBtn30" class="reportRatingBtn" data-contest="30" >Summer Hopwood - Drama or Screenplay</a></li>
+                <li><a id="reportRatingBtn27" class="reportRatingBtn" data-contest="27" >Summer Hopwood - Nonfiction</a></li>
+                <li><a id="reportRatingBtn28" class="reportRatingBtn" data-contest="28" >Summer Hopwood - Short Fiction</a></li>
+                <li><a id="reportRatingBtn29" class="reportRatingBtn" data-contest="29" >Summer Hopwood - Poetry</a></li>
               </ul>
             </div>
             <div class="btn-group" role="group">
