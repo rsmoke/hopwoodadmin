@@ -97,7 +97,7 @@ $_SESSION['isAdmin'] = true;
             <?php
             //query for existing contests and populate the panels
             $sqlContestSelect = <<<SQL
-            SELECT c1.id AS ContestId, c1.contestsID, c1.date_open, c1.date_closed, `lk_contests`.`name`,c1.status
+            SELECT c1.id AS ContestId, c1.contestsID, c1.date_open, c1.date_closed, `lk_contests`.`name`,c1.status, tte.ttl_count
             FROM tbl_contest c1
             INNER JOIN (SELECT MAX(c2.date_open) AS OPENS, c2.contestsID
                   FROM tbl_contest c2
@@ -105,6 +105,7 @@ $_SESSION['isAdmin'] = true;
                   GROUP BY c2.contestsID) AS MAX
               ON (MAX.contestsID = c1.contestsID AND MAX.OPENS = c1.date_open)
               JOIN `lk_contests` ON (c1.contestsID = `lk_contests`.`id`)
+              LEFT JOIN (SELECT COUNT(id) AS ttl_count, contestID FROM tbl_entry WHERE status = 0 GROUP BY `contestID`) AS tte ON c1.id = tte.contestID
               WHERE c1.status = 0
             ORDER BY date_closed, name
 SQL;
@@ -122,7 +123,7 @@ SQL;
               <div class="panel-heading" role="tab" id="heading<?php echo $count ?>">
                 <h6 class="panel-title">
                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $count ?>" aria-expanded="false" aria-controls="collapse<?php echo $count ?>">
-                  <?php echo $instance['name'] . "  -->  <span class='text-muted'>open: </span>" . date("F jS, Y - g:i A", (strtotime($instance['date_open']))) . " <=> " . "<span class='text-muted'>close:</span> " . date("F jS, Y - g:i A", (strtotime($instance['date_closed']))) ?>
+                  <?php echo $instance['name']  . " ( Ttl Entries: <span style='color: red'>" . $ttl_count = ($instance['ttl_count'] > 0? $instance['ttl_count'] : 0) . "</span> )  -->  <span class='text-muted'>open: </span>" . date("F jS, Y - g:i A", (strtotime($instance['date_open']))) . " <=> " . "<span class='text-muted'>close:</span> " . date("F jS, Y - g:i A", (strtotime($instance['date_closed'])))?>
                 </a>
                 </h6>
               </div>
