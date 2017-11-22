@@ -37,24 +37,43 @@ $( document ).ready(function(){
         $("#outputEvalData").html('<h4>' + data.result[0].contestName  + '</h4>' +
             '<div class="table-responsive">' +
             '<table class="table table-hover dataout"><thead>' +
-            '<th><small>Send to National</small></th>' +
-            '<th><small>Entry ID</small></th><th>File</th>' +
-            '<th>Title</th><th>Type</th><th>ClassLevel</th><th>Pen Name</th>' +
-            '<th>First-Name</th><th>Last Name</th><th>UMID</th><th>Rating</th>' +
-            '<th>Evaluator</th><th>Contestant comment</th>' +
-            '<th>Committee comment</th></thead><tbody>');
+            '<th style="width:5%"><small>Send to National</small></th>' +
+            '<th style="width:5%"><small>Entry ID</small></th>' +
+            '<th style="width:5%">File</th>' +
+            '<th style="width:20%">Title</th>' +
+            '<th style="width:10%">Type</th>' +
+            '<th style="width:5%">Class Level</th>' +
+            '<th>Pen Name</th>' +
+            '<th style="width:10%">First-Name</th>' +
+            '<th style="width:10%">Last Name</th>' +
+            '<th style="width:5%">UMID</th>' +
+            '<th style="width:5%">Rating</th>' +
+            '<th>Evaluator</th></thead><tbody>');
 
           $.each(data.result, function(){
             var set_check = '';
             if (this.nationalstatus == 1) {
               set_check = 'checked';
             }
-              $(".dataout").append("<tr><td><input type='checkbox' class='natCheckBox' " + set_check + " data-item='" + this.entryid + "' ></td>" +
+              $(".dataout").append("<tr><td colspan = 12 ><table class='table'><thead>" +
+                '<th style="width:5%"></th>' +
+                '<th style="width:5%"></th>' +
+                '<th style="width:5%"></th>' +
+                '<th style="width:20%"></th>' +
+                '<th style="width:10%"></th>' +
+                '<th style="width:5%"></th>' +
+                '<th></th>' +
+                '<th style="width:10%"></th>' +
+                '<th style="width:10%"></th>' +
+                '<th style="width:5%"></th>' +
+                '<th style="width:5%"></th>' +
+                '<th></th></thead>' +
+                "<tbody><tr><td><input type='checkbox' class='natCheckBox' " + set_check + " data-item='" + this.entryid + "' ></td>" +
                 "<td><small>" + this.entryid + "</small></td>" +
                 "<td><a class='btn btn-xs btn-info' href='fileholder.php?file=" + this.document +
-               "' target='_blank'><i class='fa fa-book'></i></a></td><td class='comment_cell'><div class='commentBlock'>" + this.title + "</div></td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td>" + this.penName +
+               "' target='_blank'><i class='fa fa-book'></i></a></td><td style='width:20%' class='comment_cell'><div class='commentBlock'>" + this.title + "</div></td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td style='width:15%'>" + this.penName +
                 "</td><td>" + this.firstname + "</a></td><td>" + this.lastname + "</td><td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=" + this.umid + "' target='_blank'>" + this.umid + "</a></td><td>" + this.rank +
-                "</td><td>" + this.rankedby + "</td><td class='comment_cell' data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.contestantcomment) + "'><div class='commentBlock'>" + htmlEntities(this.contestantcomment) + "</div></td><td class='comment_cell' data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.committeecomment) + "'><div class='commentBlock'>" + htmlEntities(this.committeecomment) + "</div></td></tr>");
+                "</td><td>" + this.rankedby + "</td></tr><tr><td colspan = 2 ><div><strong>Comments:</strong></td><td colspan=4 class='comment_cell' data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.contestantcomment) + "'><div class='commentBlock'>Contestant: " + htmlEntities(this.contestantcomment) + "</div></td><td colspan=6 class='comment_cell' data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.committeecomment) + "'><div class='commentBlock'>Committee: " + htmlEntities(this.committeecomment) + "</div></td></tr></tbody></table></td></tr>");
           });
         $("#outputEvalData").append('</tbody></table></div>');
       } else {
