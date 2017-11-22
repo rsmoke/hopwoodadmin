@@ -3,12 +3,26 @@ function htmlEntities(str) {
 }
 
 $( document ).ready(function(){
+  $('.js-loading-bar').modal({
+    backdrop: 'static',
+    show: false
+  });
 
   $("#outputEvalData").empty();
 
   // ========== LOCAL RESULTS
     //Set the selected region to empty then populate it with the formatted result of the JSON string that is returned
   $(".reportRatingBtn").click ( function( event ){
+    var $modal = $('.js-loading-bar'),
+    $bar = $modal.find('.progress');
+
+    $modal.modal('show');
+    $bar.addClass('animate');
+    setTimeout(function() {
+      $bar.removeClass('animate');
+      $modal.modal('hide');
+    }, 7000);
+
     var useContests = $(this).data('contest');
     var isNational = false;
     if ([9,11,20,19,2,21,22,23,24,25,26].includes(useContests)){

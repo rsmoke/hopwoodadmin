@@ -52,6 +52,25 @@ $_SESSION['isAdmin'] = true;
     <base href=<?php echo URL ?>>
   </head>
   <body>
+    <div class="modal js-loading-bar">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+
+              <div class="progress blue">
+                <span class="progress-left">
+                  <span class="progress-bar"></span>
+                </span>
+                <span class="progress-right">
+                  <span class="progress-bar"></span>
+                </span>
+                <div class="progress-value">...gimme a sec</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+    </div>
     <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -129,11 +148,11 @@ $_SESSION['isAdmin'] = true;
                 <li><a id="reportRatingBtn25" class="reportRatingBtn" data-contest="25" >Hopwood Undergraduate - Short Fiction</a></li>
                 <li role="separator" class="divider"></li>
                 <li><a id="reportRatingBtn9" class="reportRatingBtn" data-contest="9" >Hopwood_Award Theodore Roethke Prize</a></li>
-                <li role="separator" class="divider"></li>
+<!--                 <li role="separator" class="divider"></li>
                 <li><a id="reportRatingBtn30" class="reportRatingBtn" data-contest="30" >Summer Hopwood - Drama or Screenplay</a></li>
                 <li><a id="reportRatingBtn27" class="reportRatingBtn" data-contest="27" >Summer Hopwood - Nonfiction</a></li>
                 <li><a id="reportRatingBtn28" class="reportRatingBtn" data-contest="28" >Summer Hopwood - Short Fiction</a></li>
-                <li><a id="reportRatingBtn29" class="reportRatingBtn" data-contest="29" >Summer Hopwood - Poetry</a></li>
+                <li><a id="reportRatingBtn29" class="reportRatingBtn" data-contest="29" >Summer Hopwood - Poetry</a></li> -->
               </ul>
             </div>
             <div class="btn-group" role="group">
