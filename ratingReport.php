@@ -27,7 +27,7 @@ $where = ($selectContests != 10)? "rating > 0 AND " : "";
 
     FROM `vw_entrydetail_with_classlevel_currated` AS vw
     JOIN vw_current_evaluations AS eval ON(vw.EntryID = eval.entry_id)
-    WHERE $where created > '2016-09-01' AND contestsID = $selectContests
+    WHERE $where created > '2017-12-06' AND contestsID = $selectContests
     ORDER BY evaluator, rating
 SQL;
 
