@@ -95,7 +95,7 @@ $_SESSION['isAdmin'] = true;
     </nav>
     <?php if ($isAdmin) {
     ?>
-    <div class="container"><!-- container of all things -->
+    <div class="container-fluid"><!-- container of all things -->
     <div class="row clearfix">
       <div class="col-md-12">
         <div class="btn-toolbar pagination-centered" role="toolbar" aria-label="admin_button_toolbar">
