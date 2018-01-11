@@ -42,4 +42,8 @@ if (!$rows = $db->query($queryLocalEval)){
 }
 
 // loop over the rows, outputting them
-while ($row = $rows->fetch_assoc()) fputcsv($output, $row);
+while ($row = $rows->fetch_assoc()) {
+  if (($row['contestName'] == "The Roy W. Cowden Memorial Fellowship") || ($row['rating'] > 0)) {
+   fputcsv($output, $row);
+  }
+ }
