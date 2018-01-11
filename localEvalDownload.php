@@ -33,7 +33,7 @@ $queryLocalEval = <<<SQL
 
     FROM `vw_entrydetail_with_classlevel_currated` AS vw
     JOIN vw_current_evaluations AS eval ON(vw.EntryID = eval.entry_id)
-    WHERE created > '2016-09-01'
+    WHERE created > '2017-12-06'
     ORDER BY contestName, evaluator, -rating DESC
 SQL;
 
