@@ -107,7 +107,7 @@ $_SESSION['isAdmin'] = true;
               JOIN `lk_contests` ON (c1.contestsID = `lk_contests`.`id`)
               LEFT JOIN (SELECT COUNT(id) AS ttl_count, contestID FROM tbl_entry WHERE status = 0 GROUP BY `contestID`) AS tte ON c1.id = tte.contestID
               WHERE c1.status = 0
-            ORDER BY date_closed, name
+            ORDER BY date_closed DESC, name
 SQL;
             $results = $db->query($sqlContestSelect);
             if (!$results) {
@@ -204,5 +204,3 @@ SQL;
     </html>
     <?php
     $db->close();
-
-
