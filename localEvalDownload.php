@@ -33,7 +33,7 @@ $queryLocalEval = <<<SQL
 
     FROM `vw_entrydetail_with_classlevel_currated` AS vw
     JOIN vw_current_evaluations AS eval ON(vw.EntryID = eval.entry_id)
-    WHERE created > '2016-09-01'
+    WHERE created > '2017-12-06'
     ORDER BY contestName, evaluator, -rating DESC
 SQL;
 
@@ -42,4 +42,8 @@ if (!$rows = $db->query($queryLocalEval)){
 }
 
 // loop over the rows, outputting them
-while ($row = $rows->fetch_assoc()) fputcsv($output, $row);
+while ($row = $rows->fetch_assoc()) {
+  if (($row['contestName'] == "The Roy W. Cowden Memorial Fellowship") || ($row['rating'] > 0)) {
+   fputcsv($output, $row);
+  }
+ }

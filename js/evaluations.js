@@ -34,7 +34,8 @@ $( document ).ready(function(){
       if (data.result.length == 0 ){
         $("#outputEvalData").html('<p>There are no evaluated entries to display.</p>');
       } else if (isNational){
-        $("#outputEvalData").html('<h4>' + data.result[0].contestName  + '</h4>' +
+        $("#outputEvalData").html('<strong>' + data.result[0].contestName  + ' </strong>' +
+            '<a id="localEvalContestSpecificDownloadBtn" type="button" class="btn btn-xs btn-info" href="localEvalContestSpecificDownload.php?ID=' + useContests + '" data-toggle="tooltip" data-placement="right" title="Click to download this contests submitted Local evaluations"><i class="fa fa-download"></i></a>' +
             '<div class="table-responsive">' +
             '<table class="table table-hover dataout"><thead>' +
             '<th><small>Send to National</small></th>' +
@@ -57,8 +58,27 @@ $( document ).ready(function(){
                 "</td><td>" + this.rankedby + "</td><td class='comment_cell' data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.contestantcomment) + "'><div class='commentBlock'>" + htmlEntities(this.contestantcomment) + "</div></td><td class='comment_cell' data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.committeecomment) + "'><div class='commentBlock'>" + htmlEntities(this.committeecomment) + "</div></td></tr>");
           });
         $("#outputEvalData").append('</tbody></table></div>');
+      } else if (useContests == 10){
+        $("#outputEvalData").html('<strong>' + data.result[0].contestName  + ' </strong>' +
+          '<div class="table-responsive">' +
+          '<table class="table table-hover dataout"><thead>' +
+          '<th><small>Entry ID</small></th><th>File</th>' +
+          '<th>Title</th><th>Type</th><th>ClassLevel</th><th>Pen Name</th>' +
+          '<th>First-Name</th><th>Last Name</th><th>UMID</th><th>Rating</th>' +
+          '<th>Evaluator</th><th>Contestant comment</th>' +
+          '<th>Committee comment</th></thead><tbody>');
+
+        $.each(data.result, function(){
+            $(".dataout").append("<tr><td><small>" + this.entryid +
+              "</small></td><td><a class='btn btn-xs btn-info' href='fileholder.php?file=" + this.document +
+             "' target='_blank'><i class='fa fa-book'></i></a></td><td class='comment_cell'><div class='commentBlock'>" + this.title + "</div></td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td>" + this.penName +
+              "</td><td>" + this.firstname + "</a></td><td>" + this.lastname + "</td><td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=" + this.umid + "' target='_blank'>" + this.umid + "</a></td><td>" + this.rank +
+              "</td><td>" + this.rankedby + "</td><td class='comment_cell' class='comment_cell' data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.contestantcomment) + "'><div class='commentBlock'>" + htmlEntities(this.contestantcomment) + "</div></td><td class='comment_cell' class='comment_cell' data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.committeecomment) + "'><div class='commentBlock'>" + htmlEntities(this.committeecomment) + "</div></td></tr>");
+        });
+      $("#outputEvalData").append('</tbody></table></div>');
       } else {
-          $("#outputEvalData").html('<h4>' + data.result[0].contestName  + '</h4>' +
+          $("#outputEvalData").html('<strong>' + data.result[0].contestName  + ' </strong>' +
+          '<a id="localEvalContestSpecificDownloadBtn" type="button" class="btn btn-xs btn-info" href="localEvalContestSpecificDownload.php?ID=' + useContests + '" data-toggle="tooltip" data-placement="right" title="Click to download this contests submitted Local evaluations"><i class="fa fa-download"></i></a>' +
             '<div class="table-responsive">' +
             '<table class="table table-hover dataout"><thead>' +
             '<th><small>Entry ID</small></th><th>File</th>' +
