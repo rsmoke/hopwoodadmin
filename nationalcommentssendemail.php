@@ -27,7 +27,7 @@ $_SESSION['isAdmin'] = true;
 
 
 $nat_rating_email = <<< _SQLNATRATINGEMAIL
-SELECT 
+SELECT
 cn.entry_id AS entryID
 ,ed.contestName AS contest_name
 ,ed.title AS title
@@ -40,6 +40,7 @@ cn.entry_id AS entryID
 FROM quilleng_ContestManager.vw_current_national_evaluations AS cn
 LEFT OUTER JOIN vw_entrydetail_with_classlevel_currated AS ed ON cn.entry_id = ed.EntryId
 LEFT OUTER JOIN tbl_nationalcontestjudge AS nj ON cn.evaluator = nj.uniqname
+WHERE created > '2017-12-06'
 
 GROUP BY entry_id
 ORDER BY uniqname
@@ -48,17 +49,17 @@ _SQLNATRATINGEMAIL;
 
   $resNatRatingEmail = $db->query($nat_rating_email);
   $resultNatRatingEmail = array();
-  
+
   if ($db->error) {
-      try {    
-          throw new Exception("MySQL error $db->error <br> Query:<br> $nat_rating_email", $db->errno);    
+      try {
+          throw new Exception("MySQL error $db->error <br> Query:<br> $nat_rating_email", $db->errno);
       } catch(Exception $e ) {
           echo "Error No: ".$e->getCode(). " - ". $e->getMessage() . "<br >";
           echo nl2br($e->getTraceAsString());
       }
   }
   while($item = $resNatRatingEmail->fetch_assoc()){
-    array_push($resultNatRatingEmail, 
+    array_push($resultNatRatingEmail,
       array(
         'entryID' =>$item["entryID"]
         ,'contest_name' =>$item["contest_name"]
@@ -103,7 +104,7 @@ _SQLNATRATINGEMAIL;
       $emailSentCounter++;
      };
      $_SESSION['emailsentcount'] = $emailSentCounter;
-    
+
     echo '<div><h3 class="text-center">You have just sent ' . $_SESSION['emailsentcount'] . ' emails!</h3><br />';
     echo '<h4 class="text-center"><a href="index.php">Return to the home page</h4></div>';
     $db->close();

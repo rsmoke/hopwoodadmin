@@ -27,7 +27,7 @@ $_SESSION['isAdmin'] = true;
 
 
 $nat_rating_email = <<< _SQLNATRATINGEMAIL
-SELECT 
+SELECT
 cn.entry_id AS entryID
 ,ed.contestName AS contest_name
 ,ed.title AS title
@@ -40,6 +40,7 @@ cn.entry_id AS entryID
 FROM quilleng_ContestManager.vw_current_national_evaluations AS cn
 LEFT OUTER JOIN vw_entrydetail_with_classlevel_currated AS ed ON cn.entry_id = ed.EntryId
 LEFT OUTER JOIN tbl_nationalcontestjudge AS nj ON cn.evaluator = nj.uniqname
+WHERE created > '2017-12-06'
 
 GROUP BY entry_id
 ORDER BY uniqname
@@ -48,17 +49,17 @@ _SQLNATRATINGEMAIL;
 
   $resNatRatingEmail = $db->query($nat_rating_email);
   $resultNatRatingEmail = array();
-  
+
   if ($db->error) {
-      try {    
-          throw new Exception("MySQL error $db->error <br> Query:<br> $nat_rating_email", $db->errno);    
+      try {
+          throw new Exception("MySQL error $db->error <br> Query:<br> $nat_rating_email", $db->errno);
       } catch(Exception $e ) {
           echo "Error No: ".$e->getCode(). " - ". $e->getMessage() . "<br >";
           echo nl2br($e->getTraceAsString());
       }
   }
   while($item = $resNatRatingEmail->fetch_assoc()){
-    array_push($resultNatRatingEmail, 
+    array_push($resultNatRatingEmail,
       array(
         'entryID' =>$item["entryID"]
         ,'contest_name' =>$item["contest_name"]
@@ -135,11 +136,11 @@ _SQLNATRATINGEMAIL;
     <div class="container"><!-- START container of all things -->
     <header><h3>Please review these generated emails carefully.</h3>
   <?php if ($login_name == 'rsmoke'){ ?>
-    <h4>When you are ready to send them click the button below <strong><u>only once</u></strong>. Each time you click the button it is sending this set of emails!</h4> 
+    <h4>When you are ready to send them click the button below <strong><u>only once</u></strong>. Each time you click the button it is sending this set of emails!</h4>
       <div class='sendmailbutton'>
         <a href="nationalcommentssendemail.php" type='button' id='send_national_comments' class='btn btn-warning'>Send National Comments</a>
       </div>
-  <?php }  // temp if statement to prevent users issues due to pressing the send button, Call me paranoid ?> 
+  <?php }  // temp if statement to prevent users issues due to pressing the send button, Call me paranoid ?>
     </header>
     <?php
     $summarySection = "";
@@ -167,14 +168,14 @@ _SQLNATRATINGEMAIL;
      };
      echo $summarySection;
      echo "<hr><h5>You have created " . $emailCounter . " emails.</h5>";
-     ?> 
+     ?>
     <div><h3>Please review these generated emails carefully.</h3>
-  <?php if ($login_name == 'rsmoke'){ ?> 
-    <h4>When you are ready to send them click the button below <strong><u>only once</u></strong>. Each time you click the button it is sending this set of emails!</h4>   
+  <?php if ($login_name == 'rsmoke'){ ?>
+    <h4>When you are ready to send them click the button below <strong><u>only once</u></strong>. Each time you click the button it is sending this set of emails!</h4>
       <div class='sendmailbutton'>
         <a href="nationalcommentssendemail.php" type='button' id='send_national_comments' class='btn btn-warning'>Send National Comments</a>
       </div>
-  <?php }  // temp if statement to prevent users issues due to pressing the send button, Call me paranoid ?>    
+  <?php }  // temp if statement to prevent users issues due to pressing the send button, Call me paranoid ?>
     </div>
     </div> <!--END container of all things -->
       <?php
