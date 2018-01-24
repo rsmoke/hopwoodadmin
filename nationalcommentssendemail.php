@@ -40,7 +40,7 @@ cn.entry_id AS entryID
 FROM quilleng_ContestManager.vw_current_national_evaluations AS cn
 LEFT OUTER JOIN vw_entrydetail_with_classlevel_currated AS ed ON cn.entry_id = ed.EntryId
 LEFT OUTER JOIN tbl_nationalcontestjudge AS nj ON cn.evaluator = nj.uniqname
-WHERE created > '2017-12-06'
+WHERE created > '$contest_closed_date'
 
 GROUP BY entry_id
 ORDER BY uniqname

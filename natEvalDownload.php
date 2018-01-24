@@ -32,7 +32,7 @@ $queryLocalEval = <<<SQL
 
     FROM `vw_entrydetail_with_classlevel_currated` AS vw
     JOIN vw_current_national_evaluations AS eval ON(vw.EntryID = eval.entry_id)
-    WHERE created > '2017-12-06' AND fwdToNational = 1 AND rating > 0
+    WHERE created > '$contest_closed_date' AND fwdToNational = 1 AND rating > 0
     ORDER BY contestName, evaluator, -rating DESC
 SQL;
 
