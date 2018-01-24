@@ -217,3 +217,10 @@ blockquote {
     .progress{ margin-bottom: 20px; }
 }
 
+.judge1_color{
+  background-color: #cccc66;
+}
+
+.judge2_color{
+  background-color: #cccc99;
+}

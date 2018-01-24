@@ -59,40 +59,40 @@ $( document ).ready(function(){
           });
         $("#outputEvalData").append('</tbody></table></div>');
       } else if (useContests == 10){
-        $("#outputEvalData").html('<strong>' + data.result[0].contestName  + ' </strong>' +
+        $("#outputEvalData").html('<hr><hr><strong>' + data.result[0].contestName  + ' </strong>' +
+          '<br>Judged by: ' + data.result[0].judge1_name +
           '<div class="table-responsive">' +
           '<table class="table table-hover dataout"><thead>' +
-          '<th><small>Entry ID</small></th><th>File</th>' +
-          '<th>Title</th><th>Type</th><th>ClassLevel</th><th>Pen Name</th>' +
-          '<th>First-Name</th><th>Last Name</th><th>UMID</th><th>Rating</th>' +
-          '<th>Evaluator</th><th>Contestant comment</th>' +
-          '<th>Committee comment</th></thead><tbody>');
+          '<th><small>Entry ID</small></th><th>Award</th><th>File</th>' +
+          '<th>Title</th><th>Type</th><th>ClassLevel</th><th>eMail</th>' +
+          '<th>First-Name</th><th>Last Name</th><th>Pen Name</th><th>UMID</th>' +
+          '<th>Evaluator</th>' +
+          '</thead><tbody>');
 
         $.each(data.result, function(){
             $(".dataout").append("<tr><td><small>" + this.entryid +
-              "</small></td><td><a class='btn btn-xs btn-info' href='fileholder.php?file=" + this.document +
-             "' target='_blank'><i class='fa fa-book'></i></a></td><td class='comment_cell'><div class='commentBlock'>" + this.title + "</div></td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td>" + this.penName +
-              "</td><td>" + this.firstname + "</a></td><td>" + this.lastname + "</td><td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=" + this.umid + "' target='_blank'>" + this.umid + "</a></td><td>" + this.rank +
-              "</td><td>" + this.rankedby + "</td><td class='comment_cell' class='comment_cell' data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.contestantcomment) + "'><div class='commentBlock'>" + htmlEntities(this.contestantcomment) + "</div></td><td class='comment_cell' class='comment_cell' data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.committeecomment) + "'><div class='commentBlock'>" + htmlEntities(this.committeecomment) + "</div></td></tr>");
+              "</small></td><td>" + htmlEntities(this.committeecomment) + "</td><td><a class='btn btn-xs btn-info' href='fileholder.php?file=" + this.document +
+             "' target='_blank'><i class='fa fa-book'></i></a></td><td class='comment_cell'><div class='commentBlock'>" + this.title + "</div></td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td>" + this.email +
+              "</td><td>" + this.firstname + "</a></td><td>" + this.lastname + "</td><td>" + this.penName + "<td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=" + this.umid + "' target='_blank'>" + this.umid + "</a></td>" +
+              "<td>" + this.rankedby + "</td></tr>");
         });
       $("#outputEvalData").append('</tbody></table></div>');
-      } else {
-          $("#outputEvalData").html('<strong>' + data.result[0].contestName  + ' </strong>' +
+    } else {
+          $("#outputEvalData").html('<hr><hr><strong>' + data.result[0].contestName  + ' </strong>' +
           '<a id="localEvalContestSpecificDownloadBtn" type="button" class="btn btn-xs btn-info" href="localEvalContestSpecificDownload.php?ID=' + useContests + '" data-toggle="tooltip" data-placement="right" title="Click to download this contests submitted Local evaluations"><i class="fa fa-download"></i></a>' +
             '<div class="table-responsive">' +
             '<table class="table table-hover dataout"><thead>' +
-            '<th><small>Entry ID</small></th><th>File</th>' +
-            '<th>Title</th><th>Type</th><th>ClassLevel</th><th>Pen Name</th>' +
-            '<th>First-Name</th><th>Last Name</th><th>UMID</th><th>Rating</th>' +
-            '<th>Evaluator</th><th>Contestant comment</th>' +
-            '<th>Committee comment</th></thead><tbody>');
+            '<th><small>Entry ID</small></th><th class = "judge1_color"><small>Judge1</small><br>' + data.result[0].judge1_name + '</th>' +
+            '<th class = "judge2_color"><small>Judge2</small><br>' + data.result[0].judge2_name + '</th><th>File</th>' +
+            '<th>Title</th><th>Type</th><th>ClassLevel</th><th>eMail</th>' +
+            '<th>First-Name</th><th>Last Name</th><th>Pen Name</th><th>UMID</th></thead><tbody>');
 
           $.each(data.result, function(){
               $(".dataout").append("<tr><td><small>" + this.entryid +
-                "</small></td><td><a class='btn btn-xs btn-info' href='fileholder.php?file=" + this.document +
-               "' target='_blank'><i class='fa fa-book'></i></a></td><td class='comment_cell'><div class='commentBlock'>" + this.title + "</div></td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td>" + this.penName +
-                "</td><td>" + this.firstname + "</a></td><td>" + this.lastname + "</td><td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=" + this.umid + "' target='_blank'>" + this.umid + "</a></td><td>" + this.rank +
-                "</td><td>" + this.rankedby + "</td><td class='comment_cell' class='comment_cell' data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.contestantcomment) + "'><div class='commentBlock'>" + htmlEntities(this.contestantcomment) + "</div></td><td class='comment_cell' class='comment_cell' data-toggle='tooltip' data-placement='right' title='"+ htmlEntities(this.committeecomment) + "'><div class='commentBlock'>" + htmlEntities(this.committeecomment) + "</div></td></tr>");
+                "</small></td><td class = 'judge1_color'>" + this.judge_1 +
+                "</td><td class = 'judge2_color'>" + this.judge_2 + "</td><td><a class='btn btn-xs btn-info' href='fileholder.php?file=" + this.document +
+               "' target='_blank'><i class='fa fa-book'></i></a></td><td class='comment_cell'><div class='commentBlock'>" + this.title + "</div></td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td>" + this.email +
+                "</td><td>" + this.firstname + "</a></td><td>" + this.lastname + "</td><td>"  + this.penName + "</td><td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=" + this.umid + "' target='_blank'>" + this.umid + "</a></td></tr>");
           });
         $("#outputEvalData").append('</tbody></table></div>');
       }
