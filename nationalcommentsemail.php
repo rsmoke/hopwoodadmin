@@ -37,7 +37,7 @@ cn.entry_id AS entryID
 ,MIN(CONCAT("<strong>Judge: ",CONCAT(nj.firstname, ' ',nj.lastname), " commented- </strong>",cn.contestantcomment)) AS judge2comments
 ,MAX(cn.evaluator) AS judge1
 ,MIN(cn.evaluator) AS judge2
-FROM quilleng_ContestManager.vw_current_national_evaluations AS cn
+FROM vw_current_national_evaluations AS cn
 LEFT OUTER JOIN vw_entrydetail_with_classlevel_currated AS ed ON cn.entry_id = ed.EntryId
 LEFT OUTER JOIN tbl_nationalcontestjudge AS nj ON cn.evaluator = nj.uniqname
 WHERE created > '$contest_closed_date'
