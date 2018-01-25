@@ -1,4 +1,5 @@
 $( document ).ready(function(){
+
   $(".outputReportData").empty();
 
   //Set the selected region to empty then populate it with the formatted result of the JSON string that is returned

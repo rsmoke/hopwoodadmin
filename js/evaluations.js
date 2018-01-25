@@ -3,6 +3,7 @@ function htmlEntities(str) {
 }
 
 $( document ).ready(function(){
+
   $('.js-loading-bar').modal({
     backdrop: 'static',
     show: false
