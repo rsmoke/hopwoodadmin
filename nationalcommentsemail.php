@@ -135,10 +135,10 @@ _SQLNATRATINGEMAIL;
     ?>
     <div class="container"><!-- START container of all things -->
     <header><h3>Please review these generated emails carefully.</h3>
-  <?php if ($login_name == 'rsmoke'){ ?>
+  <?php if (($login_name == 'rsmoke') || ($login_name == 'ensorh')){ ?>
     <h4>When you are ready to send them click the button below <strong><u>only once</u></strong>. Each time you click the button it is sending this set of emails!</h4>
       <div class='sendmailbutton'>
-        <a href="nationalcommentssendemail.php" type='button' id='send_national_comments' class='btn btn-warning'>Send National Comments</a>
+        <a href="nationalcommentssendemail.php" type='button' id='send_national_comments' class='btn btn-warning disabled'>Send National Comments</a>
       </div>
   <?php }  // temp if statement to prevent users issues due to pressing the send button, Call me paranoid ?>
     </header>
