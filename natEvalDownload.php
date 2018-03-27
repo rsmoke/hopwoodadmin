@@ -31,7 +31,6 @@ JSQL;
 
   if ( count($judge_array) > 0 ){
       // output the column headings
-      //fputcsv($output, array('EntryId', 'Title', 'Contest_Name', 'Rating', 'Firstname', 'Lastname', 'umid', 'ClassLevel', 'Pen_Name', 'Evaluator', 'Document', 'Contestant_comment', 'Committee_comment', 'Manuscript_Type'));
       if (count($judge_array) == 1) {
         fputcsv($output, array('o==========o', 'o==========o', 'o==========o'
                              , 'o==========o', 'o==========o', 'o==========o'
@@ -72,7 +71,7 @@ JSQL;
             $pvt_part .= ",pvt.judge" . $pvt_count . "_committeecomment AS '" . $judge_array[$pvt_count - 1]  . "_committee-comments' ";
             $pvt_count++;
           } while ($pvt_count <= count($judge_array));
-        //print_r2($pvt_part);
+
           //build ext select statement
           $ext_part = '';
           $ext_count = 1;
@@ -82,7 +81,7 @@ JSQL;
             $ext_part .= ',MAX(judge' . $ext_count . '_contestantcomment) AS judge' . $ext_count . '_contestantcomment ';
             $ext_count++;
           } while ($ext_count <= count($judge_array));
-        //print_r2($ext_part);
+
           //build cn select statement
           $cn_part = '';
           $cn_count = 0;
@@ -92,14 +91,14 @@ JSQL;
             $cn_part .= ',CASE WHEN cn.evaluator = ' . "'" . $judge_array[$cn_count] . "'" . ' THEN cn.contestantcomment END AS judge' . ($cn_count + 1) . '_contestantcomment ';
             $cn_count++;
           } while ($cn_count < count($judge_array));
-        //print_r2($cn_part);
+
+          // build out order by section
           $order_part = 'ORDER BY -pvt.judge1 DESC';
           $order_count = 2;
           while ($order_count <= count($judge_array)){
             $order_part .= ', -pvt.judge' . $order_count . ' DESC' . ' ';
             $order_count++;
           }
-        //print_r2($order_part);
 
           // fetch the data
           $queryNationalSpecificEval = <<<SQL
@@ -150,7 +149,6 @@ JSQL;
             WHERE ed.contestsID IN ($contestID)
             $order_part ;
 SQL;
-      //print_r2($queryNationalSpecificEval);
 
       if (!$rows = $db->query($queryNationalSpecificEval)){
         db_fatal_error("data SELECT issue", $db->error, $queryNationalSpecificEval, $login_name);
@@ -161,46 +159,3 @@ SQL;
       while ($row = $rows->fetch_assoc()) fputcsv($output, $row);
     }
 }
-// require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestAdmin.php');
-// //require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
-//
-// // output headers so that the file is downloaded rather than displayed
-// header('Content-Type: text/csv; charset=utf-8');
-// header("Content-Disposition: attachment; filename=National_Evaluations-printed_on-" . date('Y-m-d') . ".csv");
-//
-// // create a file pointer connected to the output stream
-// $output = fopen('php://output', 'w');
-//
-// // output the column headings
-// fputcsv($output, array('EntryId', 'Title', 'Contest_Name', 'Rating', 'Firstname', 'Lastname', 'umid', 'ClassLevel', 'Pen_Name', 'Evaluator', 'Document', 'Contestant_comment', 'Committee_comment', 'Manuscript_Type'));
-//
-// // fetch the data
-// $queryNationalEval = <<<SQL
-//     SELECT
-//     vw.EntryId
-//     ,vw.title AS title
-//     ,vw.contestName As contestName
-//     ,CASE WHEN eval.rating >= 1 THEN eval.rating ELSE '' END AS rating
-//     ,vw.firstname AS firstname
-//     ,vw.lastname AS lastname
-//     ,vw.umid AS umid
-//     ,CASE WHEN vw.classLevel > 12 THEN 'G' ELSE 'U' END AS classLevel
-//     ,vw.penName AS penName
-//     ,eval.evaluator AS evaluator
-//     ,vw.document AS document
-//     ,eval.contestantcomment AS contestantcomment
-//     ,eval.committeecomment AS committeecomment
-//     ,vw.manuscriptType AS manuscriptType
-//
-//     FROM `vw_entrydetail_with_classlevel_currated` AS vw
-//     JOIN vw_current_national_evaluations AS eval ON(vw.EntryID = eval.entry_id)
-//     WHERE created > '$contest_closed_date' AND fwdToNational = 1 AND rating > 0
-//     ORDER BY contestName, evaluator, -rating DESC
-// SQL;
-//
-// if (!$rows = $db->query($queryNationalEval)){
-//   die("Database query failed");
-// }
-//
-// // loop over the rows, outputting them
-// while ($row = $rows->fetch_assoc()) fputcsv($output, $row);
