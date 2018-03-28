@@ -114,12 +114,13 @@ blockquote {
  }
 
  .comment_cell {
-  min-width: 250px;
+  min-width: 50%;
+  padding: 10px 5px;
+  border: 1px solid black;
 }
 
 .commentBlock{
-  height: 50px;
-  max-width: 350px;
+  height: 100px;
   overflow-y:auto;
 }
 

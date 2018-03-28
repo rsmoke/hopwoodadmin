@@ -1,9 +1,6 @@
 function htmlEntities(str) {
   return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
-$(function () {
-  $('[data-toggle="popover"]').popover()
-})
 
 $( document ).ready(function(){
 
@@ -158,9 +155,9 @@ $(".reportNatRatingBtn").click ( function( event ){
             jdg2_name +
             '<th>File</th><th>Title</th><th>Type</th><th>ClassLevel</th><th>eMail</th>' +
             '<th>First-Name</th><th>Last Name</th><th>Pen Name</th><th>UMID</th><th>Financial<br>Aid</th>' +
-            '<th class = "judge1_color"><small>Judge1<br>Contestant Comments</small><br>' + data.result[0].judge1_name + '</th>' +
-            '<th class = "judge1_color"><small>Judge1<br>Committee Comments</small><br>' + data.result[0].judge1_name + '</th>' +
-            jdg2_contestantcomment_title +  jdg2_committecomment_title +
+            // '<th class = "judge1_color"><small>Judge1<br>Contestant Comments</small><br>' + data.result[0].judge1_name + '</th>' +
+            // '<th class = "judge1_color"><small>Judge1<br>Committee Comments</small><br>' + data.result[0].judge1_name + '</th>' +
+            // jdg2_contestantcomment_title +  jdg2_committecomment_title +
             '</thead><tbody>');
 
           $.each(data.result, function(){
@@ -173,11 +170,15 @@ $(".reportNatRatingBtn").click ( function( event ){
                 "</small></td><td class = 'judge1_color'>" + this.judge_1 + "</td>" +
                 jdg2_rating +
                 "<td><a class='btn btn-xs btn-info' href='fileholder.php?file=" + this.document +
-               "' target='_blank'><i class='fa fa-book'></i></a></td><td class='comment_cell'><div class='commentBlock' data-container='body' data-toggle='popover' data-placement='left' title='stuff' data-content='" + this.title + "'>" + this.title + "</div></td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td>" + this.email +
+               "' target='_blank'><i class='fa fa-book'></i></a></td><td>" + this.title + "</div></td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td>" + this.email +
                 "</td><td>" + this.firstname + "</a></td><td>" + this.lastname + "</td><td>"  + this.penName + "</td><td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=" + this.umid + "' target='_blank'>" + this.umid + "</a></td>" +
-                "<td>" + this.fin_aid + "</td><td class = 'judge1_color comment_cell'><div class='commentBlock'>" + this.judge1_contestantcomment + "</div></td><td class = 'judge1_color comment_cell'><div class='commentBlock'>" + this.judge1_committeecomment + "</div></td>" +
+                "<td>" + this.fin_aid + "</td>" +
+                "<tr><td></td><td colspan='11' ><table><thead><th>Contestant Comments</th><th>Committe Comments</th></thead><tbody><tr>" +
+                "<td class = 'judge1_color comment_cell'><div class='commentBlock'>" + this.judge1_contestantcomment + "</div></td><td class = 'judge1_color comment_cell'><div class='commentBlock'>" + this.judge1_committeecomment + "</div></td>" +
+                "<tr>" +
                 jdg2_contestantcomment + jdg2_committecomment +
-                "</tr>");
+                "</tr>" +
+                "</tr></tbody></table></td></tr></tr>");
           });
         $("#outputEvalData").append('</tbody></table></div>');
       }
