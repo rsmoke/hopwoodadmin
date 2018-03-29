@@ -29,6 +29,7 @@ $( document ).ready(function(){
     if ([9,11,20,19,2,21,22,23,24,25,26].includes(useContests)){
       isNational = true;
     }
+      $("#outputSummaryEvalData").empty();
       $("#outputEvalData").empty();
     $.getJSON("ratingReport.php", {id: useContests}, function(data){
       var jdg2_name = '';
