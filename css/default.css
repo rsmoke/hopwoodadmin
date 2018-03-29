@@ -2,8 +2,16 @@
   fieldset { display: table-cell; }
 }
 
+/* html {
+    font-size: 20px;
+} */
+
 body {
 	padding-top: 70px;
+}
+
+#outputSummaryEvalData {
+  font-size: 80%;
 }
 
 .notes {

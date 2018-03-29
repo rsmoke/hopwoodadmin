@@ -135,6 +135,7 @@ $(".reportNatRatingBtn").click ( function( event ){
   }, 7000);
 
   var useContests = $(this).data('contest');
+    $("#outputSummaryEvalData").empty();
     $("#outputEvalData").empty();
   $.getJSON("ratingNatReport.php", {id: useContests}, function(data){
     var jdg2_name, jdg2_rating, jdg2_contestantcomment_title, jdg2_committecomment_title, jdg2_contestantcomment, jdg2_committecomment;
@@ -147,38 +148,61 @@ $(".reportNatRatingBtn").click ( function( event ){
         jdg2_contestantcomment_title = '<th class = "judge2_color"><small>Judge2<br>Contestant Comments</small><br>' + data.result[0].judge2_name + '</th>';
         jdg2_committecomment_title = '<th class = "judge2_color"><small>Judge2<br>Committee Comments</small><br>' + data.result[0].judge2_name + '</th>';
       }
-          $("#outputEvalData").html('<hr><hr><strong>' + data.result[0].contestName  + ' </strong>' +
-          // '<a id="localEvalContestSpecificDownloadBtn" type="button" class="btn btn-xs btn-info" href="localEvalContestSpecificDownload.php?ID=' + useContests + '" data-toggle="tooltip" data-placement="right" title="Click to download this contests submitted Local evaluations"><i class="fa fa-download"></i></a>' +
-            '<div class="table-responsive">' +
-            '<table class="table table-hover dataout"><thead>' +
-            '<th><small>Entry ID</small></th><th class = "judge1_color"><small>Judge1</small><br>' + data.result[0].judge1_name + '</th>' +
-            jdg2_name +
-            '<th>File</th><th>Title</th><th>Type</th><th>ClassLevel</th><th>eMail</th>' +
-            '<th>First-Name</th><th>Last Name</th><th>Pen Name</th><th>UMID</th><th>Financial<br>Aid</th>' +
-            // '<th class = "judge1_color"><small>Judge1<br>Contestant Comments</small><br>' + data.result[0].judge1_name + '</th>' +
-            // '<th class = "judge1_color"><small>Judge1<br>Committee Comments</small><br>' + data.result[0].judge1_name + '</th>' +
-            // jdg2_contestantcomment_title +  jdg2_committecomment_title +
-            '</thead><tbody>');
+        // Summary Results
+        $("#outputSummaryEvalData").html('<hr><h4><span class="bg-primary">&nbsp;' + data.result[0].contestName  + '&nbsp;</span><br>SUMMARY of Results </h4>' +
+          '<div class="table-responsive">' +
+          '<table class="table table-hover summary_dataout"><thead>' +
+          '<th>Entry ID</th><th class = "judge1_color"><small>Judge1</small><br>' + data.result[0].judge1_name + '</th>' +
+          jdg2_name +
+          '<th>File</th><th>Title</th><th>Type</th><th>Level</th><th>eMail</th>' +
+          '<th>First-Name</th><th>Last Name</th><th>Pen Name</th><th>UMID</th><th>Financial<br>Aid</th>' +
+          '</thead><tbody>');
 
           $.each(data.result, function(){
             if (typeof this.judge_2 !== 'undefined'){
-              jdg2_rating = "<td class = 'judge2_color'>" + this.judge_2 + "</td>";
-              jdg2_contestantcomment = "<td class = 'judge2_color comment_cell'><div class='commentBlock'>" + this.judge2_contestantcomment + "</div></td>";
-              jdg2_committecomment = "<td class = 'judge2_color comment_cell'><div class='commentBlock'>" + this.judge2_committeecomment + "</div></td>";
+              jdg2_rating = "<td class = 'judge2_color'>" + (this.judge_2 == null ? '' :  this.judge_2) + "</td>";
             }
-              $(".dataout").append("<tr><td><small>" + this.entryid +
-                "</small></td><td class = 'judge1_color'>" + this.judge_1 + "</td>" +
+              $(".summary_dataout").append("<tr><td>" + this.entryid +
+                "</td><td class = 'judge1_color'>" + (this.judge_1 == null ? '' :  this.judge_1) + "</td>" +
                 jdg2_rating +
                 "<td><a class='btn btn-xs btn-info' href='fileholder.php?file=" + this.document +
                "' target='_blank'><i class='fa fa-book'></i></a></td><td>" + this.title + "</div></td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td>" + this.email +
                 "</td><td>" + this.firstname + "</a></td><td>" + this.lastname + "</td><td>"  + this.penName + "</td><td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=" + this.umid + "' target='_blank'>" + this.umid + "</a></td>" +
                 "<td>" + this.fin_aid + "</td>" +
-                "<tr><td></td><td colspan='11' ><table><thead><th>Contestant Comments</th><th>Committe Comments</th></thead><tbody><tr>" +
-                "<td class = 'judge1_color comment_cell'><div class='commentBlock'>" + this.judge1_contestantcomment + "</div></td><td class = 'judge1_color comment_cell'><div class='commentBlock'>" + this.judge1_committeecomment + "</div></td>" +
-                "<tr>" +
-                jdg2_contestantcomment + jdg2_committecomment +
-                "</tr>" +
-                "</tr></tbody></table></td></tr></tr>");
+                "</tr>");
+          });
+        $("#outputSummaryEvalData").append('</tbody></table></div>');
+
+        // Full results
+        $("#outputEvalData").html('<hr><h4>FULL Results <small>(scroll for complete table)</small></h4>' +
+        // '<a id="localEvalContestSpecificDownloadBtn" type="button" class="btn btn-xs btn-info" href="localEvalContestSpecificDownload.php?ID=' + useContests + '" data-toggle="tooltip" data-placement="right" title="Click to download this contests submitted Local evaluations"><i class="fa fa-download"></i></a>' +
+          '<div class="table-responsive">' +
+          '<table class="table table-hover dataout"><thead>' +
+          '<th>Entry ID</th><th class = "judge1_color"><small>Judge1</small><br>' + data.result[0].judge1_name + '</th>' +
+          jdg2_name +
+          '<th>File</th><th>Title</th><th>Type</th><th>Level</th><th>eMail</th>' +
+          '<th>First-Name</th><th>Last Name</th><th>Pen Name</th><th>UMID</th><th>Financial<br>Aid</th>' +
+          '</thead><tbody>');
+
+        $.each(data.result, function(){
+          if (typeof this.judge_2 !== 'undefined'){
+            jdg2_rating = "<td class = 'judge2_color'>" + (this.judge_2 == null ? '' :  this.judge_2) + "</td>";
+            jdg2_contestantcomment = "<td class = 'judge2_color comment_cell'><div class='commentBlock'>" + (this.judge2_contestantcomment == null ? '(no comment)' : this.judge2_contestantcomment)  + "</div></td>";
+            jdg2_committecomment = "<td class = 'judge2_color comment_cell'><div class='commentBlock'>" + (this.judge2_committeecomment == null ? '(no comment)' : this.judge2_committeecomment) + "</div></td>";
+          }
+            $(".dataout").append("<tr><td>" + this.entryid +
+              "</td><td class = 'judge1_color'>" + (this.judge_1 == null ? '' :  this.judge_1) + "</td>" +
+              jdg2_rating +
+              "<td><a class='btn btn-xs btn-info' href='fileholder.php?file=" + this.document +
+             "' target='_blank'><i class='fa fa-book'></i></a></td><td>" + this.title + "</div></td><td>" + this.manuscriptType + "</td><td><small>" + this.classLevel + "</small></td><td>" + this.email +
+              "</td><td>" + this.firstname + "</a></td><td>" + this.lastname + "</td><td>"  + this.penName + "</td><td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=" + this.umid + "' target='_blank'>" + this.umid + "</a></td>" +
+              "<td>" + this.fin_aid + "</td>" +
+              "<tr><td></td><td colspan='11' ><table><thead><th>Contestant Comments</th><th>Committe Comments</th></thead><tbody><tr>" +
+              "<td class = 'judge1_color comment_cell'><div class='commentBlock'>" + (this.judge1_contestantcomment == null  || this.judge1_contestantcomment == '' ? '(no comment)' : this.judge1_contestantcomment)  + "</div></td><td class = 'judge1_color comment_cell'><div class='commentBlock'>" + (this.judge1_committeecomment == null  || this.judge1_committeecomment == '' ? '(no comment)' : this.judge1_committeecomment) + "</div></td>" +
+              "<tr>" +
+              jdg2_contestantcomment + jdg2_committecomment +
+              "</tr>" +
+              "</tr></tbody></table></td></tr></tr>");
           });
         $("#outputEvalData").append('</tbody></table></div>');
       }
