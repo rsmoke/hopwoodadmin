@@ -87,15 +87,7 @@ $_SESSION['isAdmin'] = true;
           <div class="btn-toolbar pagination-centered" role="toolbar" aria-label="admin_button_toolbar">
             <div class="btn-group" role="group" aria-label="contest_management">
               <a id="backToIndexBtn" type="button" class="btn btn-xs btn-default" href="index.php"><i class="fa fa-home" aria-hidden="true"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row clearfix">
-        <div class="col-md-12">
-          <div class="btn-toolbar pagination-centered" role="toolbar" aria-label="admin_button_toolbar">
-            <div class="btn-group" role="group" aria-label="contest_management">
-              <a id="backToApplicants" type="button" class="btn btn-xs btn-success" href="allApplicants.php"><i class="fa fa-user" aria-hidden="true"></i></a>
+              <a id="backToApplicants" type="button" data-toggle="tooltip" data-placement="right" title="go back to applicants listing" class="btn btn-xs btn-success" href="allApplicants.php"><i class="fa fa-user" aria-hidden="true"></i></a>
             </div>
           </div>
         </div>
