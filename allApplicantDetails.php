@@ -1,9 +1,13 @@
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestAdmin.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
+
+$selectApplicant = $_GET['id'];
+
 if (session_status() == PHP_SESSION_NONE) {
 session_start();
 }
+//$_SESSION['flashMessage'] = "FLASHER";
 $isAdmin = false;
 $_SESSION['isAdmin'] = false;
 $sqlSelect = <<< _SQL
@@ -13,13 +17,14 @@ WHERE uniqname = '$login_name'
 ORDER BY uniqname
 _SQL;
 if (!$resAdmin = $db->query($sqlSelect)) {
-db_fatal_error("data insert issue", $db->error, $sqlSelect, $login_name);
+db_fatal_error("data read issue", $db->error, $sqlSelect, $login_name);
 exit;
 }
 if ($resAdmin->num_rows > 0) {
 $isAdmin = true;
 $_SESSION['isAdmin'] = true;
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,37 +80,74 @@ $_SESSION['isAdmin'] = true;
       </div>
     </nav>
     <?php if ($isAdmin) {
-      $resApp = $db->query("SELECT * FROM tbl_applicant ORDER BY userLname");
-    ?>
-    <div class="container"><!-- container of all things -->
-    <div class="row clearfix">
-      <div class="col-md-12">
-        <div class="btn-toolbar pagination-centered" role="toolbar" aria-label="admin_button_toolbar">
-          <div class="btn-group" role="group" aria-label="contest_management">
-            <a id="backToIndexBtn" type="button" class="btn btn-xs btn-default" href="index.php"><i class="fa fa-home" aria-hidden="true"></i></a>
+      ?>
+    <div class="container">
+      <div class="row clearfix">
+        <div class="col-md-12">
+          <div class="btn-toolbar pagination-centered" role="toolbar" aria-label="admin_button_toolbar">
+            <div class="btn-group" role="group" aria-label="contest_management">
+              <a id="backToIndexBtn" type="button" class="btn btn-xs btn-default" href="index.php"><i class="fa fa-home" aria-hidden="true"></i></a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="row clearfix">
-      <div class="col-md-12">
-        <table class="table table-hover">
-          <thead><th>Details</th><th>Last Name</th><th>First Name</th><th>Pen name</th><th>UniqName</th><th>UMID</th></thead>
-          <tbody>
-          <?php while ($row = $resApp->fetch_assoc()) {
-          echo '<tr class="record" id="record-' . $row['id'] . '"><td><a id="applicant_details" type="button" class="btn btn-xs btn-info" href="allApplicantDetails.php?id=' . $row['id'] . '"><i class="fa fa-info" aria-hidden="true"></i></a></td><td>' . $row['userLname'] . '</td><td>' . $row['userFname'] .  '</td><td>' . $row['penName'] .  '</td><td><strong>' . $row['uniqname'] .'</strong></td><td><a href="https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=' . $row['umid'] . '" target=_"blank">' . $row['umid'] . '</td></tr>';
-          }
-          echo '</tbody></table>';
-          ?>
+      <div class="row clearfix">
+        <div class="col-md-12">
+          <div class="btn-toolbar pagination-centered" role="toolbar" aria-label="admin_button_toolbar">
+            <div class="btn-group" role="group" aria-label="contest_management">
+              <a id="backToApplicants" type="button" class="btn btn-xs btn-success" href="allApplicants.php"><i class="fa fa-user" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+      <div class="row clearfix">
+            <?php
+            $allDetails = "";
+            $query = "SELECT `id`,`userFname`,`userLname`,`umid`,`uniqname`,`streetL`,`cityL`,`stateL`,`zipL`,`usrtelL`,`streetH`,`cityH`,`stateH`,`countryH`,`zipH`,`usrtelH`,`classLevel`,`school`,`major`,`department`,`gradYearMonth`,`degree`,CASE WHEN `finAid` = 1 THEN 'Y' ELSE '' END,`finAidDesc`,`namePub`,`homeNewspaper`,`penName`,`created_on` FROM tbl_applicant WHERE id = ? ";
+            if ($stmt = $db->prepare($query)) {
+              $stmt->bind_param("i", $selectApplicant);
+                $stmt->execute();
+                $stmt->bind_result($id,$userFname,$userLname,$umid,$uniqname,$streetL,$cityL,$stateL,$zipL,$usrtelL,$streetH,$cityH,$stateH,$countryH,$zipH,$usrtelH,$classLevel,$school,$major,$department,$gradYearMonth,$degree,$finAid,$finAidDesc,$namePub,$homeNewspaper,$penName,$created_on);
+                while ($stmt->fetch()) {
+                    echo '<div class="col-md-12"><h4> Details for: </h4><h4><span class="bg-success">&nbsp;' .  $userFname . ' ' . $userLname . ' - ' . $uniqname . '&nbsp;</span></h4>';
+                    $allDetails .= 'UMID: <a href="https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=' . $umid . '" target=_"blank">' . $umid . '</a>';
+                    $allDetails .= '<br>Pen Name: ' . $penName;
+                    $allDetails .= '</div>';
+                    $allDetails .= '<div class="col-md-12">';
+                    $allDetails .= '<div class="col-md-3 col-offset-md-1 bg-warning">';
+                    $allDetails .= '<h5>Campus Address:</h5>' . $streetL . '<br>' . $cityL . ', ' . $stateL . ' ' . $zipL;
+                    $allDetails .= '<br>&nbsp;';
+                    // $allDetails .= '<br>Campus Phone: ' . $usrtelL;
+                    $allDetails .= '</div>';
+                    $allDetails .= '<div class="col-md-1"></div>';
+                    $allDetails .= '<div class="col-md-3 col-offset-md-1 bg-info">';
+                    $allDetails .= '<h5>Home Address:</h5>' . $streetH . '<br>' . $cityH . ', ' . $stateH . ' ' . $zipH;
+                    $allDetails .= '<br>Country: ' . $countryH;
+                    $allDetails .= '</div></div>';
+                    // $allDetails .= '<br>Home Phone: ' . $usrtelH;
+                    $allDetails .= '<div class="col-md-12">';
+                    $allDetails .= '<br>Grade Level: ' . $classLevel;
+                    $allDetails .= '<br>School: ' . $school;
+                    $allDetails .= '<br>Concentration: ' . $major;
+                    $allDetails .= '<br>Department: ' . $department;
+                    $allDetails .= '<br>Graduation Date: ' . $gradYearMonth;
+                    $allDetails .= '<br>Degree: ' . $degree;
+                    $allDetails .= '<br>Financial Aid: ' . $finAid;
+                    $allDetails .= '<br>Financial Aid Description: ' . $finAidDesc;
+                    $allDetails .= '<br><br>Name for Publication: ' . $namePub;
+                    $allDetails .= '<br>Hometown News Outlet: ' . $homeNewspaper;
+                    $allDetails .= '<br><br><small>Date this record was last updated: ' . $created_on . '</small><br>&nbsp;</div>';
+                    echo $allDetails;
+                }
+                $stmt->close();
+            }
+            ?>
+      </div>
 
       <?php
       } else {
       ?>
-      <!-- if there is not a record for $login_name display the basic
-      information form. Upon submitting this data display the contest available
-       section -->
+      <!-- if there is not a record for $login_name display the basic information form. Upon submitting this data display the contest available section -->
       <div id="notAdmin">
         <div class="row clearfix">
           <div class="col-md-12">
@@ -130,6 +172,7 @@ $_SESSION['isAdmin'] = true;
         }
         include("footer.php");?>
         <!-- //additional script specific to this page -->
+        <script src="js/admMyScript.js"></script>
         </div><!-- End Container of all things -->
       </body>
     </html>
