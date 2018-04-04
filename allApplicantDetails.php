@@ -135,6 +135,37 @@ $_SESSION['isAdmin'] = true;
             }
             ?>
       </div>
+      <hr>
+      <div class="row clearfix">
+        <div class="col-md-12">
+          <h5>Contests Entered</h5>
+            <table class="table table-hover table-condensed">
+              <thead><th><small>EntryID</small></th><th>Document</th><th>Title</th><th>Contest => Year</th></thead>
+              <tbody>
+          <?php
+          $contestsEntered = '';
+          $queryContests = <<<CESQL
+          SELECT te.id, te.title, te.documentName, te.created_on, concat(lc.name,' => ',date_format(tc.date_open,'%Y')) AS contestName
+          FROM tbl_entry te
+          JOIN tbl_contest tc ON te.contestID = tc.id
+          JOIN lk_contests lc ON tc.contestsID = lc.id
+          WHERE applicantID = ? AND te.status IN(0,2)
+          ORDER BY -te.id
+CESQL;
+          if ($stmtContests = $db->prepare($queryContests)) {
+            $stmtContests->bind_param("i", $selectApplicant);
+              $stmtContests->execute();
+              $stmtContests->bind_result($entry_id, $title, $document, $created, $contest_name);
+              while ($stmtContests->fetch()) {
+                  $contestsEntered .= '<tr><td>' . $entry_id . '</td><td><a class="btn btn-xs btn-info" href="fileholder.php?file=' . $document . '" target="_blank"><i class="fa fa-book"></i></a></td></td><td>' . $title . '</td><td>' . $contest_name . '</td></tr>';
+              }
+              echo $contestsEntered;
+              $stmtContests->close();
+          }
+          ?>
+          </tbody></table>
+        </div>
+      </div>
 
       <?php
       } else {
