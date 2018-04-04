@@ -3,7 +3,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestAdmin.
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 
   $queryFinAid = <<<SQL
-  SELECT DISTINCT uniqname, umid, finAidDesc, userFname, userLname
+  SELECT DISTINCT tbl_applicant.id, uniqname, umid, finAidDesc, userFname, userLname
   FROM
     tbl_entry
         JOIN
@@ -20,6 +20,7 @@ SQL;
     $result = array();
     while($item = $resSelect->fetch_assoc()){
     array_push($result, array(
+        'applicant_id' => $item["id"],
         'uniqname' =>$item["uniqname"],
         'umid' =>$item["umid"],
         'fname' =>$item["userFname"],

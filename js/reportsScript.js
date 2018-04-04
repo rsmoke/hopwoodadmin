@@ -14,8 +14,8 @@ $( document ).ready(function(){
         $(".dataout").append("<tr><td colspan='5'>There are no records.</td></td>");
       } else {
         $.each(data.result, function(){
-          $(".dataout").append("<tr><td><button class='btn btn-xs btn-info' data-ID='" + this.uniqname +
-           "'><i class='fa fa-info'></i></button></td><td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=" + this.umid + "' target='_blank'>" + this.umid + "</a></td><td>" + this.lname + "</td><td>" + this.fname +
+          $(".dataout").append("<tr><td><a id='applicant_details' type='button' class='btn btn-xs btn-info' href='allApplicantDetails.php?id=" + this.applicant_id + "'><i class='fa fa-info' aria-hidden='true'></i></a></td>" +
+          "<td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=" + this.umid + "' target='_blank'>" + this.umid + "</a></td><td>" + this.lname + "</td><td>" + this.fname +
             "</td><td>" + this.uniqname + "</td><td>" + this.desc + "</td></tr>");
             });
       }
