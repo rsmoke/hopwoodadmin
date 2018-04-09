@@ -33,14 +33,16 @@ cn.entry_id AS entryID
 ,ed.title AS title
 ,ed.uniqname AS uniqname
 ,CONCAT(ed.firstname, " ", ed.lastname) AS author_fullname
-,MAX(CONCAT("<strong>Judge: ",CONCAT(nj.firstname, ' ',nj.lastname), " commented- </strong>",cn.contestantcomment)) AS judge1comments
-,MIN(CONCAT("<strong>Judge: ",CONCAT(nj.firstname, ' ',nj.lastname), " commented- </strong>",cn.contestantcomment)) AS judge2comments
+,MAX(CONCAT("Judge: ",CONCAT(nj.firstname, ' ',nj.lastname), " commented- ",cn.contestantcomment)) AS judge1comments
+,MIN(CONCAT("Judge: ",CONCAT(nj.firstname, ' ',nj.lastname), " commented- ",cn.contestantcomment)) AS judge2comments
 ,MAX(cn.evaluator) AS judge1
 ,MIN(cn.evaluator) AS judge2
-FROM vw_current_national_evaluations AS cn
+,tc.status AS contest_status
+FROM quilleng_ContestManager.vw_current_national_evaluations AS cn
 LEFT OUTER JOIN vw_entrydetail_with_classlevel_currated AS ed ON cn.entry_id = ed.EntryId
 LEFT OUTER JOIN tbl_nationalcontestjudge AS nj ON cn.evaluator = nj.uniqname
-WHERE created > '$contest_closed_date'
+LEFT OUTER JOIN tbl_contest AS tc ON ed.ContestInstance = tc.id
+WHERE created > '$contest_closed_date' AND tc.status = 0
 
 GROUP BY entry_id
 ORDER BY uniqname
@@ -74,8 +76,6 @@ _SQLNATRATINGEMAIL;
       )
     );
   }
-
- //print_r2 ($resultNatRatingEmail);
 
   ?>
   <!DOCTYPE html>
