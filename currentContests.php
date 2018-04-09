@@ -106,7 +106,7 @@ $_SESSION['isAdmin'] = true;
               ON (MAX.contestsID = c1.contestsID AND MAX.OPENS = c1.date_open)
               JOIN `lk_contests` ON (c1.contestsID = `lk_contests`.`id`)
               LEFT JOIN (SELECT COUNT(id) AS ttl_count, contestID FROM tbl_entry WHERE status = 0 GROUP BY `contestID`) AS tte ON c1.id = tte.contestID
-              WHERE c1.status = 0
+              WHERE c1.status IN (0,4)
             ORDER BY date_closed DESC, name
 SQL;
             $results = $db->query($sqlContestSelect);
