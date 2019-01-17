@@ -164,10 +164,13 @@ $_SESSION['isAdmin'] = true;
                 <li><a id="reportRatingBtn5" class="reportRatingBtn" data-contest="5" >The Academy of American Poets (Undergraduate)</a></li>
                 <li><a id="reportRatingBtn12" class="reportRatingBtn" data-contest="12" >The Arthur Miller Award</a></li>
                 <li><a id="reportRatingBtn6" class="reportRatingBtn" data-contest="6" >The Bain-Swiggett Poetry Prize</a></li>
+                <li><a id="reportRatingBtn31" class="reportRatingBtn" data-contest="31" >The Cora Duncan Award in Fiction</a></li>
                 <li><a id="reportRatingBtn8" class="reportRatingBtn" data-contest="8" >The Jeffrey L. Weisberg Memorial Prize in Poetry</a></li>
                 <li><a id="reportRatingBtn11" class="reportRatingBtn" data-contest="11" >The Kasdan Scholarship in Creative Writing</a></li>
+                <li><a id="reportRatingBtn33" class="reportRatingBtn" data-contest="33" >Keith Taylor Award for Excellence in Poetry</a></li>
                 <li><a id="reportRatingBtn15" class="reportRatingBtn" data-contest="15" >The Marjorie Rapaport Award in Poetry</a></li>
                 <li><a id="reportRatingBtn7" class="reportRatingBtn" data-contest="7" >The Michael R. Gutterman Award in Poetry</a></li>
+                <li><a id="reportRatingBtn32" class="reportRatingBtn" data-contest="32" >Peter Philip Pratt Award in Fiction</a></li>
                 <li><a id="reportRatingBtn10" class="reportRatingBtn" data-contest="10" >The Roy W. Cowden Memorial Fellowship</a></li>
               </ul>
             </div>
