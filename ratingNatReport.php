@@ -102,7 +102,7 @@ if ( count($judge_array) > 0 ){
     							from tbl_evaluations AS max
     							where ((max.entry_id = te.entry_id) and (max.evaluator = te.evaluator))
     							))
-    						) AND te.rating > 0 AND te.created > '2017-12-06 12:00:00'
+    						) AND te.rating > 0 AND te.created > (SELECT MAX(contclose.date_closed) FROM tbl_contest AS contclose WHERE contclose.contestsID = 1)
     					) AS cn ) AS ext
     	GROUP BY entryID) AS pvt
     LEFT OUTER JOIN vw_entrydetail_with_classlevel_currated AS ed ON pvt.entryID = ed.EntryId
