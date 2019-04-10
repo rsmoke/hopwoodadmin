@@ -42,7 +42,7 @@ FROM vw_current_national_evaluations AS cn
 LEFT OUTER JOIN vw_entrydetail_with_classlevel_currated AS ed ON cn.entry_id = ed.EntryId
 LEFT OUTER JOIN tbl_nationalcontestjudge AS nj ON cn.evaluator = nj.uniqname
 LEFT OUTER JOIN tbl_contest AS tc ON ed.ContestInstance = tc.id
-WHERE created > '$contest_closed_date' AND tc.status = 0
+WHERE created > '$contest_closed_date' AND tc.status = 0  AND tc.contestsID IN (2,9,11,19,20,21,22,23,24,25,26)
 
 GROUP BY entry_id
 ORDER BY uniqname
@@ -108,11 +108,11 @@ _SQLNATRATINGEMAIL;
      $_SESSION['emailsentcount'] = $emailSentCounter;
 
      $updateContest = <<< _updateContestStatus
-      UPDATE tbl_contest
-      SET
-      status = 4
-      WHERE id IN (58,61,62,63,64,65,66,67,68) AND status = 0
-      LIMIT 20;
+     UPDATE tbl_contest
+     SET
+     status = 4
+     WHERE contestsID IN (2,9,11,19,20,21,22,23,24,25,26) AND status = 0
+     LIMIT 20;
 _updateContestStatus;
 
     if (!$updateContest = $db->query($updateContest)) {
