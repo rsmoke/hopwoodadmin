@@ -170,7 +170,7 @@ _SQLNATRATINGEMAIL;
      echo "<hr><h5>You have created " . $emailCounter . " emails.</h5>";
      ?>
     <div><h3>Please review these generated emails carefully.</h3>
-  <?php if ($login_name == 'rsmoke'){ ?>
+  <?php if (($login_name == 'rsmoke') || ($login_name == 'ensorh')){ ?>
     <h4>When you are ready to send them click the button below <strong><u>only once</u></strong>. Each time you click the button it is sending this set of emails!</h4>
       <div class='sendmailbutton'>
         <a href="nationalcommentssendemail.php" type='button' id='send_national_comments' class='btn btn-warning'>Send National Comments</a>

@@ -83,8 +83,8 @@ _SQLNATRATINGEMAIL;
     foreach($resultNatRatingEmail as $item){
       $mailSection = ""; //Clear mail body each time
 
-      // $to = $item["uniqname"] . "@umich.edu";
-      $to = "rsmoke" . "@umich.edu";
+      $to = $item["uniqname"] . "@umich.edu";
+      // $to = "rsmoke" . "@umich.edu";
       $from = "hopwoodcontestnotify@umich.edu";
       $subject = "Hopwood Writing Contest - Judges Comments";
 
