@@ -136,10 +136,8 @@ _SQLNATRATINGEMAIL;
     <div class="container"><!-- START container of all things -->
     <header><h3>Please review these generated emails carefully.</h3>
   <?php if (($login_name == 'rsmoke') || ($login_name == 'ensorh')){ ?>
-    <h4>When you are ready to send them click the button below <strong><u>only once</u></strong>. Each time you click the button it is sending this set of emails!</h4>
-      <div class='sendmailbutton'>
-        <a href="nationalcommentssendemail.php" type='button' id='send_national_comments' class='btn btn-warning disabled'>Send National Comments</a>
-      </div>
+    <h4>When you are ready to send them click the <span class='text-warning'>[Send National Comments]</span> button at the bottom <strong><u>only once</u></strong>. Each time you click the button it is sending this set of emails!</h4>
+      <hr>
   <?php }  // temp if statement to prevent users issues due to pressing the send button, Call me paranoid ?>
     </header>
     <?php
@@ -169,13 +167,16 @@ _SQLNATRATINGEMAIL;
      echo $summarySection;
      echo "<hr><h5>You have created " . $emailCounter . " emails.</h5>";
      ?>
-    <div><h3>Please review these generated emails carefully.</h3>
-  <?php if (($login_name == 'rsmoke') || ($login_name == 'ensorh')){ ?>
+    <div>
+  <?php if ((($login_name == 'rsmoke') || ($login_name == 'ensorh')) && $emailCounter > 0){ ?>
+    <h3>Please review these generated emails carefully.</h3>
     <h4>When you are ready to send them click the button below <strong><u>only once</u></strong>. Each time you click the button it is sending this set of emails!</h4>
       <div class='sendmailbutton'>
         <a href="nationalcommentssendemail.php" type='button' id='send_national_comments' class='btn btn-warning'>Send National Comments</a>
       </div>
-  <?php }  // temp if statement to prevent users issues due to pressing the send button, Call me paranoid ?>
+  <?php } else {
+    echo "<h4>There are no emails to send </h4>";
+  } ?>
     </div>
     </div> <!--END container of all things -->
       <?php
