@@ -2,6 +2,7 @@
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestAdmin.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 
+if ($isAdmin){
 // output headers so that the file is downloaded rather than displayed
 header('Content-Type: text/csv; charset=utf-8');
 header("Content-Disposition: attachment; filename=National_Evaluations-printed_on-" . date('Y-m-d') . ".csv");
@@ -158,4 +159,7 @@ SQL;
       // loop over the rows, outputting them
       while ($row = $rows->fetch_assoc()) fputcsv($output, $row);
     }
+}
+} else {
+  echo "unauthorized";
 }

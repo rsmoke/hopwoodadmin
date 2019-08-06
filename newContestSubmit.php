@@ -1,9 +1,8 @@
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestAdmin.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
-if (session_status() == PHP_SESSION_NONE) {
-session_start();
-}
+
+if ($isAdmin) {
 if (!($stmt = $db->prepare("INSERT INTO tbl_contest
 (`contestsID`,`date_open`,`date_closed`,`notes`,`created_by`)
 VALUES (?,?,?,?,?)"))){
@@ -32,6 +31,7 @@ if (isset($_POST['insertContest'])) {
   $contestsID = $contestNotes = $contestOpen = $contestClose = null;
   $_SESSION['flashMessage'] = "";
   $_POST['insertContest'] = false;
+}
 }
 ?>
 <!DOCTYPE html>
@@ -89,7 +89,7 @@ if (isset($_POST['insertContest'])) {
         </div>
       </div>
     </nav>
-    <?php if ($_SESSION['isAdmin']) {
+    <?php if ($isAdmin) {
     ?>
     <div class="container"><!-- container of all things -->
     <div id="flashArea"><span class='flashNotify'><?php echo $_SESSION['flashMessage']; $_SESSION['flashMessage'] = ""; ?></span></div>

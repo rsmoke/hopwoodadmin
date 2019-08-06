@@ -2,6 +2,7 @@
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestAdmin.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 
+if ($isAdmin){
 		$queryAdmin = "SELECT * FROM tbl_contestadmin ORDER BY uniqname ASC";
 		
 		$resAdmin = $db->query($queryAdmin);
@@ -24,3 +25,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 
 		$resAdmin->free();
 		$db->close();
+
+	} else {
+		echo "unauthorized";
+}

@@ -2,6 +2,7 @@
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestAdmin.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 	
+if ($isAdmin) {
 	$whichContests = $_GET['id'];
 
 	$queryContest = "SELECT C1.id, C1.contestsID, C1.date_closed, C1.date_open,C1.notes, L1.name
@@ -32,3 +33,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 
 		$resContest->free();
 		$db->close();
+
+	} else {
+		echo "unauthorized";
+}

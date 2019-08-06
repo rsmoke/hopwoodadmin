@@ -1,26 +1,7 @@
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestAdmin.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
-if (session_status() == PHP_SESSION_NONE) {
-session_start();
-}
-//$_SESSION['flashMessage'] = "FLASHER";
-$isAdmin = false;
-$_SESSION['isAdmin'] = false;
-$sqlSelect = <<< _SQL
-SELECT *
-FROM tbl_contestadmin
-WHERE uniqname = '$login_name'
-ORDER BY uniqname
-_SQL;
-if (!$resAdmin = $db->query($sqlSelect)) {
-db_fatal_error("data read issue", $db->error, $sqlSelect, $login_name);
-exit;
-}
-if ($resAdmin->num_rows > 0) {
-$isAdmin = true;
-$_SESSION['isAdmin'] = true;
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -102,7 +83,10 @@ $_SESSION['isAdmin'] = true;
         <div id="contests">
           <div class="btn-toolbar" role="toolbar" aria-label="contest_button_toolbar">
             <div class="btn-group" role="group" aria-label="contests_management">
-              <a href="newContestSubmit.php" id="addContest" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="Click to create a new instance of one of the contests listed below">Add New Contest Instance</a>
+              <a href="newContestSubmit.php" id="addContest" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="Click to create a new instance of a contests">Add New Contest Instance</a>
+            </div>
+            <div class="btn-group" role="group" aria-label="contests_management">
+              <a href="multiContestCreate.php" id="addMultiContest" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Click to create a new instance of all of the contests for the year">Create all contests for this academic year</a>
             </div>
           </div>
           <div id="allOpenContests">

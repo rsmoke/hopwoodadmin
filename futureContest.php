@@ -2,6 +2,7 @@
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestAdmin.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 
+if ($isAdmin){
   $resOpenContests = $db->query("SELECT * FROM vw_contestlistingfuturedated ORDER BY date_open");
   if (!$resOpenContests) {
     echo "There are no future contests set to open.";
@@ -16,3 +17,6 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
   }
 
   $db->close();
+} else {
+  echo "unauthorized";
+}

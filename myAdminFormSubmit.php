@@ -1,7 +1,7 @@
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestAdmin.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
-
+if ($isAdmin){
 $admin = $db->real_escape_string(htmlspecialchars($_POST['name']));
 $sql = "INSERT INTO tbl_contestadmin (edited_by, uniqname) VALUES('$login_name','$admin')";
 $res = $db->query($sql);
@@ -14,4 +14,7 @@ if ($db->error) {
     }
 } else {
     echo "Successfully Inserted   <b>" .  $admin . "</b>";
+}
+} else {
+    echo "unauthorized";
 }

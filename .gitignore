@@ -2,3 +2,4 @@ contestfiles/
 *.sublime-workspace
 *BUP*
 *OLD*
+.vscode/
