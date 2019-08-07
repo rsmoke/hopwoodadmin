@@ -2,6 +2,7 @@
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestAdmin.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 
+if ($isAdmin){
 $entryToUpdate = $_POST['entry_id'];
 
   $updateEntry = "UPDATE tbl_entry SET sendtoNationalJudging = 0 WHERE id = $entryToUpdate";
@@ -21,3 +22,6 @@ $entryToUpdate = $_POST['entry_id'];
     }
 
     $db->close();
+} else {
+    echo "unauthorized";
+}

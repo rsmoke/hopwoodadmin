@@ -1,26 +1,7 @@
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestAdmin.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
-if (session_status() == PHP_SESSION_NONE) {
-session_start();
-}
-//$_SESSION['flashMessage'] = "FLASHER";
-$isAdmin = false;
-$_SESSION['isAdmin'] = false;
-$sqlSelect = <<< _SQL
-SELECT *
-FROM tbl_contestadmin
-WHERE uniqname = '$login_name'
-ORDER BY uniqname
-_SQL;
-if (!$resAdmin = $db->query($sqlSelect)) {
-db_fatal_error("data read issue", $db->error, $sqlSelect, $login_name);
-exit;
-}
-if ($resAdmin->num_rows > 0) {
-$isAdmin = true;
-$_SESSION['isAdmin'] = true;
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

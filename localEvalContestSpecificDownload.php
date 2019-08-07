@@ -2,6 +2,7 @@
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestAdmin.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 
+if ($isAdmin){
 $specificContestID = $_GET['ID'];
 
 // output headers so that the file is downloaded rather than displayed
@@ -114,3 +115,6 @@ if (!$rows = $db->query($queryLocalSpecificEval)){
 while ($row = $rows->fetch_assoc()) {
    fputcsv($output, $row);
  }
+} else {
+  echo "unauthorized";
+}

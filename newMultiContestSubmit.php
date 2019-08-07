@@ -3,35 +3,68 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestAdmin.
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 
 if ($isAdmin) {
-if (!($stmt = $db->prepare("INSERT INTO tbl_contest
-(`contestsID`,`date_open`,`date_closed`,`notes`,`created_by`)
-VALUES (?,?,?,?,?)"))){
-  db_fatal_error("{Prepare failed", "( " . $db->errno . " )" . $db->error, "EMPTY", $login_name);
-  exit($user_err_message);
-}
-if (!$stmt->bind_param('issss',$contestsID,$contestOpen,$contestClose,$contestNotes,$login_name)){
-  db_fatal_error("Bind parameters failed", "( " . $stmt->errno . " )" . $stmt->error, "EMPTY", $login_name);
-  exit($user_err_message);
-}
+  if (isset($_POST['insertMultiContest'])) {
+    // $contestsID = $db->real_escape_string(htmlspecialchars($_POST['contestID']));
+    
+    $date_open = date("Y-m-d H:i:s", (strtotime($_POST['openDate'])));
+    $fall_date_closed = date("Y-m-d H:i:s", (strtotime($_POST['closeDateFall'])));
+    $fall_notes = $db->real_escape_string(htmlspecialchars($_POST['notesFallContests']));
+    $winter_date_closed = date("Y-m-d H:i:s", (strtotime($_POST['closeDateWinter'])));
+    $winter_notes = $db->real_escape_string(htmlspecialchars($_POST['notesWinterContests']));
 
-if (isset($_POST['insertContest'])) {
-  $contestsID = $db->real_escape_string(htmlspecialchars($_POST['contestID']));
-  $contestNotes = $db->real_escape_string(htmlspecialchars($_POST['notes']));
-  $contestOpen = date("Y-m-d H:i:s", (strtotime($_POST['openDate'])));
-  $contestClose = date("Y-m-d H:i:s", (strtotime($_POST['closeDate'])));
-  if($stmt->execute()){
-    $_SESSION['flashMessage'] = "Successfully added new contest";
+    $sqlMultiInsert = <<< _SQL
+    INSERT INTO `quilleng_ContestManager`.`tbl_contest`
+    (
+    `contestsID`,
+    `date_open`,
+    `date_closed`,
+    `notes`,
+    `edited_by`,
+    `judgingOpen`,
+    `status`)
+    VALUES
+    (1,'$date_open','$fall_date_closed','$fall_notes',"srvr_scrpt",0,0),
+    (5,'$date_open','$fall_date_closed','$fall_notes',"srvr_scrpt",0,0),
+    (6,'$date_open','$fall_date_closed','$fall_notes',"srvr_scrpt",0,0),
+    (7,'$date_open','$fall_date_closed','$fall_notes',"srvr_scrpt",0,0),
+    (8,'$date_open','$fall_date_closed','$fall_notes',"srvr_scrpt",0,0),
+    (9,'$date_open','$fall_date_closed','$fall_notes',"srvr_scrpt",0,0),
+    (10,'$date_open','$fall_date_closed','$fall_notes',"srvr_scrpt",0,0),
+    (15,'$date_open','$fall_date_closed','$fall_notes',"srvr_scrpt",0,0),
+    (16,'$date_open','$fall_date_closed','$fall_notes',"srvr_scrpt",0,0),
+    (17,'$date_open','$fall_date_closed','$fall_notes',"srvr_scrpt",0,0),
+    (18,'$date_open','$fall_date_closed','$fall_notes',"srvr_scrpt",0,0),
+
+    (2,'$date_open','$winter_date_closed','$winter_notes',"srvr_scrpt",0,0),
+    (11,'$date_open','$winter_date_closed','$winter_notes',"srvr_scrpt",0,0),
+    (12,'$date_open','$winter_date_closed','$winter_notes',"srvr_scrpt",0,0),
+    (19,'$date_open','$winter_date_closed','$winter_notes',"srvr_scrpt",0,0),
+    (20,'$date_open','$winter_date_closed','$winter_notes',"srvr_scrpt",0,0),
+    (21,'$date_open','$winter_date_closed','$winter_notes',"srvr_scrpt",0,0),
+    (22,'$date_open','$winter_date_closed','$winter_notes',"srvr_scrpt",0,0),
+    (23,'$date_open','$winter_date_closed','$winter_notes',"srvr_scrpt",0,0),
+    (24,'$date_open','$winter_date_closed','$winter_notes',"srvr_scrpt",0,0),
+    (25,'$date_open','$winter_date_closed','$winter_notes',"srvr_scrpt",0,0),
+    (26,'$date_open','$winter_date_closed','$winter_notes',"srvr_scrpt",0,0),
+    (31,'$date_open','$winter_date_closed','$winter_notes',"srvr_scrpt",0,0),
+    (32,'$date_open','$winter_date_closed','$winter_notes',"srvr_scrpt",0,0),
+    (33,'$date_open','$winter_date_closed','$winter_notes',"srvr_scrpt",0,0);
+_SQL;
+
+    if (!$resAdmin = $db->query($sqlMultiInsert)) {
+      db_fatal_error("data insert issue", $db->error, $sqlMultiInsert, $login_name);
+      $_SESSION['flashMessage'] = "You already added the contests for this academic year!";
+      $_POST['insertMultiContest'] = false;
+      safeRedirect('contestAdmin.php');
+    } else {
+      $_SESSION['flashMessage'] = "You successfully added the contests for this academic year!";
+      $_POST['insertMultiContest'] = false;
+      safeRedirect('contestAdmin.php');
+    }
+    $date_open = $fall_date_closed = $fall_notes = $winter_date_closed = $winter_notes = null;
+    $_SESSION['flashMessage'] = "";
     $_POST['insertContest'] = false;
-    safeRedirect('contestAdmin.php');
-  } else {
-    db_fatal_error("Execute failed", "( " . $stmt->errno . " )" . $stmt->error, "EMPTY", $login_name);
-    exit($user_err_message);
   }
-} else {
-  $contestsID = $contestNotes = $contestOpen = $contestClose = null;
-  $_SESSION['flashMessage'] = "";
-  $_POST['insertContest'] = false;
-}
 }
 ?>
 <!DOCTYPE html>
@@ -92,6 +125,8 @@ if (isset($_POST['insertContest'])) {
     <?php if ($isAdmin) {
     ?>
     <div class="container"><!-- container of all things -->
+    <h3>Create all the contests for the <?php echo date("Y") . "/" . (date("Y")+1); ?> academic year.</h3>
+    <h5>Select the opening date for all the contests, the Fall contests closing date and the Winter contests closing date.</h5>
     <div id="flashArea"><span class='flashNotify'><?php echo $_SESSION['flashMessage']; $_SESSION['flashMessage'] = ""; ?></span></div>
         <div class="row clearfix">
       <div class="col-md-12">
@@ -104,13 +139,8 @@ if (isset($_POST['insertContest'])) {
     </div>
     <div class="row clearfix">
       <div class='outputContainer col-sm-8 col-md-offset-2'>
-        <form action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>' method='post' id='addContestForm' >
-          <div class='form-group'>
-            <label for='contest'>Select the type of contest</label>
-              <select id='contestSelect' name='contestID' class='form-control' required>
-              <option value=''>Select a Contest Type</option></select>
-          </div>
-            <div class="form-group">
+        <form action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>' method='post' id='addContestForms' >
+          <div class="form-group">
             <label for='openDate'>Open Date</label>
                 <div class='input-group date' id='datetimepicker1'>
                     <input class="form-control" type='text' class="form-control" name='openDate' required />
@@ -120,19 +150,32 @@ if (isset($_POST['insertContest'])) {
                 </div>
             </div>
             <div class="form-group">
-            <label for='openDate'>Close Date</label>
+              <label for='openDate'>Close Date for Fall Contests</label>
                 <div class='input-group date' id='datetimepicker2'>
-                    <input class="form-control" type='text' class="form-control" name='closeDate' required />
+                    <input class="form-control" type='text' class="form-control" name='closeDateFall' required />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
                 </div>
             </div>
-          <div class='form-group'>
-            <label for='notes'>Notes</label>
-            <input class="form-control" type='text' name='notes' placeholder='Notes'>
-          </div>
-          <input class="btn btn-success" type="submit" name="insertContest" value="Insert Contest">
+            <div class='form-group'>
+              <label for='notes'>Notes for Fall Contest</label>
+              <input class="form-control" type='text' name='notesFallContests' value='<?php echo 'Fall ' . date("Y"); ?>'>
+            </div>
+            <div class="form-group">
+              <label for='openDate'>Close Date for Winter Contests</label>
+                <div class='input-group date' id='datetimepicker3'>
+                    <input class="form-control" type='text' class="form-control" name='closeDateWinter' required />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class='form-group'>
+              <label for='notes'>Notes for Winter Contests</label>
+              <input class="form-control" type='text' name='notesWinterContests' value='<?php echo 'Winter ' . (date("Y")+1); ?>'>
+            </div>
+          <input class="btn btn-success" type="submit" name="insertMultiContest" value="Insert Contests">
         </form>
       </div>
     </div>
@@ -174,8 +217,12 @@ include("footer.php");?>
         $('#datetimepicker2').datetimepicker({
             useCurrent: false //Important! See issue #1075
         });
+        $('#datetimepicker3').datetimepicker({
+            useCurrent: false //Important! See issue #1075
+        });
         $("#datetimepicker1").on("dp.change", function (e) {
             $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
+            $('#datetimepicker3').data("DateTimePicker").minDate(e.date);
         });
         $("#datetimepicker2").on("dp.change", function (e) {
             $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);

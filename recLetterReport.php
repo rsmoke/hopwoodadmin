@@ -2,6 +2,7 @@
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestAdmin.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 
+if ($isAdmin){
   $queryFinAid = <<<SQL
   SELECT tbl_applicant.id AS applicant_id, uniqname, userFname, userLname, title, tbl_entry.id, recletter1Name, recletter2Name
     FROM
@@ -38,3 +39,6 @@ SQL;
   echo (json_encode(array("result" => $result)));
 
   $resSelect->free();
+} else {
+  echo "unauthorized";
+}

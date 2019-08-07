@@ -2,6 +2,7 @@
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestAdmin.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 
+if ($isAdmin){
 $selectContests = $_GET['id'];
 
 // Get listing oif judges for a the selected contest
@@ -171,4 +172,7 @@ SQL;
     echo (json_encode(array("result" => $result)));
 
     $resSelect->free();
+}
+} else {
+  echo "unauthorized";
 }

@@ -2,6 +2,7 @@
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestAdmin.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 
+if ($isAdmin) {
   $queryNatEval = <<<SQL
 -- SELECT `evaluator`,rating AS evaluation,comment,`entry_id`,created,
 -- vc.title, vc.`document`,vc.`uniqname` AS applicantUniq,vc.`firstname`,vc.`lastname`,
@@ -60,3 +61,7 @@ SQL;
   echo (json_encode(array("result" => $result)));
 
   $resSelect->free();
+
+} else {
+  echo "unauthorized";
+}

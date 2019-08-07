@@ -1,6 +1,6 @@
 $( document ).ready(function(){
 
-  $('.flashNotify').fadeOut(6000);
+  $('.flashNotify').fadeOut(7000);
 
 
   //When the submit button of the admin page is selected the database is updated with

@@ -2,6 +2,7 @@
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestAdmin.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 
+if ($isAdmin){
 // Setup query
 if (!($stmt = $db->prepare("UPDATE tbl_contest
     SET status = 1, edited_by = ?, edited_on = ?
@@ -29,3 +30,7 @@ $nowDate = date("Y-m-d H:i:s", (strtotime("now")));
   }
 
 $db->close();
+
+} else {
+  echo "unauthorized";
+}

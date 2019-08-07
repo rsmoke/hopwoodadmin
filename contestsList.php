@@ -2,6 +2,7 @@
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestAdmin.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 
+if ($isAdmin) {
 	$queryContests = "SELECT L1.id, L1.name
 					 FROM lk_contests AS L1
 					 ORDER BY L1.Name ASC";
@@ -25,3 +26,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 
 		$resContests->free();
 		$db->close();
+
+	} else {
+		echo "unauthorized";
+}

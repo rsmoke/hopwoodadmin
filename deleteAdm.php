@@ -1,13 +1,10 @@
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestAdmin.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
 
 $idSent =  htmlspecialchars($_POST['delid']);
 
-if ($_SESSION['isAdmin']) {
+if ($isAdmin) {
     if ($idSent != 1) {
         $sqlDelete = <<< _SQL
             DELETE FROM tbl_contestadmin
