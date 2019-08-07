@@ -86,7 +86,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
               <a href="newContestSubmit.php" id="addContest" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="Click to create a new instance of a contests">Add New Contest Instance</a>
             </div>
             <div class="btn-group" role="group" aria-label="contests_management">
-              <a href="multiContestCreate.php" id="addMultiContest" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Click to create a new instance of all of the contests for the year">Create all contests for this academic year</a>
+              <a href="multiContestCreate.php" id="addMultiContest" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Click to create a new instance of all of the contests for the year">Create all contests for the <?php echo date("Y") . "/" . (date("Y")+1); ?> academic year</a>
             </div>
           </div>
           <div id="allOpenContests">
