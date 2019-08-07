@@ -86,26 +86,36 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
               <a href="newContestSubmit.php" id="addContest" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="Click to create a new instance of a contests">Add New Contest Instance</a>
             </div>
             <div class="btn-group" role="group" aria-label="contests_management">
-              <a href="multiContestCreate.php" id="addMultiContest" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Click to create a new instance of all of the contests for the year">Create all contests for the <?php echo date("Y") . "/" . (date("Y")+1); ?> academic year</a>
+              <a href="newMultiContestSubmit.php" id="addMultiContest" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Click to create a new instance of all of the contests for the year">Create all contests for the <?php echo date("Y") . "/" . (date("Y")+1); ?> academic year</a>
             </div>
           </div>
           <div id="allOpenContests">
             <h4>These are the currently open contests</h4>
             <?php
-              $resOpenContests = $db->query("SELECT * FROM vw_contestlisting WHERE status = 0 ORDER BY date_closed, ContestsName");
-              if (!$resOpenContests) {
-              echo "There are no open contests.";
+            $sqlSelect = <<< _SQL
+              SELECT * 
+              FROM vw_contestlisting 
+              WHERE status = 0 
+              ORDER BY date_closed, ContestsName;
+_SQL;
+              if (!$resOpenContests = $db->query($sqlSelect)){
+                db_fatal_error("data insert issue", $db->error, $sqlSelect, $login_name);
               } else {
-                while ($instance = $resOpenContests->fetch_assoc()) {
-                  echo '<div class="record"><strong><span class="glyphicon glyphicon-asterisk"></span>' . $instance['ContestsName'] . '</strong> OPENED: ' . date("F jS, Y - g:i A", (strtotime($instance['date_open']))) . ' - CLOSES: ' . date("F jS, Y - g:i A", (strtotime($instance['date_closed'])));
-                  if(strlen($instance['notes']) > 0){
-                    echo '<br><blockquote><em>NOTES: ' . $instance['notes'] . '</em></blockquote>';
+                if ( ($resOpenContests->num_rows) > 0 ) {
+                  while ($instance = $resOpenContests->fetch_assoc()) {
+                    echo '<div class="record"><strong><span class="glyphicon glyphicon-asterisk"></span>' . $instance['ContestsName'] . '</strong> OPENED: ' . date("F jS, Y - g:i A", (strtotime($instance['date_open']))) . ' - CLOSES: ' . date("F jS, Y - g:i A", (strtotime($instance['date_closed'])));
+                    if(strlen($instance['notes']) > 0){
+                      echo '<br><blockquote><em>NOTES: ' . $instance['notes'] . '</em></blockquote>';
+                    }
+                    echo '</div>';
                   }
-                  echo '</div>';
+                } else {
+                  echo "-- There are no open contests -- <br />";
                 }
               }
             ?>
           </div>
+          <hr>
           <div class="well well-sm">
             <div id="futureContests" class="text-info">
               <h4>These are the contests set to open in the future</h4>
