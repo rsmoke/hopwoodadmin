@@ -93,7 +93,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
             `lk_contests`.`graduateEligible`
             FROM tbl_contest
             JOIN `lk_contests` ON (`tbl_contest`.`contestsID` = `lk_contests`.`id`)
-            WHERE `tbl_contest`.`status` IN (0,2)
+            WHERE `tbl_contest`.`status` IN (0,2,4)
             ORDER BY date_closed DESC, name
 SQL;
             $results = $db->query($sqlContestSelect);
