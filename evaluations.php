@@ -147,6 +147,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
                 <li><a id="reportRatingBtn12" class="reportRatingBtn" data-contest="12" >The Arthur Miller Award</a></li>
                 <li><a id="reportRatingBtn6" class="reportRatingBtn" data-contest="6" >The Bain-Swiggett Poetry Prize</a></li>
                 <li><a id="reportRatingBtn31" class="reportRatingBtn" data-contest="31" >The Cora Duncan Award in Fiction</a></li>
+                <li><a id="reportRatingBtn34" class="reportRatingBtn" data-contest="34" >Excellence in Jouranalism Prize</a></li>
                 <li><a id="reportRatingBtn8" class="reportRatingBtn" data-contest="8" >The Jeffrey L. Weisberg Memorial Prize in Poetry</a></li>
                 <li><a id="reportRatingBtn11" class="reportRatingBtn" data-contest="11" >The Kasdan Scholarship in Creative Writing</a></li>
                 <li><a id="reportRatingBtn33" class="reportRatingBtn" data-contest="33" >Keith Taylor Award for Excellence in Poetry</a></li>
