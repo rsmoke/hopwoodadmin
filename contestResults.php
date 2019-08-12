@@ -137,7 +137,7 @@ SQL;
                       $sqlIndEntry = <<<SQL
                       SELECT *
                       FROM vw_entrydetail
-                      WHERE ContestInstance = {$instance['ContestId']}  AND vw_entrydetail.status = 0
+                      WHERE ContestInstance = {$instance['ContestId']}  AND (vw_entrydetail.status IN (0,2))
                       ORDER BY uniqname
 SQL;
                       $resultsInd = $db->query($sqlIndEntry);
