@@ -1,7 +1,7 @@
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestAdmin.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
-if ($idAdmin){
+if ($isAdmin){
 $selectContests = $_GET['id'];
 
 // $where = ($selectContests != 10)? "rating > 0 AND " : "";
