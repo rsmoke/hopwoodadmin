@@ -72,10 +72,10 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
     <div class="row clearfix">
       <div class="col-md-12">
         <table class="table table-hover">
-          <thead><th>Details</th><th>Last Name</th><th>First Name</th><th>Pen name</th><th>UniqName</th><th>UMID</th></thead>
+          <thead><th>Details</th><th>Last Name</th><th>First Name</th><th>Pen name</th><th>UniqName</th><th>UMID</th><th>Campus</th></thead>
           <tbody>
           <?php while ($row = $resApp->fetch_assoc()) {
-          echo '<tr class="record" id="record-' . $row['id'] . '"><td><a id="applicant_details" type="button" class="btn btn-xs btn-info" href="allApplicantDetails.php?id=' . $row['id'] . '"><i class="fa fa-info" aria-hidden="true"></i></a></td><td>' . $row['userLname'] . '</td><td>' . $row['userFname'] .  '</td><td>' . $row['penName'] .  '</td><td><strong>' . $row['uniqname'] .'</strong></td><td><a href="https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=' . $row['umid'] . '" target=_"blank">' . $row['umid'] . '</td></tr>';
+          echo '<tr class="record" id="record-' . $row['id'] . '"><td><a id="applicant_details" type="button" class="btn btn-xs btn-info" href="allApplicantDetails.php?id=' . $row['id'] . '"><i class="fa fa-info" aria-hidden="true"></i></a></td><td>' . $row['userLname'] . '</td><td>' . $row['userFname'] .  '</td><td>' . $row['penName'] .  '</td><td><strong>' . $row['uniqname'] .'</strong></td><td><a href="https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=' . $row['umid'] . '" target=_"blank">' . $row['umid'] . '</td><td>' . ucwords($row['campusLocation']) .  '</td></tr>';
           }
           echo '</tbody></table>';
           ?>
