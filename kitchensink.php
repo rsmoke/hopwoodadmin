@@ -11,7 +11,7 @@ if ($isAdmin) {
     $output = fopen('php://output', 'w');
 
     // output the column headings
-    fputcsv($output, array('uniqname', 'UMid', 'Name', 'Local_Address', 'Home_Address', 'ClassLevel', 'Grad_Yr-Mo/School/Dept/Major', 'Financial-Aid', 'Financial-Aid-Desciption', 'Title-of-Manuscript', 'Type-of-Manuscript', 'Name-of-Contest', 'Qualifying-Course', 'Qualifying-Instructor', 'Qualifying-Term_Year', 'Hometown-Newspaper', 'Publication-Name', 'Pen_Name'));
+    fputcsv($output, array('uniqname', 'UMid', 'Name', 'Local_Address', 'Home_Address', 'ClassLevel', 'Campus_Location','Grad_Yr-Mo/School/Dept/Major', 'Financial-Aid', 'Financial-Aid-Desciption', 'Title-of-Manuscript', 'Type-of-Manuscript', 'Name-of-Contest', 'Qualifying-Course', 'Qualifying-Instructor', 'Qualifying-Term_Year', 'Hometown-Newspaper', 'Publication-Name', 'Pen_Name'));
 
                 $sqlSelect2 = <<<SQL
                     SELECT *
