@@ -76,9 +76,10 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
           </div>
           <div class="btn-group" role="group" aria-label="contest_applicants">
             <button id="reportRecLetterBtn" type="button" class="btn btn-success">Reference Letter Required</button>
-          </div>
+	  </div>
           <div class="btn-group-vertical pull-right" role="group" aria-label="contest_applicants">
-            <a id="ktchensinkBtn" type="button" class="btn btn-xs btn-info" href="kitchensink.php" data-toggle="tooltip" data-placement="right" title="Click to download details of all the applications ever submitted"><i class="fa fa-download"></i> Details of Entries</a>
+            <a id="ktchensinkBtn" type="button" class="btn btn-xs btn-info" href="kitchensink.php" data-toggle="tooltip" data-placement="right" title="Click to download details of all the applications for the current contests"><i class="fa fa-download"></i> Details of Current Contests Entries</a>
+            <a id="ktchensinkBtn" type="button" class="btn btn-xs btn-info" href="kitchensinkAll.php" data-toggle="tooltip" data-placement="right" title="Click to download details of all the applications ever submitted"><i class="fa fa-download"></i> Details of ALL Entries</a>
             <a id="localEvalDownloadBtn" type="button" class="btn btn-xs btn-info" href="localEvalDownload.php" data-toggle="tooltip" data-placement="right" title="Click to download all submitted Local evaluations"><i class="fa fa-download"></i> All Local Evaluations</a>
             <a id="natEvalDownloadBtn" type="button" class="btn btn-xs btn-info" href="natEvalDownload.php" data-toggle="tooltip" data-placement="right" title="Click to download all submitted National evaluations"><i class="fa fa-download"></i> All National Evaluations</a>
             <hr>
@@ -130,3 +131,4 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
     </html>
     <?php
     $db->close();
+
