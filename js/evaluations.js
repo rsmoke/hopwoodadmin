@@ -96,7 +96,7 @@ $( document ).ready(function(){
             '<table class="table table-hover dataout"><thead>' +
             '<th><small>Entry ID</small></th><th class = "judge1_color"><small>Judge1</small><br>' + data.result[0].judge1_name + '</th>' +
             jdg2_name +
-            '<th>Title</th><th>Type</th><th>ClassLevel</th><th>eMail</th>' +
+            '<th>File</th><th>Title</th><th>Type</th><th>ClassLevel</th><th>eMail</th>' +
             '<th>First-Name</th><th>Last Name</th><th>Pen Name</th><th>UMID</th></thead><tbody>');
 
           $.each(data.result, function(){
