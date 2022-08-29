@@ -5,7 +5,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 if ($isAdmin) {
     // output headers so that the file is downloaded rather than displayed
     header('Content-Type: text/csv; charset=utf-8');
-    header('Content-Disposition: attachment; filename="Hopwood-Kitchensink.csv"');
+    header("Content-Disposition: attachment; filename=Current_Contests_Entries-printed_on-" . date('Y-m-d') . ".csv");
 
     // create a file pointer connected to the output stream
     $output = fopen('php://output', 'w');
