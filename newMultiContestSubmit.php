@@ -49,7 +49,8 @@ if ($isAdmin) {
     (31,'$date_open','$winter_date_closed','$winter_notes',"srvr_scrpt",0,0),
     (32,'$date_open','$winter_date_closed','$winter_notes',"srvr_scrpt",0,0),
     (33,'$date_open','$winter_date_closed','$winter_notes',"srvr_scrpt",0,0),
-    (34,'$date_open','$winter_date_closed','$winter_notes',"srvr_scrpt",0,0);
+    (34,'$date_open','$winter_date_closed','$winter_notes',"srvr_scrpt",0,0),
+    (35,'$date_open','$winter_date_closed','$winter_notes',"srvr_scrpt",0,0);
 _SQL;
 
     if (!$resAdmin = $db->query($sqlMultiInsert)) {
