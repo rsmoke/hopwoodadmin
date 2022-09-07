@@ -3,7 +3,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/configEnglishContestAdmin.
 require_once($_SERVER["DOCUMENT_ROOT"] . '/../Support/basicLib.php');
 if ($isAdmin) {
   $queryFinAid = <<<SQL
-  SELECT DISTINCT tbl_applicant.id, uniqname, umid, finAidDesc, userFname, userLname
+  SELECT DISTINCT tbl_applicant.id, uniqname, umid, finAidDesc, finAidNotice, userFname, userLname
   FROM
     tbl_entry
         JOIN
@@ -25,7 +25,8 @@ SQL;
         'umid' =>$item["umid"],
         'fname' =>$item["userFname"],
         'lname' =>$item["userLname"],
-        'desc' =>$item["finAidDesc"]
+        'desc' =>$item["finAidDesc"],
+        'finaidnotice' =>$item["finAidNotice"]
         )
 
       );

@@ -7,7 +7,7 @@ $( document ).ready(function(){
       $("#outputReportData").empty();
         $("#outputReportData").append(
           '<table class="table table-hover dataout">'+
-          '<thead><th></th><th>UMID</th><th>Last-Name</th><th>First-Name</th><th>Uniqname</th><th>Description</th></thead>'+
+          '<thead><th></th><th>UMID</th><th>Last-Name</th><th>First-Name</th><th>Uniqname</th><th>Description</th><th>Accepted FinAid Notice</th></thead>'+
           '<tbody>');
     $.getJSON("finAidReport.php", function(data){
       if ($.isEmptyObject(data.result)){
@@ -16,7 +16,7 @@ $( document ).ready(function(){
         $.each(data.result, function(){
           $(".dataout").append("<tr><td><a id='applicant_details' type='button' class='btn btn-xs btn-info' href='allApplicantDetails.php?id=" + this.applicant_id + "'><i class='fa fa-info' aria-hidden='true'></i></a></td>" +
           "<td><a href='https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=" + this.umid + "' target='_blank'>" + this.umid + "</a></td><td>" + this.lname + "</td><td>" + this.fname +
-            "</td><td>" + this.uniqname + "</td><td>" + this.desc + "</td></tr>");
+            "</td><td>" + this.uniqname + "</td><td>" + this.desc + "</td><td>" + this.finaidnotice + "</td></tr>");
             });
       }
     });
