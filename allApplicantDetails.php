@@ -74,11 +74,11 @@ $selectApplicant = $_GET['id'];
       <div class="row clearfix">
             <?php
             $allDetails = "";
-            $query = "SELECT `id`,`userFname`,`userLname`,`umid`,`uniqname`,`streetL`,`cityL`,`stateL`,`zipL`,`usrtelL`,`streetH`,`cityH`,`stateH`,`countryH`,`zipH`,`usrtelH`,`classLevel`,`school`, `campusLocation`,`major`,`department`,`gradYearMonth`,`degree`,CASE WHEN `finAid` = 1 THEN 'Y' ELSE '' END,`finAidDesc`,`namePub`,`homeNewspaper`,`penName`,`created_on` FROM tbl_applicant WHERE id = ? ";
+            $query = "SELECT `id`,`userFname`,`userLname`,`umid`,`uniqname`,`streetL`,`cityL`,`stateL`,`zipL`,`usrtelL`,`streetH`,`cityH`,`stateH`,`countryH`,`zipH`,`usrtelH`,`classLevel`,`school`, `campusLocation`,`major`,`department`,`gradYearMonth`,`degree`,CASE WHEN `finAid` = 1 THEN 'Y' ELSE '' END,CASE WHEN `finAidNotice` = 1 THEN 'Y' ELSE '' END,`finAidDesc`,`namePub`,`homeNewspaper`,`penName`,`created_on` FROM tbl_applicant WHERE id = ? ";
             if ($stmt = $db->prepare($query)) {
               $stmt->bind_param("i", $selectApplicant);
                 $stmt->execute();
-                $stmt->bind_result($id,$userFname,$userLname,$umid,$uniqname,$streetL,$cityL,$stateL,$zipL,$usrtelL,$streetH,$cityH,$stateH,$countryH,$zipH,$usrtelH,$classLevel,$school,$campusLocation,$major,$department,$gradYearMonth,$degree,$finAid,$finAidDesc,$namePub,$homeNewspaper,$penName,$created_on);
+                $stmt->bind_result($id,$userFname,$userLname,$umid,$uniqname,$streetL,$cityL,$stateL,$zipL,$usrtelL,$streetH,$cityH,$stateH,$countryH,$zipH,$usrtelH,$classLevel,$school,$campusLocation,$major,$department,$gradYearMonth,$degree,$finAid,$finAidNotice,$finAidDesc,$namePub,$homeNewspaper,$penName,$created_on);
                 while ($stmt->fetch()) {
                     echo '<div class="col-md-12"><h4> Details for: </h4><h4><span class="bg-success">&nbsp;' .  $userFname . ' ' . $userLname . ' - ' . $uniqname . '&nbsp;</span></h4>';
                     $allDetails .= 'UMID: <a href="https://webapps.lsa.umich.edu/UGStuFileV2/App/Cover/Cover.aspx?ID=' . $umid . '" target=_"blank">' . $umid . '</a>';
@@ -105,6 +105,7 @@ $selectApplicant = $_GET['id'];
                     $allDetails .= '<br>Graduation Date: <strong>' . $gradYearMonth . '</strong>';
                     $allDetails .= '<br>Degree: <strong>' . $degree . '</strong>';
                     $allDetails .= '<br>Financial Aid: <strong>' . $finAid . '</strong>';
+                    $allDetails .= '<br>Accepted Financial Aid Notice: <strong>' . $finAidNotice . '</strong>';
                     $allDetails .= '<br>Financial Aid Description: <strong>' . $finAidDesc . '</strong>';
                     $allDetails .= '<br><br>Name for Publication: <strong>' . $namePub . '</strong>';
                     $allDetails .= '<br>Hometown News Outlet: <strong>' . $homeNewspaper . '</strong>';
